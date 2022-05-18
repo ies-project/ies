@@ -1,6 +1,6 @@
 ﻿USE [ICT]
 GO
-/****** Object:  Table [dbo].[Actions]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[Actions]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[Actions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Areas]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[Areas]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -31,7 +31,7 @@ CREATE TABLE [dbo].[Areas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Buildings]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[Buildings]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -47,14 +47,14 @@ CREATE TABLE [dbo].[Buildings](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DeviceRequestedReads]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[DeviceRequestedReads]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[DeviceRequestedReads](
 	[Id] [int] NOT NULL,
-	[Id_Device] [varchar](36) NOT NULL,
+	[Id_Device] [uniqueidentifier] NOT NULL,
 	[RequestDate] [datetime] NOT NULL,
 	[ResponseDate] [datetime] NULL,
 	[ResponseStatus] [varchar](50) NULL,
@@ -65,13 +65,13 @@ CREATE TABLE [dbo].[DeviceRequestedReads](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Devices]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[Devices]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Devices](
-	[Id] [varchar](36) NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL,
 	[Id_Area] [int] NULL,
 	[Id_DeviceType] [int] NOT NULL,
 	[Name] [varchar](32) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE [dbo].[Devices](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DeviceSubmittedActions]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[DeviceSubmittedActions]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ GO
 CREATE TABLE [dbo].[DeviceSubmittedActions](
 	[Id] [int] NOT NULL,
 	[Id_Action] [int] NOT NULL,
-	[Id_Device] [varchar](36) NOT NULL,
+	[Id_Device] [uniqueidentifier] NOT NULL,
 	[RequestDate] [datetime] NOT NULL,
 	[ResponseDate] [datetime] NULL,
 	[ResponseStatus] [varchar](50) NULL,
@@ -108,7 +108,7 @@ CREATE TABLE [dbo].[DeviceSubmittedActions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DeviceTypes]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[DeviceTypes]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,7 +123,7 @@ CREATE TABLE [dbo].[DeviceTypes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SurroundingAreas]    Script Date: 18/05/2022 02:15:34 ******/
+/****** Object:  Table [dbo].[SurroundingAreas]    Script Date: 18/05/2022 11:59:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
