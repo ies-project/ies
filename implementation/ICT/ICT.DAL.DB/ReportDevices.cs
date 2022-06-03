@@ -17,7 +17,7 @@ namespace ICT.DAL.DB
 
         public int Id_Area { get; set; }
 
-        [StringLength(30, ErrorMessage = "The {0} cannot have more than 30 characters")]
+        [StringLength(32, ErrorMessage = "The {0} cannot have more than 32 characters")]
         public string State { get; set; }
 
         //public Devices Device { get; set; }
