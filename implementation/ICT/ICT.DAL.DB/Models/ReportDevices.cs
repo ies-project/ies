@@ -12,13 +12,26 @@ namespace ICT.DAL.DB
     /// </summary>
     public class ReportDevices
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [Key]
         public int Id_Report { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Key]
         public int Id_Device { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Id_Area { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [StringLength(32, ErrorMessage = "The {0} cannot have more than 32 characters")]
         public string State { get; set; }
 
