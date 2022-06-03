@@ -2,7 +2,7 @@
 
 namespace ICT.MM.DAL.DB.Models {
 
-    public class DeviceTypes {
+    public class DeviceType {
 
         [Key]
         public int Id { get; set; }
