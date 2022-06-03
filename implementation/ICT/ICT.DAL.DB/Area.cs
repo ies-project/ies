@@ -21,27 +21,29 @@ namespace ICT.DAL.DB
 		/// </summary>
 		public int Id_Type { get; set; }
 		/// <summary>
-		/// Nome da área
+		/// Name of the Area
 		/// </summary>
+		[StringLength(32)]
 		public string Name { get; set; }
 		/// <summary>
-		/// Piso da área
+		/// Area FLoor
 		/// </summary>
+		[StringLength(32)]
 		public string Floor { get; set; }
 		/// <summary>
-		/// Número de bolas de fogo numa área
+		/// Number of Fire Balls in a Area
 		/// </summary>
 		public int NumFireBalls { get; set; }
 		/// <summary>
-		/// Número de Aspersores numa área
+		/// Number of Springles in a Area
 		/// </summary>
 		public int NumSpringles { get; set; }
 		/// <summary>
-		/// Número de Bocas Singulares numa área
+		/// Number of Bocas Singulares in a Area
 		/// </summary>
 		public int NumBocasSingulares { get; set; }
 		/// <summary>
-		/// Número de Bocas Siameses numa área
+		/// Number of Bocas Siameses in a Area
 		/// </summary>
 		public int NumBocasSiameses { get; set; }
 
