@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ICT.DAL.DB
 {
     /// <summary>
-    /// 
+    /// Data of devices that can be report
     /// </summary>
     public class ReportDevices
     {
@@ -17,7 +17,7 @@ namespace ICT.DAL.DB
 
         public int Id_Area { get; set; }
 
-        [StringLength(1, ErrorMessage = "The {0} cannot have more than 30 characters")]
+        [StringLength(30, ErrorMessage = "The {0} cannot have more than 30 characters")]
         public string State { get; set; }
 
         //public Devices Device { get; set; }
