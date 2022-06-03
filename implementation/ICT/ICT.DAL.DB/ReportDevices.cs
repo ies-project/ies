@@ -12,7 +12,9 @@ namespace ICT.DAL.DB
     /// </summary>
     public class ReportDevices
     {
+        [Key]
         public int Id_Report { get; set; }
+        [Key]
         public int Id_Device { get; set; }
 
         public int Id_Area { get; set; }
