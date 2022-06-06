@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ICT.DAL.DB
 {
     /// <summary>
-    /// Data of devices that can be reported
+    /// ReportDevice class
     /// </summary>
     public class ReportDevice
     {

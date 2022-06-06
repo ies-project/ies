@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ICT.DAL.DB
 {
     /// <summary>
-    /// Data of reports
+    /// Report class
     /// </summary>
     public class Report
     {
