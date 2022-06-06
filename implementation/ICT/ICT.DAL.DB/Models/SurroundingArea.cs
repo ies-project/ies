@@ -4,25 +4,20 @@ using System.ComponentModel.DataAnnotations;
 namespace ICT.DAL.DB
 {
     /// <summary>
-    /// Action class
+    /// SurroundingArea class
     /// </summary>
-    public class Action
+    public class SurroundingArea
     {
         /// <summary>
-        /// Primary key of Action
+        /// Primary key of SurroundingArea
         /// </summary>
         [Key]
         public int Id { get; set; }
 
         /// <summary>
-        /// Name of the Action
+        /// Foreign Key from table Area
         /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Description of the Action
-        /// </summary>
-        public string Description { get; set; }
+        public int Id_Area { get; set; }
 
     }
 }
