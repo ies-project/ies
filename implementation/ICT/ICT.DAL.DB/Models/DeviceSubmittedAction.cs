@@ -4,19 +4,24 @@ using System.ComponentModel.DataAnnotations;
 namespace ICT.DAL.DB
 {
     /// <summary>
-    /// DeviceRequestedRead class
+    /// DeviceSubmittedAction class
     /// </summary>
-    public class DeviceRequestedReads
+    public class DeviceSubmittedAction
     {
 
         /// <summary>
-        /// Primary key of DeviceRequestedReads
+        /// Primary key of DeviceSubmittedAction
         /// </summary>
         [Key]
         public int Id { get; set; }
 
         /// <summary>
-        /// Foreign Key from table Device
+        /// Foreign Key from table Action
+        /// </summary>
+        public int Id_Action { get; set; }
+
+        /// <summary>
+        /// Foreign key from table Device
         /// </summary>
         public int Id_Device { get; set; }
 
@@ -35,12 +40,6 @@ namespace ICT.DAL.DB
         /// </summary>
         [StringLength(64, ErrorMessage = "The {0} cannot have more than 64 characters")]
         public string ResponseStatus { get; set; }
-        
-        /// <summary>
-        /// Body of the response
-        /// </summary>
-        [StringLength(500, ErrorMessage = "The {0} cannot have more than 500 characters")]
-        public string ResponseBody { get; set; }
 
     }
 }
