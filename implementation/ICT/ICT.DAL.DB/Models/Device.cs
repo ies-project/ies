@@ -27,16 +27,19 @@ namespace ICT.DAL.DB
         /// Name of the Device
         /// 32 Character Limit
         /// </summary>
+		[StringLength(32)]
 		public string Name { get; set; }
 		/// <summary>
         /// Description for the Device
         /// 64 Character Limit
         /// </summary>
+		[StringLength(64)]
 		public string Description { get; set; }
 		/// <summary>
         /// Current state for the device
         /// 64 Character Limit
         /// </summary>
+		[StringLength(64)]
 		public string State { get; set; }
 		/// <summary>
         /// Date of Device Manufacture
