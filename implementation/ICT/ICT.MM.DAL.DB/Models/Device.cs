@@ -13,9 +13,12 @@ namespace ICT.MM.DAL.DB.Models {
 		[Required]
 		[StringLength(32)]
 		public string Name { get; set; }
+
 		[Required]
 		[StringLength(32)]
 		public string Description { get; set; }
+
+		public DeviceType DeviceType { get; set; }
 
 		public DateTime ManufacturedDate { get; set; }
 
@@ -33,7 +36,7 @@ namespace ICT.MM.DAL.DB.Models {
 
 		public DateTime ModifiedDate { get; set; }
 
-		public ICollection<ScenarioDevices> scenDev { get; set; }
+		public ICollection<ScenarioDevices> ScenarioDevices { get; set; }
 
 	}
 

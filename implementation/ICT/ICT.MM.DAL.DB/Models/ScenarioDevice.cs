@@ -17,9 +17,9 @@ namespace ICT.MM.DAL.DB.Models {
         [Key]
         public int Id_Device { get; set; }
 
-        public Scenario scen { get; set; }
+        public Scenario Scenario { get; set; }
 
-        public Devices devi { get; set; }
+        public Devices Device { get; set; }
 
 
         [Required]
@@ -37,19 +37,5 @@ namespace ICT.MM.DAL.DB.Models {
         [StringLength(64)]
         public string CurrentState { get; set; }
 
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ScenarioDevices>()
-                .HasKey(sd => new { sd.Id_Scenario, sd.Id_Device });
-            modelBuilder.Entity<ScenarioDevices>()
-                .HasOne(sd => sd.scen)
-                .WithMany(s => s.scenDev)
-                .HasForeignKey(sd => sd.Id_Scenario);
-            modelBuilder.Entity<ScenarioDevices>()
-                .HasOne(sd => sd.devi)
-                .WithMany(d => d.scenDev)
-                .HasForeignKey(sd => sd.Id_Device);
-        }
     }
 }
