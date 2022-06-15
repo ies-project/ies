@@ -33,6 +33,8 @@ namespace ICT.MM.DAL.DB.Models {
 
 		public DateTime ModifiedDate { get; set; }
 
+		public ICollection<ScenarioDevices> scenDev { get; set; }
+
 	}
 
 }
