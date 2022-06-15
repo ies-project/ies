@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace ICT.DAL.DB
@@ -25,7 +24,8 @@ namespace ICT.DAL.DB
         /// </summary>
         public int Description { get; set; }
 
- 
+        public ICollection<Device> Devices { get; set; }
+
     }
 }
 

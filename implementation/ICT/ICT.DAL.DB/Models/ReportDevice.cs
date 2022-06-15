@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ICT.DAL.DB
 {
@@ -31,9 +30,9 @@ namespace ICT.DAL.DB
         [StringLength(32, ErrorMessage = "The {0} cannot have more than 32 characters")]
         public string State { get; set; }
 
-        //public Devices Device { get; set; }
+        public Device Device { get; set; }
 
-        //public Reports Report { get; set; }
+        public Report Report { get; set; }
  
     }
 }

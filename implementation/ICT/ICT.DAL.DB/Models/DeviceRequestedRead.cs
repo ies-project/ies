@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ICT.DAL.DB
 {
     /// <summary>
     /// DeviceRequestedRead class
     /// </summary>
-    public class DeviceRequestedReads
+    public class DeviceRequestedRead
     {
 
         /// <summary>
@@ -41,6 +40,8 @@ namespace ICT.DAL.DB
         /// </summary>
         [StringLength(500, ErrorMessage = "The {0} cannot have more than 500 characters")]
         public string ResponseBody { get; set; }
+
+        public Device Device { get; set; }
 
     }
 }

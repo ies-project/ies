@@ -19,7 +19,7 @@ namespace ICT.MM.DAL.DB.Models {
         [StringLength(64)]
         public String Description { get; set; }
 
-        public ICollection<ScenarioDevices> ScenarioDevices { get; set; }
+        public ICollection<ScenarioDevice> ScenarioDevices { get; set; }
 
     }
 }

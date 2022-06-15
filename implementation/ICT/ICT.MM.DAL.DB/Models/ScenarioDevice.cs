@@ -7,7 +7,7 @@ namespace ICT.MM.DAL.DB.Models {
     /// <summary>
     /// 
     /// </summary>
-    public class ScenarioDevices {
+    public class ScenarioDevice {
 
         //Foreign Key To Scenarios
         [Key]
@@ -16,11 +16,6 @@ namespace ICT.MM.DAL.DB.Models {
         //Foreign Key To Devices
         [Key]
         public int Id_Device { get; set; }
-
-        public Scenario Scenario { get; set; }
-
-        public Devices Device { get; set; }
-
 
         [Required]
         public DateTime ManufacturedDate { get; set; }
@@ -37,5 +32,7 @@ namespace ICT.MM.DAL.DB.Models {
         [StringLength(64)]
         public string CurrentState { get; set; }
 
+        public Scenario Scenario { get; set; }
+        public Device Device { get; set; }
     }
 }

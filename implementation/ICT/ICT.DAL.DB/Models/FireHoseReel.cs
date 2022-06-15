@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ICT.DAL.DB
 {
@@ -45,6 +44,8 @@ namespace ICT.DAL.DB
         /// FireHoseReel Maintenance Due Date 
         /// </summary>
         public DateTime ManteinanceDueDate { get; set; }
+
+        public Area Area { get; set; }
     }
 }
 

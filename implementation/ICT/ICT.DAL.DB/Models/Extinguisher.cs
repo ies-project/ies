@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+
 namespace ICT.DAL.DB
 {
 	/// <summary>
@@ -32,15 +33,18 @@ namespace ICT.DAL.DB
 		/// <summary>
 		/// Extinguisher Manufactured Date 
 		/// </summary>
-		public datetime ManufacturedDate { get; set; }
+		public DateTime ManufacturedDate { get; set; }
 
 		/// <summary>
 		/// Extinguisher Last Maintenance Date 
 		/// </summary>
-		public datetime LastMaintenanceDate { get; set; }
+		public DateTime LastMaintenanceDate { get; set; }
 
 		/// <summary>
 		/// Extinguisher Maintenance Due Date 
 		/// </summary>
-		public datetime MaintenanceDueDate { get; set; }
+		public DateTime MaintenanceDueDate { get; set; }
+
+		public Area Area { get; set; }
 	}
+}

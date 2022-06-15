@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ICT.DAL.DB
 {
@@ -41,6 +40,8 @@ namespace ICT.DAL.DB
         [StringLength(64, ErrorMessage = "The {0} cannot have more than 64 characters")]
         public string ResponseStatus { get; set; }
 
+        public Device Device { get; set; }
+        public Action Action { get; set; }
     }
 }
 

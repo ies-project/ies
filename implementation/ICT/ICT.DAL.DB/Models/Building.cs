@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+
 namespace ICT.DAL.DB
 {
 	/// <summary>
@@ -31,3 +32,4 @@ namespace ICT.DAL.DB
 		/// </summary>
 		public ICollection<Area> Areas { get; set; }
 	}
+}

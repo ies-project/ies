@@ -2,12 +2,11 @@
 
 namespace ICT.MM.DAL.DB.Models {
 
-	public class Devices {
+	public class Device {
 		
 		[Key]
 		public int Id { get; set; }
 		
-		//[ForeignKey(nameof(DeviceTypes))]
 		public int Id_DeviceType { get; set; }
 
 		[Required]
@@ -17,8 +16,6 @@ namespace ICT.MM.DAL.DB.Models {
 		[Required]
 		[StringLength(32)]
 		public string Description { get; set; }
-
-		public DeviceType DeviceType { get; set; }
 
 		public DateTime ManufacturedDate { get; set; }
 
@@ -36,7 +33,8 @@ namespace ICT.MM.DAL.DB.Models {
 
 		public DateTime ModifiedDate { get; set; }
 
-		public ICollection<ScenarioDevices> ScenarioDevices { get; set; }
+		public ICollection<ScenarioDevice> ScenarioDevices { get; set; }
+		public DeviceType DeviceType { get; set; }
 
 	}
 

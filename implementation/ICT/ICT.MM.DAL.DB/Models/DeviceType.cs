@@ -13,7 +13,7 @@ namespace ICT.MM.DAL.DB.Models {
         [StringLength(64)]
         public string Description { get; set; }
 
-        public ICollection<Devices> Devices { get; set; }
+        public ICollection<Device> Devices { get; set; }
 
     }
 

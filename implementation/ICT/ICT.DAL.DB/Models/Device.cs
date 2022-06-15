@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ICT.DAL.DB
 {
@@ -17,12 +16,10 @@ namespace ICT.DAL.DB
         /// Foreign Key from Area
         /// </summary>
 		public int Id_Area { get; set; }
-		public virtual Area Area { get; set; }
 		/// <summary>
         /// Foreign Key from Device Type
         /// </summary>
 		public int Id_DeviceType { get; set; }
-		public virtual DeviceType DeviceType { get; set; }
 		/// <summary>
         /// Name of the Device
         /// 32 Character Limit
@@ -73,6 +70,14 @@ namespace ICT.DAL.DB
         /// Date and time the device was last modified
         /// </summary>
 		public DateTime ModifiedDate { get; set; }
+
+		public ICollection<DeviceRequestedRead> DeviceRequestedReads { get; set; }
+		public ICollection<DeviceSubmittedAction> DeviceSubmittedActions { get; set; }
+		public ICollection<ReportDevice> ReportDevices { get; set; }
+
+
+		public virtual DeviceType DeviceType { get; set; }
+		public virtual Area Area { get; set; }
 
 	}
 }

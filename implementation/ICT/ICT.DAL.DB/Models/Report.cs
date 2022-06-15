@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ICT.DAL.DB
 {
@@ -52,6 +51,8 @@ namespace ICT.DAL.DB
         /// Date of report modification
         /// </summary>
         public DateTime ModifiedDate { get; set; }
+
+        public ICollection<ReportDevice> ReportDevices { get; set; }
 
     }
 }
