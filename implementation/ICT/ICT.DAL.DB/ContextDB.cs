@@ -73,17 +73,12 @@ namespace ICT.DAL.DB
                 .WithMany(dv => dv.DeviceRequestedReads)
                 .HasForeignKey(drr => drr.Id_Device);
 
-           /* //Relationship from Area to ReportDevices
-            modelBuilder.Entity<ReportDevice>()
-                .HasOne(rd => rd.Area)
-                .WithMany(ar => ar.ReportDevices)
-                .HasForeignKey(rd => rd.Id_Area);*/
-
             //Relationship from Device to ReportDevices
             modelBuilder.Entity<ReportDevice>()
                 .HasOne(rd => rd.Device)
                 .WithMany(dv => dv.ReportDevices)
-                .HasForeignKey(rd => rd.Id_Device);
+                .HasForeignKey(rd => rd.Id_Device)
+                .HasForeignKey(rd => rd.Id_Area);
 
             //Relationship from Report to ReportDevices
             modelBuilder.Entity<ReportDevice>()
