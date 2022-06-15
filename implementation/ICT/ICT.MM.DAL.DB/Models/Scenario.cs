@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection.Emit;
 
-namespace ICT.MM.DAL.DB {
+namespace ICT.MM.DAL.DB.Models {
     /// <summary>
     /// 
     /// </summary>
@@ -17,5 +18,6 @@ namespace ICT.MM.DAL.DB {
         [Required]
         [StringLength(64)]
         public String Description { get; set; }
+
     }
 }
