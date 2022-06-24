@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT.DAL.DB
 {
@@ -10,13 +11,11 @@ namespace ICT.DAL.DB
         /// <summary>
         /// Primary key of ReportDevice
         /// </summary>
-        [Key]
         public int Id_Report { get; set; }
 
         /// <summary>
         /// Primary key of ReportDevice
         /// </summary>
-        [Key]
         public int Id_Device { get; set; }
 
         /// <summary>
@@ -33,7 +32,22 @@ namespace ICT.DAL.DB
         public Device Device { get; set; }
 
         public Report Report { get; set; }
- 
+
+        public static void ConfigureRelations(ModelBuilder modelBuilder)
+        {
+            //Relationship from Device to ReportDevices
+            modelBuilder.Entity<ReportDevice>()
+                .HasOne(rd => rd.Device)
+                .WithMany(dv => dv.ReportDevices)
+                .HasForeignKey(rd => rd.Id_Device)
+                .HasForeignKey(rd => rd.Id_Area);
+
+            //Relationship from Report to ReportDevices
+            modelBuilder.Entity<ReportDevice>()
+                .HasOne(rd => rd.Report)
+                .WithMany(rp => rp.ReportDevices)
+                .HasForeignKey(rd => rd.Id_Report);
+        }
     }
 }
 

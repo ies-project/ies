@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT.DAL.DB
 {
@@ -17,14 +17,23 @@ namespace ICT.DAL.DB
         /// <summary>
         /// Name of the DeviceType
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Description of the DeviceType
         /// </summary>
-        public int Description { get; set; }
+        public string Description { get; set; }
 
         public ICollection<Device> Devices { get; set; }
+
+        public static void ConfigureRelations(ModelBuilder modelBuilder)
+        {
+            //Relationship from DeviceType to Devices
+            modelBuilder.Entity<Device>()
+                .HasOne(d => d.DeviceType)
+                .WithMany(dt => dt.Devices)
+                .HasForeignKey(d => d.Id_DeviceType);
+        }
 
     }
 }
