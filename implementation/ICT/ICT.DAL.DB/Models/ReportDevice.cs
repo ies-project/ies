@@ -35,18 +35,9 @@ namespace ICT.DAL.DB
 
         public static void ConfigureRelations(ModelBuilder modelBuilder)
         {
-            //Relationship from Device to ReportDevices
+            //Defined primary key
             modelBuilder.Entity<ReportDevice>()
-                .HasOne(rd => rd.Device)
-                .WithMany(dv => dv.ReportDevices)
-                .HasForeignKey(rd => rd.Id_Device)
-                .HasForeignKey(rd => rd.Id_Area);
-
-            //Relationship from Report to ReportDevices
-            modelBuilder.Entity<ReportDevice>()
-                .HasOne(rd => rd.Report)
-                .WithMany(rp => rp.ReportDevices)
-                .HasForeignKey(rd => rd.Id_Report);
+                .HasKey(rd => new { rd.Id_Report, rd.Id_Device });
         }
     }
 }

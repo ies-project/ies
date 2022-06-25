@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT.DAL.DB
 {
@@ -56,6 +57,31 @@ namespace ICT.DAL.DB
 		public AreaType AreaType { get; set; }
 		public SurroundingArea SurroundingArea { get; set; }
 
+		public static void ConfigureRelations(ModelBuilder modelBuilder)
+		{
+            //Relationship from Area to Devices
+            modelBuilder.Entity<Device>()
+                .HasOne(dv => dv.Area)
+                .WithMany(ar => ar.Devices)
+                .HasForeignKey(dv => dv.Id_Area);
 
+            //Relationship from Area to Extinguisher
+            modelBuilder.Entity<Extinguisher>()
+                .HasOne(ex => ex.Area)
+                .WithMany(ar => ar.Extinguishers)
+                .HasForeignKey(ex => ex.Id_Area);
+
+            //Relationship from Area to FireHoseReel
+            modelBuilder.Entity<FireHoseReel>()
+                .HasOne(fh => fh.Area)
+                .WithMany(ar => ar.FireHoseReels)
+                .HasForeignKey(fh => fh.Id_Area);
+
+            //Relationship from Area to SurroundingArea (M - N)
+            modelBuilder.Entity<SurroundingArea>()
+                .HasOne(sa => sa.Area)
+                .WithMany(ar => ar.SurroundingAreas)
+                .HasForeignKey(sa => sa.Id_Area);
+        }
 	}
 }

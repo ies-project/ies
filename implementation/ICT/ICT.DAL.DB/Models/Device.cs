@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT.DAL.DB
 {
@@ -74,11 +75,31 @@ namespace ICT.DAL.DB
 		public ICollection<DeviceRequestedRead> DeviceRequestedReads { get; set; }
 		public ICollection<DeviceSubmittedAction> DeviceSubmittedActions { get; set; }
 		public ICollection<ReportDevice> ReportDevices { get; set; }
-
-
 		public virtual DeviceType DeviceType { get; set; }
 		public virtual Area Area { get; set; }
+		public static void ConfigureRelations(ModelBuilder modelBuilder)
+		{
+            //Relationship from Device to DeviceRequestedReads
+            modelBuilder.Entity<DeviceRequestedRead>()
+                .HasOne(drr => drr.Device)
+                .WithMany(dv => dv.DeviceRequestedReads)
+                .HasForeignKey(drr => drr.Id_Device);
 
-	}
+            //Relationship from Device to DeviceSubmittedActions
+            modelBuilder.Entity<DeviceSubmittedAction>()
+                .HasOne(drr => drr.Device)
+                .WithMany(dv => dv.DeviceSubmittedActions)
+                .HasForeignKey(drr => drr.Id_Device);
+
+            //Relationship from Device to ReportDevices
+            modelBuilder.Entity<ReportDevice>()
+                .HasOne(drr => drr.Device)
+                .WithMany(dv => dv.ReportDevices)
+                .HasForeignKey(drr => drr.Id_Device);
+
+
+        }
+
+    }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT.DAL.DB
 {
@@ -53,6 +54,15 @@ namespace ICT.DAL.DB
         public DateTime ModifiedDate { get; set; }
 
         public ICollection<ReportDevice> ReportDevices { get; set; }
+
+        public static void ConfigureRelations(ModelBuilder modelBuilder)
+        {
+            //Relationship from Action to DeviceSubmittedActions
+            modelBuilder.Entity<ReportDevice>()
+                 .HasOne(rd => rd.Report)
+                 .WithMany(r => r.ReportDevices)
+                 .HasForeignKey(rd => rd.Id_Report);
+        }
 
     }
 }

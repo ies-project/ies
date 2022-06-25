@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT.DAL.DB
 {
@@ -31,5 +32,15 @@ namespace ICT.DAL.DB
 		/// Collection of the Areas with this Building
 		/// </summary>
 		public ICollection<Area> Areas { get; set; }
+
+		public static void ConfigureRelations(ModelBuilder modelBuilder)
+		{
+            //Relationship from Building to Areas
+            modelBuilder.Entity<Area>()
+                .HasOne(ar => ar.Building)
+                .WithMany(bl => bl.Areas)
+                .HasForeignKey(ar => ar.Id_Building);
+        }
+
 	}
 }

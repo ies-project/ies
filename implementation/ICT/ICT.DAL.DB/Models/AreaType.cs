@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT.DAL.DB
 {
@@ -27,7 +28,15 @@ namespace ICT.DAL.DB
         /// </summary>
 		public ICollection<Area>Areas { get; set; }
 
+        public static void ConfigureRelations(ModelBuilder modelBuilder)
+        {
+            //Relationship from AreaType to Areas
+            modelBuilder.Entity<Area>()
+                .HasOne(ar => ar.AreaType)
+                .WithMany(at => at.Areas)
+                .HasForeignKey(ar => ar.Id_Type);
+        }
 
-	}
+    }
 }
 
