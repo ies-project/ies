@@ -2,7 +2,7 @@
 using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore;
 
-namespace ICT.MM.DAL.DB.Models 
+namespace ICT.MM.DAL.DB
 {
     /// <summary>
     /// 

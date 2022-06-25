@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using ICT.DAL.DB;
+//using ICT.DAL.DB;
 using ICT.MM.DAL.DB;
 
 Console.WriteLine("Hello, World!");

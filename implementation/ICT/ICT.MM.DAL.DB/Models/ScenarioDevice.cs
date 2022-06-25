@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.ComponentModel.DataAnnotations;
 
-namespace ICT.MM.DAL.DB.Models 
+namespace ICT.MM.DAL.DB
 {
     /// <summary>
     /// ScenarioDevice class

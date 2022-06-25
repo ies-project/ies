@@ -1,5 +1,4 @@
-﻿using ICT.MM.DAL.DB.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace ICT.MM.DAL.DB 
