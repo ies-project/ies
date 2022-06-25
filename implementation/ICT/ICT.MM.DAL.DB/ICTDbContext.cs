@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ICT.MM.DAL.DB.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace ICT.DAL.DB
+namespace ICT.MM.DAL.DB 
 {
     public class ICTDbContext : DbContext{
 
@@ -19,15 +20,10 @@ namespace ICT.DAL.DB
         {
             // Defined database relations
             DeviceType.ConfigureRelations(modelBuilder);
-            Action.ConfigureRelations(modelBuilder);
-            Report.ConfigureRelations(modelBuilder);
-            Building.ConfigureRelations(modelBuilder);
-            AreaType.ConfigureRelations(modelBuilder);
-            Area.ConfigureRelations(modelBuilder);
             Device.ConfigureRelations(modelBuilder);
+            Scenario.ConfigureRelations(modelBuilder);
             // Defined primary key
-            ReportDevice.ConfigureRelations(modelBuilder);
-            SurroundingArea.ConfigureRelations(modelBuilder);
+            ScenarioDevice.ConfigureRelations(modelBuilder);
 
         }
     }

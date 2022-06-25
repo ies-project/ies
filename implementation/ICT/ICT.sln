@@ -23,7 +23,10 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ICT.MM.PL.Web", "ICT.MM.PL.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICT.BLL", "ICT.BLL\ICT.BLL.csproj", "{6BCDD602-FF67-47EE-9C05-312A3BE103AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICT.PL.Tester", "ICT.PL.Tester\ICT.PL.Tester.csproj", "{5DF6537B-F38D-464C-AA8D-047DC4D765F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICT.PL.Tester", "ICT.PL.Tester\ICT.PL.Tester.csproj", "{5DF6537B-F38D-464C-AA8D-047DC4D765F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{889184E5-123E-4772-BCE0-771DB499A96B} = {889184E5-123E-4772-BCE0-771DB499A96B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

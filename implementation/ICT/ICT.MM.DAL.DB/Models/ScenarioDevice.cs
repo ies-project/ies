@@ -3,36 +3,60 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.ComponentModel.DataAnnotations;
 
-namespace ICT.MM.DAL.DB.Models {
+namespace ICT.MM.DAL.DB.Models 
+{
     /// <summary>
-    /// 
+    /// ScenarioDevice class
     /// </summary>
     public class ScenarioDevice {
-
-        //Foreign Key To Scenarios
-        [Key]
+        /// <summary>
+        /// Primary key of Scenarios
+        /// </summary>
         public int Id_Scenario { get; set; }
 
-        //Foreign Key To Devices
-        [Key]
+        /// <summary>
+        /// Primary key and Foreign Key from table Devices
+        /// </summary>
         public int Id_Device { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Required]
         public DateTime ManufacturedDate { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime LastManteinanceDate { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime ManteinanceDueDate { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Required]
         [StringLength(64)]
         public string OriginalState { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Required]
         [StringLength(64)]
         public string CurrentState { get; set; }
 
         public Scenario Scenario { get; set; }
         public Device Device { get; set; }
+
+        public static void ConfigureRelations(ModelBuilder modelBuilder)
+        {
+            //Defined primary key
+            modelBuilder.Entity<ScenarioDevice>()
+                .HasKey(sd => new { sd.Id_Scenario, sd.Id_Device });
+        }
     }
 }
