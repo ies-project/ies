@@ -7,6 +7,12 @@ namespace ICT.MM.DAL.DB
 
         public DbSet<DeviceType> DeviceTypes { get; set; }
 
+        public DbSet<Device> Devices { get; set; }
+
+        public DbSet<Scenario> Scenarios { get; set; }
+
+        public DbSet<ScenarioDevice> ScenarioDevices { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
