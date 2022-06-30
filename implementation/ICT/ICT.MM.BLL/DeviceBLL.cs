@@ -42,21 +42,37 @@ public class DeviceBLL
 
     }
 
-    public void updateDevice()
+    public void updateDevice(int id, int id_DeviceType, string name, string description, DateTime ManufacturedDate, DateTime LastMaintenanceDate,
+        DateTime MaintenanceDueDate, string ManufacturedBy, string CreatedBy, DateTime CreatedDate, string ModifiedBy, DateTime ModifiedDate)
     {
         ICTDbContext db = new ICTDbContext();
+
+        Device newDevice = db.Devices.Find(id);
+
+        newDevice.Id = id;
+        newDevice.Id_DeviceType = id_DeviceType;
+        newDevice.Name = name;
+        newDevice.Description = description;
+        newDevice.ManufacturedDate = ManufacturedDate;
+        newDevice.LastMaintenanceDate = LastMaintenanceDate;
+        newDevice.MaintenanceDueDate = MaintenanceDueDate;
+        newDevice.ManufacturedBy = ManufacturedBy;
+        newDevice.CreatedBy = CreatedBy;
+        newDevice.CreatedDate = CreatedDate;
+        newDevice.ModifiedBy = ModifiedBy;
+        newDevice.ModifiedDate = ModifiedDate;
 
         db.SaveChanges();
     }
 
-    public void listDevice()
+    public ICollection<Device> listDevice()
     {
         ICTDbContext db = new ICTDbContext();
 
+        ICollection<Device> deviceList = db.Devices.ToList();
+
         db.SaveChanges();
+
+        return deviceList;
     }
 }
-
-
-
-//iCTDbContext.SaveChanges();
