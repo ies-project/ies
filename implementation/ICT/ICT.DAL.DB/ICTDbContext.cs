@@ -6,6 +6,8 @@ namespace ICT.DAL.DB
     public class ICTDbContext : DbContext{
 
         public DbSet<DeviceType> DeviceTypes { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
