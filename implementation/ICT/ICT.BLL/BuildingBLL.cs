@@ -33,19 +33,10 @@ public class BuildingBLL
 
     }
 
-    public void updateDevice(int id, string name, string address, string type)
+    public void updateBuilding()
     {
         ICTDbContext db = new ICTDbContext();
 
-        Building newBuilding = db.Buildings.Find(id);
-
-        newBuilding.Id = id;
-
-        newBuilding.Name = name;
-
-        newBuilding.Address = address;
-
-        db.Buildings.Add(newBuilding);
 
         db.SaveChanges();
     }
