@@ -34,9 +34,26 @@ namespace ICT.MM.BLL {
             iCTDbContext.SaveChanges();
         }
 
-        public void updateScenario(int id, int? name, int? descripton)
+        public void updateScenario(int id, string name, string descripton)
         {
+            iCTDbContext = new ICT.MM.DAL.DB.ICTDbContext();
 
+            Scenario sc = iCTDbContext.Scenarios.Find(id);
+
+            sc.Name = name;
+
+            sc.Description = descripton;
+
+            iCTDbContext.SaveChanges();
+        }
+
+        public ICollection<Scenario> listScenario() {
+
+            iCTDbContext = new ICT.MM.DAL.DB.ICTDbContext();
+
+            ICollection<Scenario> listScenario = iCTDbContext.Scenarios.ToList();
+
+            return listScenario;
         }
 
     }
