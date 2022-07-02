@@ -9,30 +9,36 @@ using ICT.MM.DAL.DB;
 namespace ICT.MM.BLL {
     public class ScenariosBLL {
 
-        public static void InsertScenario(int id, string name, string description)
-        {
-            using (ICT.MM.DAL.DB.ICTDbContext iCTDbContext = new ICT.MM.DAL.DB.ICTDbContext())
-            {
-                Scenario sc = new Scenario();
-                sc.Name = name;
-                sc.Description = description;
-                sc.Id = id;
-
-                iCTDbContext.Scenarios.Add(sc);
-
-                iCTDbContext.SaveChanges();
-            }
-        }
-        
-        public static void DeleteScenario(DeleteScenarioDTO dto)
+        public static void InsertScenario(InsertScenarioRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Scenario == id));
+                if (iCTDbContext.Scenarios.Find(dto.Id) == null)
+                {
+                    Scenario sc = new Scenario();
+                    sc.Name = dto.Name;
+                    sc.Description = dto.Description;
+                    sc.Id = dto.Id;
 
-                iCTDbContext.Scenarios.Remove(iCTDbContext.Scenarios.Find(dto.Id));
+                    iCTDbContext.Scenarios.Add(sc);
 
-                iCTDbContext.SaveChanges();
+                    iCTDbContext.SaveChanges();
+                }
+            }
+        }
+        
+        public static void DeleteScenario(DeleteScenarioRequestDTO dto)
+        {
+            using (ICTDbContext iCTDbContext = new ICTDbContext())
+            {
+                iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Scenario == dto.Id));
+
+                if(iCTDbContext.Scenarios.Find(dto.Id) != null)
+                {
+                    iCTDbContext.Scenarios.Remove(iCTDbContext.Scenarios.Find(dto.Id));
+
+                    iCTDbContext.SaveChanges();
+                }                
             }
         }
 
@@ -55,7 +61,7 @@ namespace ICT.MM.BLL {
             using (ICTDbContext iCTDbContext = new ICTDbContext()){ 
 
             List<ListItemScenarioResponseDTO> listItemScenarioResponseDTOs = iCTDbContext.Scenarios
-                    .Select(x => new ListItemScenarioResponseDTO { Id = x.Id, Name = x.Name}).ToList();
+                    .Select(x => new ListItemScenarioResponseDTO { Id = x.Id, Name = x.Name, Description = x.Description}).ToList();
 
                 return new ListScenarioResponseDTO {Items = listItemScenarioResponseDTOs, Total = listItemScenarioResponseDTOs.Count()};
             }

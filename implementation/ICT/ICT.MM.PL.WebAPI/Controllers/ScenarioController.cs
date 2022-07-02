@@ -6,9 +6,21 @@ namespace ICT.MM.PL.WebAPI.Controllers {
     [Route("[controller]")]
     public class ScenarioController : ControllerBase {
         [HttpGet(Name = "GetScenarios")]
-        public ListScenarioResponseDTO Get()
+        public ListScenarioResponseDTO GetList()
         {
             return BLL.ScenariosBLL.ListScenarios();
+        }
+
+        [HttpDelete(Name = "DeleteScenario")]
+        public void DeleteScenario(DeleteScenarioRequestDTO dto)
+        {
+            BLL.ScenariosBLL.DeleteScenario(dto);
+        }
+
+        [HttpPut(Name = "InsertScenarios")]
+        public void InsertScenario(InsertScenarioRequestDTO dto)
+        {
+            BLL.ScenariosBLL.InsertScenario(dto);
         }
     }
 }
