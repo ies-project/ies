@@ -8,9 +8,9 @@ namespace ICT.Core.DTO {
     public class ListReportResponseDTO {
         public int Total { get; set; }
 
-        public List<ListItemReportgResponseDTO> Items { get; set; }
+        public List<ListItemReportResponseDTO> Items { get; set; }
     }
-    public class ListItemReportgResponseDTO {
+    public class ListItemReportResponseDTO {
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }

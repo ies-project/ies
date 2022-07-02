@@ -8,28 +8,31 @@ public class ReportBLL
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            if (db.Reports.Find(dto.Id) == null)
+            {
 
-            Report newReport = new Report();
+                Report newReport = new Report();
 
-            newReport.Id = dto.Id;
+                newReport.Id = dto.Id;
 
-            newReport.Name = dto.Name;
+                newReport.Name = dto.Name;
 
-            newReport.Date = dto.Date;
+                newReport.Date = dto.Date;
 
-            newReport.Criteria = dto.Criteria;
+                newReport.Criteria = dto.Criteria;
 
-            newReport.CreatedBy = dto.CreatedBy;
+                newReport.CreatedBy = dto.CreatedBy;
 
-            newReport.CreatedDate = dto.CreatedDate;
+                newReport.CreatedDate = dto.CreatedDate;
 
-            newReport.ModifiedBy = dto.ModifiedBy;
+                newReport.ModifiedBy = dto.ModifiedBy;
 
-            newReport.ModifiedDate = dto.ModifiedDate;
+                newReport.ModifiedDate = dto.ModifiedDate;
 
-            db.Reports.Add(newReport);
+                db.Reports.Add(newReport);
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
         }
     }
 
@@ -37,13 +40,12 @@ public class ReportBLL
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            if (db.Reports.Find(dto.Id) != null)
+            {
+                db.Reports.Remove(db.Reports.Find(dto.Id));
 
-            db.Reports.Remove(db.Reports.Find(dto.Id));
-
-            db.Reports.RemoveRange(db.Reports.Where(x => x.Id == dto.Id));
-
-            db.SaveChanges();
-
+                db.SaveChanges();
+            }
         }
     }
 
@@ -54,8 +56,6 @@ public class ReportBLL
 
             Report newReport = db.Reports.Find(dto.Id);
 
-            newReport.Id = dto.Id;
-
             newReport.Name = dto.Name;
 
             newReport.Date = dto.Date;
@@ -76,14 +76,28 @@ public class ReportBLL
         }
     }
 
-    public ICollection<Report> listReport()
+    public ListReportResponseDTO listReport()
     {
-        ICTDbContext db = new ICTDbContext();
+        using (ICTDbContext db = new ICTDbContext())
+        {
+            List<ListItemReportResponseDTO> listItemReportResponseDTOs = db.Reports
+                    .Select(x => new ListItemReportResponseDTO
+                    { 
+                        Id = x.Id,
+                        Name = x.Name,
+                        Date = x.Date,
+                        Criteria = x.Criteria,
+                        CreatedBy = x.CreatedBy,
+                        CreatedDate = x.CreatedDate,
+                        ModifiedBy = x.ModifiedBy,
+                        ModifiedDate = x.ModifiedDate, 
+                    }).ToList();
 
-        ICollection<Report> reportList = db.Reports.ToList();
-
-        db.SaveChanges();
-
-        return reportList;
+            return new ListReportResponseDTO 
+            { 
+                Items = listItemReportResponseDTOs,
+                Total = listItemReportResponseDTOs.Count() 
+            };
+        }
     }
 }
