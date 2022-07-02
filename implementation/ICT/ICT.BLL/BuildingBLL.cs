@@ -18,6 +18,7 @@ namespace ICT.BLL
                 if (iCTDbContext.Buildings.Find(dto.Id) == null)
                 {
                     Building bd = new Building();
+                    bd.Id = dto.Id;
                     bd.Name = dto.Name;
                     bd.Address = dto.Address;
                     bd.Type = dto.Type;
