@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICT.Core.DTO
 {
-    public class DeleteAreaTypeDTO
+    public class DeleteAreaTypeRequestDTO
     {
         public int Id { get; set; }
     }

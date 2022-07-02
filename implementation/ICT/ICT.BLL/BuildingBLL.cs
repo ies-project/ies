@@ -55,7 +55,7 @@ namespace ICT.BLL
             }
         }
 
-        public static ListBuildingResponseDTO listBuilding()
+        public static ListBuildingResponseDTO ListBuilding()
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {

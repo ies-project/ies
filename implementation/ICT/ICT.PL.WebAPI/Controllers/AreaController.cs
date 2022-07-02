@@ -18,9 +18,15 @@ namespace ICT.PL.WebAPI.Controllers {
         }
 
         [HttpPut(Name = "InsertArea")]
-        public void InsertDevice(InsertAreaRequestDTO dto)
+        public void InsertArea(InsertAreaRequestDTO dto)
         {
             AreaBLL.InsertArea(dto);
+        }
+
+        [HttpPut(Name = "UpdateArea")]
+        public void UpdateArea(UpdateAreaRequestDTO dto)
+        {
+            AreaBLL.UpdateArea(dto);
         }
     }
 }

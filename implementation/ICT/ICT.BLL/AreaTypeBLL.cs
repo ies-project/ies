@@ -27,7 +27,7 @@ namespace ICT.BLL
             }
         }
 
-        public static void DeleteAreaType(DeleteAreaTypeDTO dto)
+        public static void DeleteAreaType(DeleteAreaTypeRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
@@ -50,7 +50,7 @@ namespace ICT.BLL
             }
         }
 
-        public static ListAreaTypeResponseDTO listAreaType()
+        public static ListAreaTypeResponseDTO ListAreaType()
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
