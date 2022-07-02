@@ -4,7 +4,7 @@ using ICT.DAL.DB;
 public class AreaBLL
 {
 
-    public void insertArea(InsertReportRequestDTO dto)
+    public static void InsertArea(InsertAreaRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
@@ -35,57 +35,67 @@ public class AreaBLL
         }
     }
 
-    public void deleteReport(DeleteReportRequestDTO dto)
+    public static void DeleteArea(DeleteAreaRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
 
-            db.Reports.Remove(db.Reports.Find(dto.Id));
+            db.Areas.Remove(db.Areas.Find(dto.Id));
 
-            db.Reports.RemoveRange(db.Reports.Where(x => x.Id == dto.Id));
+            db.Areas.RemoveRange(db.Areas.Where(x => x.Id == dto.Id));
 
             db.SaveChanges();
 
         }
     }
 
-    public void updateReport(UpdateReportRequestDTO dto)
+    public static void UpdateArea(UpdateAreaRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            Area newArea = db.Areas.Find(dto.Id);
 
-            Report newReport = db.Reports.Find(dto.Id);
+            newArea.Name = dto.Name;
 
-            newReport.Id = dto.Id;
+            newArea.Floor = dto.Floor;
 
-            newReport.Name = dto.Name;
+            newArea.NumFireBalls = dto.NumFireBalls;
 
-            newReport.Date = dto.Date;
+            newArea.NumSpringles = dto.NumSpringles;
 
-            newReport.Criteria = dto.Criteria;
+            newArea.NumBocasSingulares = dto.NumBocasSingulares;
 
-            newReport.CreatedBy = dto.CreatedBy;
+            newArea.NumBocasSiameses = dto.NumBocasSiameses;
 
-            newReport.CreatedDate = dto.CreatedDate;
-
-            newReport.ModifiedBy = dto.ModifiedBy;
-
-            newReport.ModifiedDate = dto.ModifiedDate;
-
-            db.Reports.Add(newReport);
+            db.Areas.Add(newArea);
 
             db.SaveChanges();
         }
     }
 
-    public ICollection<Report> listReport()
+    public static ListAreaResponseDTO ListArea()
     {
-        ICTDbContext db = new ICTDbContext();
+        using (ICTDbContext db = new ICTDbContext())
+        {
+            List<ListItemAreaResponseDTO> listItemAreaResponseDTOs = db.Areas
+                    .Select(x => new ListItemAreaResponseDTO
+                    {
+                        Id = x.Id,
+                        Id_Building = x.Id_Building,
+                        Id_Type = x.Id_Type,
+                        Floor = x.Floor,
+                        NumFireBalls = x.NumFireBalls,
+                        NumSpringles = x.NumSpringles,
+                        NumBocasSingulares = x.NumBocasSingulares,
+                        NumBocasSiameses = x.NumBocasSiameses,
+                        
+                    }).ToList();
 
-        ICollection<Report> reportList = db.Reports.ToList();
-
-        db.SaveChanges();
-
-        return reportList;
+            return new ListAreaResponseDTO
+            {
+                Items = listItemAreaResponseDTOs,
+                Total = listItemAreaResponseDTOs.Count()
+            };
+        }
     }
 }
