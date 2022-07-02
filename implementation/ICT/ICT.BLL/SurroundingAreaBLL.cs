@@ -35,20 +35,6 @@ public class SurroundingAreaBLL
         }
     }
 
-    public static void UpdateSurroundingArea(UpdateSurroundingAreaRequestDTO dto)
-    {
-        using (ICTDbContext db = new ICTDbContext())
-        {
-            SurroundingArea newSurroundingArea = db.SurroundingAreas.Find(dto.Id);
-
-            newSurroundingArea.Id_Area = dto.Id_Area;
-
-            db.SurroundingAreas.Add(newSurroundingArea);
-
-            db.SaveChanges();
-        }
-    }
-
     public static ListSurroundingAreaResponseDTO ListSurroundingArea()
     {
         using (ICTDbContext db = new ICTDbContext())
