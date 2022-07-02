@@ -1,72 +1,79 @@
-﻿using ICT.DAL.DB;
+﻿using ICT.Core.DTO;
+using ICT.DAL.DB;
 
 public class ReportBLL
 {
 
-    public void insertReport(int id, string name, DateTime date, string criteria, string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate)
+    public void insertReport(InsertReportRequestDTO dto)
     {
-        ICTDbContext db = new ICTDbContext();
+        using (ICTDbContext db = new ICTDbContext())
+        {
 
-        Report newReport = new Report();
+            Report newReport = new Report();
 
-        newReport.Id = id;
+            newReport.Id = dto.Id;
 
-        newReport.Name = name;
+            newReport.Name = dto.Name;
 
-        newReport.Date = date;
+            newReport.Date = dto.Date;
 
-        newReport.Criteria = criteria;
+            newReport.Criteria = dto.Criteria;
 
-        newReport.CreatedBy = createdBy;
+            newReport.CreatedBy = dto.CreatedBy;
 
-        newReport.CreatedDate = createdDate;
+            newReport.CreatedDate = dto.CreatedDate;
 
-        newReport.ModifiedBy = modifiedBy;
+            newReport.ModifiedBy = dto.ModifiedBy;
 
-        newReport.ModifiedDate = modifiedDate;
+            newReport.ModifiedDate = dto.ModifiedDate;
 
-        db.Reports.Add(newReport);
+            db.Reports.Add(newReport);
 
-        db.SaveChanges();
+            db.SaveChanges();
+        }
     }
 
-    public void deleteReport(int idReport)
+    public void deleteReport(DeleteReportRequestDTO dto)
     {
-        ICTDbContext db = new ICTDbContext();
+        using (ICTDbContext db = new ICTDbContext())
+        {
 
-        db.Reports.Remove(db.Reports.Find(idReport));
+            db.Reports.Remove(db.Reports.Find(dto.Id));
 
-        db.Reports.RemoveRange(db.Reports.Where(x => x.Id == idReport));
+            db.Reports.RemoveRange(db.Reports.Where(x => x.Id == dto.Id));
 
-        db.SaveChanges();
+            db.SaveChanges();
 
+        }
     }
 
-    public void deleteReport(int id, string name, DateTime date, string criteria, string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate)
+    public void updateReport(UpdateReportRequestDTO dto)
     {
-        ICTDbContext db = new ICTDbContext();
+        using (ICTDbContext db = new ICTDbContext())
+        {
 
-        Report newReport = db.Reports.Find(id);
+            Report newReport = db.Reports.Find(dto.Id);
 
-        newReport.Id = id;
+            newReport.Id = dto.Id;
 
-        newReport.Name = name;
+            newReport.Name = dto.Name;
 
-        newReport.Date = date;
+            newReport.Date = dto.Date;
 
-        newReport.Criteria = criteria;
+            newReport.Criteria = dto.Criteria;
 
-        newReport.CreatedBy = createdBy;
+            newReport.CreatedBy = dto.CreatedBy;
 
-        newReport.CreatedDate = createdDate;
+            newReport.CreatedDate = dto.CreatedDate;
 
-        newReport.ModifiedBy = modifiedBy;
+            newReport.ModifiedBy = dto.ModifiedBy;
 
-        newReport.ModifiedDate = modifiedDate;
+            newReport.ModifiedDate = dto.ModifiedDate;
 
-        db.Reports.Add(newReport);
+            db.Reports.Add(newReport);
 
-        db.SaveChanges();
+            db.SaveChanges();
+        }
     }
 
     public ICollection<Report> listReport()
