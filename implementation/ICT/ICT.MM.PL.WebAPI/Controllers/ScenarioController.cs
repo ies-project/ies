@@ -22,5 +22,10 @@ namespace ICT.MM.PL.WebAPI.Controllers {
         {
             BLL.ScenariosBLL.InsertScenario(dto);
         }
+
+        public void UpdateScenario(UpdateScenarioRequestDTO dto)
+        {
+            BLL.ScenariosBLL.UpdateScenario(dto);
+        }
     }
 }

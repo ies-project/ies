@@ -4,13 +4,12 @@ using ICT.DAL.DB;
 public class ReportBLL
 {
 
-    public void insertReport(InsertReportRequestDTO dto)
+    public static void InsertReport(InsertReportRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
             if (db.Reports.Find(dto.Id) == null)
             {
-
                 Report newReport = new Report();
 
                 newReport.Id = dto.Id;
@@ -36,7 +35,7 @@ public class ReportBLL
         }
     }
 
-    public void deleteReport(DeleteReportRequestDTO dto)
+    public static void DeleteReport(DeleteReportRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
@@ -49,11 +48,10 @@ public class ReportBLL
         }
     }
 
-    public void updateReport(UpdateReportRequestDTO dto)
+    public static void UpdateReport(UpdateReportRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
-
             Report newReport = db.Reports.Find(dto.Id);
 
             newReport.Name = dto.Name;
@@ -76,7 +74,7 @@ public class ReportBLL
         }
     }
 
-    public ListReportResponseDTO listReport()
+    public static ListReportResponseDTO ListReport()
     {
         using (ICTDbContext db = new ICTDbContext())
         {
@@ -92,7 +90,6 @@ public class ReportBLL
                         ModifiedBy = x.ModifiedBy,
                         ModifiedDate = x.ModifiedDate, 
                     }).ToList();
-
             return new ListReportResponseDTO 
             { 
                 Items = listItemReportResponseDTOs,

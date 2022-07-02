@@ -18,6 +18,7 @@ namespace ICT.BLL
                 if (iCTDbContext.Buildings.Find(dto.Id) == null)
                 {
                     Building bd = new Building();
+                    bd.Id = dto.Id;
                     bd.Name = dto.Name;
                     bd.Address = dto.Address;
                     bd.Type = dto.Type;
@@ -54,7 +55,7 @@ namespace ICT.BLL
             }
         }
 
-        public static ListBuildingResponseDTO listBuilding()
+        public static ListBuildingResponseDTO ListBuilding()
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
@@ -65,7 +66,6 @@ namespace ICT.BLL
                         Address = x.Address, 
                         Type = x.Type 
                     }).ToList();
-
                 return new ListBuildingResponseDTO
                 {
                     Items = listItemBuildingResponseDTOs,
