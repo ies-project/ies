@@ -7,24 +7,27 @@ public class DeviceBLL {
     {
         using (ICTDbContext db = new ICTDbContext())
         {
-            Device newDevice = new Device();
+            if (db.Devices.Find(dto.Id) == null && db.DeviceTypes.Find(dto.Id_DeviceType) != null)
+            {
+                Device newDevice = new Device();
 
-            newDevice.Id = dto.Id;
-            newDevice.Id_DeviceType = dto.Id_DeviceType;
-            newDevice.Name = dto.Name;
-            newDevice.Description = dto.Description;
-            newDevice.ManufacturedDate = dto.ManufacturedDate;
-            newDevice.LastMaintenanceDate = dto.LastMaintenanceDate;
-            newDevice.MaintenanceDueDate = dto.MaintenanceDueDate;
-            newDevice.ManufacturedBy = dto.ManufacturedBy;
-            newDevice.CreatedBy = dto.CreatedBy;
-            newDevice.CreatedDate = dto.CreatedDate;
-            newDevice.ModifiedBy = dto.ModifiedBy;
-            newDevice.ModifiedDate = dto.ModifiedDate;
+                newDevice.Id = dto.Id;
+                newDevice.Id_DeviceType = dto.Id_DeviceType;
+                newDevice.Name = dto.Name;
+                newDevice.Description = dto.Description;
+                newDevice.ManufacturedDate = dto.ManufacturedDate;
+                newDevice.LastMaintenanceDate = dto.LastMaintenanceDate;
+                newDevice.MaintenanceDueDate = dto.MaintenanceDueDate;
+                newDevice.ManufacturedBy = dto.ManufacturedBy;
+                newDevice.CreatedBy = dto.CreatedBy;
+                newDevice.CreatedDate = dto.CreatedDate;
+                newDevice.ModifiedBy = dto.ModifiedBy;
+                newDevice.ModifiedDate = dto.ModifiedDate;
 
-            db.Devices.Add(newDevice);
+                db.Devices.Add(newDevice);
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
         }
     }
 
@@ -32,12 +35,14 @@ public class DeviceBLL {
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            if (db.Devices.Find(dto.Id) != null)
+            {
+                db.Devices.Remove(db.Devices.Find(dto.Id));
 
-            db.Devices.Remove(db.Devices.Find(dto.Id));
+                db.ScenarioDevices.RemoveRange(db.ScenarioDevices.Where(x => x.Id_Device == dto.Id));
 
-            db.ScenarioDevices.RemoveRange(db.ScenarioDevices.Where(x => x.Id_Device == dto.Id));
-
-            db.SaveChanges();
+                db.SaveChanges();
+            }
         }
     }
 
@@ -45,7 +50,6 @@ public class DeviceBLL {
     {
         using (ICTDbContext db = new ICTDbContext())
         {
-
             Device newDevice = db.Devices.Find(dto.Id);
 
             newDevice.Id = dto.Id;
