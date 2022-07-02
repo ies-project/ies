@@ -4,7 +4,7 @@ using ICT.DAL.DB;
 public class ReportBLL
 {
 
-    public void insertReport(InsertReportRequestDTO dto)
+    public static void InsertReport(InsertReportRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
@@ -36,7 +36,7 @@ public class ReportBLL
         }
     }
 
-    public void deleteReport(DeleteReportRequestDTO dto)
+    public static void DeleteReport(DeleteReportRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
@@ -49,7 +49,7 @@ public class ReportBLL
         }
     }
 
-    public void updateReport(UpdateReportRequestDTO dto)
+    public static void UpdateReport(UpdateReportRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
@@ -76,7 +76,7 @@ public class ReportBLL
         }
     }
 
-    public ListReportResponseDTO listReport()
+    public static ListReportResponseDTO ListReport()
     {
         using (ICTDbContext db = new ICTDbContext())
         {
