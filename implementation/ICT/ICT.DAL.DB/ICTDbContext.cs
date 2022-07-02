@@ -8,6 +8,7 @@ namespace ICT.DAL.DB
         public DbSet<DeviceType> DeviceTypes { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Area> Areas { get; set; }
+        public DbSet<AreaType> AreaTypes { get; set; }
         public DbSet<Report> Reports { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
