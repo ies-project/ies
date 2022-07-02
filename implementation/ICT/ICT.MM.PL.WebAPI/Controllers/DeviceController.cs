@@ -22,5 +22,11 @@ namespace ICT.MM.PL.WebAPI.Controllers {
         {
             DeviceBLL.InsertDevice(dto);
         }
+
+        [HttpPut(Name = "UpdateDevice")]
+        public void UpdateDevice(UpdateDeviceRequestDTO dto)
+        {
+            DeviceBLL.UpdateDevice(dto);
+        }
     }
 }

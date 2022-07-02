@@ -8,30 +8,32 @@ public class AreaBLL
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            if (db.Areas.Find(dto.Id) == null)
+            {
+                Area newArea = new Area();
 
-            Area newArea = new Area();
+                newArea.Id = dto.Id;
 
-            newArea.Id = dto.Id;
+                newArea.Id_Building = dto.Id_Building;
 
-            newArea.Id_Building = dto.Id_Building;
+                newArea.Id_Type = dto.Id_Type;
 
-            newArea.Id_Type = dto.Id_Type;
+                newArea.Name = dto.Name;
 
-            newArea.Name = dto.Name;
+                newArea.Floor = dto.Floor;
 
-            newArea.Floor = dto.Floor;
+                newArea.NumFireBalls = dto.NumFireBalls;
 
-            newArea.NumFireBalls = dto.NumFireBalls;
+                newArea.NumSpringles = dto.NumSpringles;
 
-            newArea.NumSpringles = dto.NumSpringles;
+                newArea.NumBocasSingulares = dto.NumBocasSingulares;
 
-            newArea.NumBocasSingulares = dto.NumBocasSingulares;
+                newArea.NumBocasSiameses = dto.NumBocasSiameses;
 
-            newArea.NumBocasSiameses = dto.NumBocasSiameses;
+                db.Areas.Add(newArea);
 
-            db.Areas.Add(newArea);
-
-            db.SaveChanges();
+                db.SaveChanges();
+            }
         }
     }
 
@@ -39,13 +41,14 @@ public class AreaBLL
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            if (db.Areas.Find(dto.Id) != null)
+            {
+                db.Areas.Remove(db.Areas.Find(dto.Id));
 
-            db.Areas.Remove(db.Areas.Find(dto.Id));
+                db.Areas.RemoveRange(db.Areas.Where(x => x.Id == dto.Id));
 
-            db.Areas.RemoveRange(db.Areas.Where(x => x.Id == dto.Id));
-
-            db.SaveChanges();
-
+                db.SaveChanges();
+            }
         }
     }
 
@@ -90,7 +93,6 @@ public class AreaBLL
                         NumBocasSiameses = x.NumBocasSiameses,
                         
                     }).ToList();
-
             return new ListAreaResponseDTO
             {
                 Items = listItemAreaResponseDTOs,

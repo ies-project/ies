@@ -10,7 +10,6 @@ public class ReportBLL
         {
             if (db.Reports.Find(dto.Id) == null)
             {
-
                 Report newReport = new Report();
 
                 newReport.Id = dto.Id;
@@ -53,7 +52,6 @@ public class ReportBLL
     {
         using (ICTDbContext db = new ICTDbContext())
         {
-
             Report newReport = db.Reports.Find(dto.Id);
 
             newReport.Name = dto.Name;
@@ -92,7 +90,6 @@ public class ReportBLL
                         ModifiedBy = x.ModifiedBy,
                         ModifiedDate = x.ModifiedDate, 
                     }).ToList();
-
             return new ListReportResponseDTO 
             { 
                 Items = listItemReportResponseDTOs,

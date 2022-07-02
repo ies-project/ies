@@ -66,7 +66,6 @@ namespace ICT.BLL
                         Address = x.Address, 
                         Type = x.Type 
                     }).ToList();
-
                 return new ListBuildingResponseDTO
                 {
                     Items = listItemBuildingResponseDTOs,
