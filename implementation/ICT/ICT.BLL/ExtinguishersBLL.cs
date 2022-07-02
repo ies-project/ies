@@ -61,7 +61,7 @@ namespace ICT.BLL {
             }
         }
 
-        public static ListExtinguishersResponseDTO ListScenarios()
+        public static ListExtinguishersResponseDTO ListExtinguishers()
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
