@@ -8,16 +8,18 @@ public class SurroundingAreaBLL
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            if (db.SurroundingAreas.Find(dto.Id) == null)
+            {
+                SurroundingArea newSurroundingArea = new SurroundingArea();
 
-            SurroundingArea newSurroundingArea = new SurroundingArea();
+                newSurroundingArea.Id = dto.Id;
 
-            newSurroundingArea.Id = dto.Id;
+                newSurroundingArea.Id_Area = dto.Id_Area;
 
-            newSurroundingArea.Id_Area = dto.Id_Area;
+                db.SurroundingAreas.Add(newSurroundingArea);
 
-            db.SurroundingAreas.Add(newSurroundingArea);
-
-            db.SaveChanges();
+                db.SaveChanges();
+            }
         }
     }
 
@@ -25,13 +27,14 @@ public class SurroundingAreaBLL
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+            if (db.SurroundingAreas.Find(dto.Id) != null)
+            {
+                db.SurroundingAreas.Remove(db.SurroundingAreas.Find(dto.Id));
 
-            db.SurroundingAreas.Remove(db.SurroundingAreas.Find(dto.Id));
+                db.SurroundingAreas.RemoveRange(db.SurroundingAreas.Where(x => x.Id == dto.Id));
 
-            db.SurroundingAreas.RemoveRange(db.SurroundingAreas.Where(x => x.Id == dto.Id));
-
-            db.SaveChanges();
-
+                db.SaveChanges();
+            }
         }
     }
 

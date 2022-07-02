@@ -61,7 +61,6 @@ namespace ICT.BLL
                         Name = x.Name,
                         Description = x.Description
                     }).ToList();
-
                 return new ListAreaTypeResponseDTO
                 {
                     Items = listItemAreaTypeResponseDTOs,
