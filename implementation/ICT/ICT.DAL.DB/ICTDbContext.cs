@@ -19,8 +19,6 @@ namespace ICT.DAL.DB
         public DbSet<DeviceRequestedRead> DeviceRequestedReads { get; set; }
         public DbSet<ReportDevice> ReportDevices { get; set; }
 
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
