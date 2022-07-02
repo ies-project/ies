@@ -1,54 +1,77 @@
-﻿using ICT.DAL.DB;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ICT.Core.DTO;
+using ICT.DAL.DB;
 
-
-public class BuildingBLL
+namespace ICT.BLL
 {
-
-    public void insertBuilding(int id, string name, string address, string type)
+    public class BuildingBLL
     {
-        ICTDbContext db = new ICTDbContext();
 
-        Building newBuilding = new Building();
+        public static void InsertBuilding(InsertBuildingRequestDTO dto)
+        {
+            using (ICTDbContext iCTDbContext = new ICTDbContext())
+            {
+                if (iCTDbContext.Buildings.Find(dto.Id) == null)
+                {
+                    Building bd = new Building();
+                    bd.Name = dto.Name;
+                    bd.Address = dto.Address;
+                    bd.Type = dto.Type;
 
-        newBuilding.Id = id;
+                    iCTDbContext.Buildings.Add(bd);
+                    iCTDbContext.SaveChanges();
+                }
+            }
+        }
 
-        newBuilding.Name = name;
+        public static void DeleteBuilding(DeleteBuildingRequestDTO dto)
+        {
+            using (ICTDbContext iCTDbContext = new ICTDbContext())
+            {
+                iCTDbContext.Areas.RemoveRange(iCTDbContext.Areas.Where(x => x.Id_Building == dto.Id));
 
-        newBuilding.Address = address;
+                if(iCTDbContext.Buildings.Find(dto.Id) != null)
+                {
+                    iCTDbContext.Buildings.Remove(iCTDbContext.Buildings.Find(dto.Id));
+                    iCTDbContext.SaveChanges();
+                }
+            }                 
+        }
 
-        db.Buildings.Add(newBuilding);
+        public static void UpdateBuilding(UpdateBuildingRequestDTO dto)
+        {
+            using (ICTDbContext iCTDbContext = new ICTDbContext())
+            {
+                Building bd = iCTDbContext.Buildings.Find(dto.Id);
+                bd.Name = dto.Name;
+                bd.Address = dto.Address;
+                bd.Type = dto.Type;
+                iCTDbContext.SaveChanges();
+            }
+        }
 
-        db.SaveChanges();
-    }
+        public static ListBuildingResponseDTO listBuilding()
+        {
+            using (ICTDbContext iCTDbContext = new ICTDbContext())
+            {
+                List<ListItemBuildingResponseDTO> listItemBuildingResponseDTOs = iCTDbContext.Buildings
+                    .Select(x => new ListItemBuildingResponseDTO { 
+                        Id = x.Id, 
+                        Name = x.Name, 
+                        Address = x.Address, 
+                        Type = x.Type 
+                    }).ToList();
 
-    public void deleteBuilding(int idBuilding)
-    {
-        ICTDbContext db = new ICTDbContext();
-
-        db.Buildings.Remove(db.Buildings.Find(idBuilding));
-
-        db.Buildings.RemoveRange(db.Buildings.Where(x => x.Id == idBuilding));
-
-        db.SaveChanges();
-
-    }
-
-    public void updateBuilding()
-    {
-        ICTDbContext db = new ICTDbContext();
-
-
-        db.SaveChanges();
-    }
-
-    public ICollection<Building> listBuilding()
-    {
-        ICTDbContext db = new ICTDbContext();
-
-        ICollection<Building> buildingList = db.Buildings.ToList();
-
-        db.SaveChanges();
-
-        return buildingList;
+                return new ListBuildingResponseDTO
+                {
+                    Items = listItemBuildingResponseDTOs,
+                    Total = listItemBuildingResponseDTOs.Count()
+                };
+            }
+        }
     }
 }
