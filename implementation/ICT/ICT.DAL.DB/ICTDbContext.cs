@@ -10,6 +10,16 @@ namespace ICT.DAL.DB
         public DbSet<Area> Areas { get; set; }
         public DbSet<AreaType> AreaTypes { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<SurroundingArea> SurroundingAreas { get; set; }
+        public DbSet<FireHoseReel> FireHoseReels { get; set; }
+        public DbSet<Extinguisher> Extinguishers { get; set; }
+        public DbSet<Action> Actions { get; set; }
+        public DbSet<DeviceSubmittedAction> DeviceSubmittedActions { get; set; }
+        public DbSet<Device> Devices { get; set; }
+        public DbSet<DeviceRequestedRead> DeviceRequestedReads { get; set; }
+        public DbSet<ReportDevice> ReportDevices { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
