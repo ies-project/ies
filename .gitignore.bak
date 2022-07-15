@@ -58,9 +58,6 @@ implementation/ICT/.vs/ICT/xs/project-cache/ICT.MM.Core-Debug.json
 implementation/ICT/.vs/ICT/xs/project-cache/ICT.MM.DAL.DB-Debug.json
 implementation/ICT/.vs/ICT/xs/project-cache/ICT.MM.PL.WebAPI-Debug.json
 implementation/ICT/.vs/ICT/xs/project-cache/ICT.PL.WebAPI-Debug.json
-implementation\ICT\ICT.MM.PL.WebAPI.appsettings.json
-implementation\ICT\ICT.PL.Tester.appsettings.json
-implementation\ICT\ICT.PL.WebAPI.appsettings.json
 implementation/ICT/.vs/ICT/xs/UserPrefs.xml
 implementation/ICT/.vs/ICT/v17/.suo
 implementation/ICT/.vs/slnx.sqlite

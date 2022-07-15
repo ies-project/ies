@@ -22,5 +22,11 @@ namespace ICT.PL.WebAPI.Controllers {
         {
             ReportBLL.InsertReport(dto);
         }
+
+        [HttpPatch(Name = "UpdateReport")]
+        public void UpdateReport(UpdateReportRequestDTO dto)
+        {
+            ReportBLL.UpdateReport(dto);
+        }
     }
 }

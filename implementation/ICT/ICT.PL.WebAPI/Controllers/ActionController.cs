@@ -17,7 +17,7 @@ namespace ICT.PL.WebAPI.Controllers {
             BLL.ActionBLL.DeleteAction(dto);
         }
 
-        [HttpPut(Name = "UpdateAction")]
+        [HttpPatch(Name = "UpdateAction")]
         public void UpdateAction(UpdateActionRequestDTO dto)
         {
             BLL.ActionBLL.UpdateAction(dto);

@@ -23,7 +23,7 @@ namespace ICT.PL.WebAPI.Controllers {
             AreaBLL.InsertArea(dto);
         }
 
-        [HttpPut(Name = "UpdateArea")]
+        [HttpPatch(Name = "UpdateArea")]
         public void UpdateArea(UpdateAreaRequestDTO dto)
         {
             AreaBLL.UpdateArea(dto);
