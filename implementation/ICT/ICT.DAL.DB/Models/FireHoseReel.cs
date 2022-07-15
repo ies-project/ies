@@ -43,7 +43,7 @@ namespace ICT.DAL.DB
         /// <summary>
         /// FireHoseReel Maintenance Due Date 
         /// </summary>
-        public DateTime ManteinanceDueDate { get; set; }
+        public DateTime MaintenanceDueDate { get; set; }
 
         public Area Area { get; set; }
     }

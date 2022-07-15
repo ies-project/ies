@@ -51,6 +51,7 @@ namespace ICT.BLL
                 bd.Name = dto.Name;
                 bd.Address = dto.Address;
                 bd.Type = dto.Type;
+
                 iCTDbContext.SaveChanges();
             }
         }

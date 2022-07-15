@@ -1,0 +1,85 @@
+﻿using ICT.Core.DTO;
+using ICT.DAL.DB;
+
+namespace ICT.BLL
+{
+    public class DeviceBLL
+    {
+
+        public static void InsertDevice(InsertDeviceRequestDTO dto)
+        {
+            using (ICTDbContext db = new ICTDbContext())
+            {
+                if (db.Devices.Find(dto.Id) == null && db.DeviceTypes.Find(dto.Id_DeviceType) != null)
+                {
+                    Device newDevice = new Device();
+
+                    newDevice.Id = dto.Id;
+                    newDevice.Id_Area = dto.Id_Area;
+                    newDevice.Id_DeviceType = dto.Id_DeviceType;
+                    newDevice.Name = dto.Name;
+                    newDevice.Description = dto.Description;
+                    newDevice.ManufacturedDate = dto.ManufacturedDate;
+                    newDevice.LastMaintenanceDate = dto.LastMaintenanceDate;
+                    newDevice.MaintenanceDueDate = dto.MaintenanceDueDate;
+                    newDevice.ManufacturedBy = dto.ManufacturedBy;
+                    newDevice.CreatedBy = dto.CreatedBy;
+                    newDevice.CreatedDate = dto.CreatedDate;
+                    newDevice.ModifiedBy = dto.ModifiedBy;
+                    newDevice.ModifiedDate = dto.ModifiedDate;
+
+                    db.Devices.Add(newDevice);
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public static void DeleteDevice(DeleteDeviceRequestDTO dto)
+        {
+            using (ICTDbContext db = new ICTDbContext())
+            {
+                if (db.Devices.Find(dto.Id) != null)
+                {
+                    db.Devices.Remove(db.Devices.Find(dto.Id));
+
+                    db.Devices.RemoveRange(db.Devices.Where(x => x.Id == dto.Id));
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public static void UpdateDevice(UpdateDeviceRequestDTO dto)
+        {
+            using (ICTDbContext db = new ICTDbContext())
+            {
+                Device newDevice = db.Devices.Find(dto.Id);
+
+                newDevice.Name = dto.Name;
+                newDevice.Description = dto.Description;
+                newDevice.ManufacturedDate = dto.ManufacturedDate;
+                newDevice.LastMaintenanceDate = dto.LastMaintenanceDate;
+                newDevice.MaintenanceDueDate = dto.MaintenanceDueDate;
+                newDevice.ManufacturedBy = dto.ManufacturedBy;
+                newDevice.CreatedBy = dto.CreatedBy;
+                newDevice.CreatedDate = dto.CreatedDate;
+                newDevice.ModifiedBy = dto.ModifiedBy;
+                newDevice.ModifiedDate = dto.ModifiedDate;
+
+                db.SaveChanges();
+            }
+        }
+
+        public static ListDeviceResponseDTO ListDevice()
+        {
+            using (ICTDbContext db = new ICTDbContext())
+            {
+                List<ListItemDeviceResponseDTO> listItemDeviceResponseDTOs = db.Devices
+                        .Select(x => new ListItemDeviceResponseDTO { Id = x.Id, Id_DeviceType = x.Id_DeviceType, Description = x.Description }).ToList();
+
+                return new ListDeviceResponseDTO { Items = listItemDeviceResponseDTOs, Total = listItemDeviceResponseDTOs.Count() };
+            }
+        }
+    }
+}

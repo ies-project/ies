@@ -46,6 +46,7 @@ namespace ICT.BLL
                 AreaType at = iCTDbContext.AreaTypes.Find(dto.Id);
                 at.Name = dto.Name;
                 at.Description= dto.Description;
+
                 iCTDbContext.SaveChanges();
             }
         }

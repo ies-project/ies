@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ICT.BLL {
-    public class ExtinguishersBLL {
+    public class ExtinguisherBLL {
         public static void InsertExtinguisher(InsertExtinguisherRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -61,17 +61,17 @@ namespace ICT.BLL {
             }
         }
 
-        public static ListExtinguishersResponseDTO ListExtinguishers()
+        public static ListExtinguisherResponseDTO ListExtinguishers()
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
 
-                List<ListItemExtinguishersResponseDTO> listItemScenarioResponseDTOs = iCTDbContext.Extinguishers
-                        .Select(x => new ListItemExtinguishersResponseDTO { Id = x.Id, Id_Area = x.Id_Area, Type = x.Type, 
+                List<ListItemExtinguisherResponseDTO> listItemExtinguisherResponseDTOs = iCTDbContext.Extinguishers
+                        .Select(x => new ListItemExtinguisherResponseDTO { Id = x.Id, Id_Area = x.Id_Area, Type = x.Type, 
                             Description = x.Description, ManufacturedDate = x.ManufacturedDate, LastMaintenanceDate = x.LastMaintenanceDate, 
                             MaintenanceDueDate = x.MaintenanceDueDate }).ToList();
 
-                return new ListExtinguishersResponseDTO { Items = listItemScenarioResponseDTOs, Total = listItemScenarioResponseDTOs.Count() };
+                return new ListExtinguisherResponseDTO { Items = listItemExtinguisherResponseDTOs, Total = listItemExtinguisherResponseDTOs.Count() };
             }
         }
     }

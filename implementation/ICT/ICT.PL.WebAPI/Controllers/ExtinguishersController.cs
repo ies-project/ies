@@ -7,7 +7,7 @@ namespace ICT.PL.WebAPI.Controllers {
     [Route("[controller]")]
     public class ExtinguishersController : ControllerBase {
         [HttpGet(Name = "GetExtinguishers")]
-        public ListExtinguishersResponseDTO GetList()
+        public ListExtinguisherResponseDTO GetList()
         {
             return ExtinguishersBLL.ListExtinguishers();
         }

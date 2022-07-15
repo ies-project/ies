@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ICT.Core.DTO {
-    public class ListExtinguishersResponseDTO {
+    public class ListFireHoseReelResponseDTO
+    {
         public int Total { get; set; }
-        public List<ListItemExtinguishersResponseDTO> Items { get; set; }
+        public List<ListItemFireHoseReelResponseDTO> Items { get; set; }
     }
 
-    public class ListItemExtinguishersResponseDTO {
+    public class ListItemFireHoseReelResponseDTO
+    {
         public int Id { get; set; }
         public int Id_Area { get; set; }
         public string Type { get; set; }

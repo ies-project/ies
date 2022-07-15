@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ICT.Core.DTO {
-    public class DeleteSurroundingAreaRequestDTO
-    {
-        public int Id { get; set; }
+    public class InsertReportDeviceRequestDTO {
+        public int Id_Report { get; set; }
+        public int Id_Device { get; set; }
         public int Id_Area { get; set; }
+        public string State { get; set; }
     }
 }

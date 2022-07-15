@@ -1,18 +1,59 @@
 ﻿using ICT.Core.DTO;
 using ICT.DAL.DB;
 
-public class ReportBLL
+namespace ICT.BLL
 {
-
-    public static void InsertReport(InsertReportRequestDTO dto)
+    public class ReportBLL
     {
-        using (ICTDbContext db = new ICTDbContext())
+        public static void InsertReport(InsertReportRequestDTO dto)
         {
-            if (db.Reports.Find(dto.Id) == null)
+            using (ICTDbContext db = new ICTDbContext())
             {
-                Report newReport = new Report();
+                if (db.Reports.Find(dto.Id) == null)
+                {
+                    Report newReport = new Report();
 
-                newReport.Id = dto.Id;
+                    newReport.Id = dto.Id;
+
+                    newReport.Name = dto.Name;
+
+                    newReport.Date = dto.Date;
+
+                    newReport.Criteria = dto.Criteria;
+
+                    newReport.CreatedBy = dto.CreatedBy;
+
+                    newReport.CreatedDate = dto.CreatedDate;
+
+                    newReport.ModifiedBy = dto.ModifiedBy;
+
+                    newReport.ModifiedDate = dto.ModifiedDate;
+
+                    db.Reports.Add(newReport);
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public static void DeleteReport(DeleteReportRequestDTO dto)
+        {
+            using (ICTDbContext db = new ICTDbContext())
+            {
+                if (db.Reports.Find(dto.Id) != null)
+                {
+                    db.Reports.Remove(db.Reports.Find(dto.Id));
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public static void UpdateReport(UpdateReportRequestDTO dto)
+        {
+            using (ICTDbContext db = new ICTDbContext())
+            {
+                Report newReport = db.Reports.Find(dto.Id);
 
                 newReport.Name = dto.Name;
 
@@ -28,73 +69,32 @@ public class ReportBLL
 
                 newReport.ModifiedDate = dto.ModifiedDate;
 
-                db.Reports.Add(newReport);
-
                 db.SaveChanges();
             }
         }
-    }
 
-    public static void DeleteReport(DeleteReportRequestDTO dto)
-    {
-        using (ICTDbContext db = new ICTDbContext())
+        public static ListReportResponseDTO ListReport()
         {
-            if (db.Reports.Find(dto.Id) != null)
+            using (ICTDbContext db = new ICTDbContext())
             {
-                db.Reports.Remove(db.Reports.Find(dto.Id));
-
-                db.SaveChanges();
+                List<ListItemReportResponseDTO> listItemReportResponseDTOs = db.Reports
+                        .Select(x => new ListItemReportResponseDTO
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            Date = x.Date,
+                            Criteria = x.Criteria,
+                            CreatedBy = x.CreatedBy,
+                            CreatedDate = x.CreatedDate,
+                            ModifiedBy = x.ModifiedBy,
+                            ModifiedDate = x.ModifiedDate,
+                        }).ToList();
+                return new ListReportResponseDTO
+                {
+                    Items = listItemReportResponseDTOs,
+                    Total = listItemReportResponseDTOs.Count()
+                };
             }
-        }
-    }
-
-    public static void UpdateReport(UpdateReportRequestDTO dto)
-    {
-        using (ICTDbContext db = new ICTDbContext())
-        {
-            Report newReport = db.Reports.Find(dto.Id);
-
-            newReport.Name = dto.Name;
-
-            newReport.Date = dto.Date;
-
-            newReport.Criteria = dto.Criteria;
-
-            newReport.CreatedBy = dto.CreatedBy;
-
-            newReport.CreatedDate = dto.CreatedDate;
-
-            newReport.ModifiedBy = dto.ModifiedBy;
-
-            newReport.ModifiedDate = dto.ModifiedDate;
-
-            db.Reports.Add(newReport);
-
-            db.SaveChanges();
-        }
-    }
-
-    public static ListReportResponseDTO ListReport()
-    {
-        using (ICTDbContext db = new ICTDbContext())
-        {
-            List<ListItemReportResponseDTO> listItemReportResponseDTOs = db.Reports
-                    .Select(x => new ListItemReportResponseDTO
-                    { 
-                        Id = x.Id,
-                        Name = x.Name,
-                        Date = x.Date,
-                        Criteria = x.Criteria,
-                        CreatedBy = x.CreatedBy,
-                        CreatedDate = x.CreatedDate,
-                        ModifiedBy = x.ModifiedBy,
-                        ModifiedDate = x.ModifiedDate, 
-                    }).ToList();
-            return new ListReportResponseDTO 
-            { 
-                Items = listItemReportResponseDTOs,
-                Total = listItemReportResponseDTOs.Count() 
-            };
         }
     }
 }
