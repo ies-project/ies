@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ICT.BLL {
     public class FireHoseReelBLL {
-        public static void InsertFireHoseReelBLL(InsertFireHoseReelRequestDTO dto)
+        public static void InsertFireHoseReel(InsertFireHoseReelRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
@@ -30,7 +30,7 @@ namespace ICT.BLL {
             }
         }
 
-        public static void DeleteFireHoseReelBLL(DeleteFireHoseReelRequestDTO dto)
+        public static void DeleteFireHoseReel(DeleteFireHoseReelRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
@@ -43,7 +43,7 @@ namespace ICT.BLL {
             }
         }
 
-        public static void UpdateFireHoseReelBLL(UpdateFireHoseReelRequestDTO dto)
+        public static void UpdateFireHoseReel(UpdateFireHoseReelRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
@@ -61,7 +61,7 @@ namespace ICT.BLL {
             }
         }
 
-        public static ListFireHoseReelResponseDTO ListFireHoseReelBLL()
+        public static ListFireHoseReelResponseDTO ListFireHoseReel()
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {

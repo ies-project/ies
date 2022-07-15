@@ -5,29 +5,29 @@ using Microsoft.AspNetCore.Mvc;
 namespace ICT.PL.WebAPI.Controllers {
     [ApiController]
     [Route("[controller]")]
-    public class ExtinguishersController : ControllerBase {
+    public class ExtinguisherController : ControllerBase {
         [HttpGet(Name = "GetExtinguishers")]
         public ListExtinguisherResponseDTO GetList()
         {
-            return ExtinguishersBLL.ListExtinguishers();
+            return ExtinguisherBLL.ListExtinguishers();
         }
 
         [HttpDelete(Name = "DeleteExtinguisher")]
         public void DeleteDevice(DeleteExtinguisherRequestDTO dto)
         {
-            ExtinguishersBLL.DeleteExtinguisher(dto);
+            ExtinguisherBLL.DeleteExtinguisher(dto);
         }
 
         [HttpPut(Name = "InsertExtinguisher")]
         public void InsertExtinguisher(InsertExtinguisherRequestDTO dto)
         {
-            ExtinguishersBLL.InsertExtinguisher(dto);
+            ExtinguisherBLL.InsertExtinguisher(dto);
         }
 
         [HttpPatch(Name = "UpdateDevice")]
         public void UpdateExtinguisher(UpdateExtinguisherRequestDTO dto)
         {
-            ExtinguishersBLL.UpdateExtinguisher(dto);
+            ExtinguisherBLL.UpdateExtinguisher(dto);
         }
     }
 }
