@@ -9,7 +9,7 @@ namespace ICT.PL.WebAPI.Controllers {
         [HttpGet(Name = "GetExtinguishers")]
         public ListExtinguisherResponseDTO GetList()
         {
-            return ExtinguisherBLL.ListExtinguishers();
+            return ExtinguisherBLL.ListExtinguisher();
         }
 
         [HttpDelete(Name = "DeleteExtinguisher")]
