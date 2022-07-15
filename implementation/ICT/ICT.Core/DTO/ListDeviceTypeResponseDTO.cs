@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICT.Core.DTO
 {
-    public class ListDeviceTypesResponseDTO
+    public class ListDeviceTypeResponseDTO
     {
         public int Total { get; set; }
 

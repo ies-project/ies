@@ -53,7 +53,7 @@ namespace ICT.BLL
             }
         }
 
-        public static ListDeviceTypesResponseDTO ListDeviceTypes()
+        public static ListDeviceTypeResponseDTO ListDeviceType()
         {
 
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -62,7 +62,7 @@ namespace ICT.BLL
                 List<ListItemDeviceTypesResponseDTO> listItemDeviceTypeResponseDTOs = iCTDbContext.DeviceTypes
                         .Select(x => new ListItemDeviceTypesResponseDTO { Id = x.Id, Name = x.Name, Description = x.Description }).ToList();
 
-                return new ListDeviceTypesResponseDTO { Items = listItemDeviceTypeResponseDTOs, Total = listItemDeviceTypeResponseDTOs.Count() };
+                return new ListDeviceTypeResponseDTO { Items = listItemDeviceTypeResponseDTOs, Total = listItemDeviceTypeResponseDTOs.Count() };
             }
         }
 
