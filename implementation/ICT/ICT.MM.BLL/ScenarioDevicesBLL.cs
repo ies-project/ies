@@ -8,66 +8,75 @@ using ICT.MM.DAL.DB;
 
 namespace ICT.MM.BLL
 {
-    public class ScenarioScenariosBLL
+    public class ScenarioDevicesBLL
     {
 
-        public static void InsertScenario(InsertScenarioRequestDTO dto)
+        public static void InsertScenarioDevices(InsertScenarioDeviceRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                if (iCTDbContext.Scenarios.Find(dto.Id) == null)
+                if (iCTDbContext.ScenarioDevices.Find(dto.Id_Device) == null)
                 {
-                    Scenario sc = new Scenario();
-                    sc.Name = dto.Name;
-                    sc.Description = dto.Description;
-                    sc.Id = dto.Id;
+                    ScenarioDevice sd = new ScenarioDevice();
+                
+                    sd.Id_Device = dto.Id_Device;
+                    sd.ManufacturedDate = dto.ManufacturedDate;
+                    sd.LastMaintenanceDate = dto.LastMaintenanceDate;
+                    sd.MaintenanceDueDate = dto.MaintenanceDueDate;
+                    sd.OriginalState = dto.OriginalState;
+                    sd.CurrentState = dto.CurrentState;
 
-                    iCTDbContext.Scenarios.Add(sc);
+                    iCTDbContext.ScenarioDevices.Add(sd);
 
                     iCTDbContext.SaveChanges();
                 }
             }
         }
 
-        public static void DeleteScenario(DeleteScenarioRequestDTO dto)
+        public static void DeleteScenarioDevices(DeleteScenarioDeviceRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                iCTDbContext.Scenarios.RemoveRange(iCTDbContext.Scenarios.Where(x => x.Id == dto.Id));
+                iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Device == dto.Id));
 
-                if (iCTDbContext.Scenarios.Find(dto.Id) != null)
+                if (iCTDbContext.ScenarioDevices.Find(dto.Id) != null)
                 {
-                    iCTDbContext.Scenarios.Remove(iCTDbContext.Scenarios.Find(dto.Id));
+                    iCTDbContext.ScenarioDevices.Remove(iCTDbContext.ScenarioDevices.Find(dto.Id));
 
                     iCTDbContext.SaveChanges();
                 }
             }
         }
 
-        public static void UpdateScenario(UpdateScenarioRequestDTO dto)
+        public static void UpdateScenarioDevices(UpdateScenarioDeviceRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                Scenario sc = iCTDbContext.Scenarios.Find(dto.Id);
+                ScenarioDevice sd = iCTDbContext.ScenarioDevices.Find(dto.Id_Device);
 
-                sc.Name = dto.Name;
-
-                sc.Description = dto.Descripton;
+                sd.ManufacturedDate = dto.ManufacturedDate;
+                sd.LastMaintenanceDate = dto.LastMaintenanceDate;
+                sd.MaintenanceDueDate = dto.MaintenanceDueDate;
+                sd.OriginalState = dto.OriginalState;
+                sd.CurrentState = dto.CurrentState;
 
                 iCTDbContext.SaveChanges();
             }
         }
 
-        public static ListScenarioResponseDTO ListScenarios()
+        public static ListScenarioDeviceResponseDTO ListScenarioDevices()
         {
 
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
 
-                List<ListItemScenarioResponseDTO> listItemScenarioResponseDTOs = iCTDbContext.Scenarios
-                        .Select(x => new ListItemScenarioResponseDTO { Id = x.Id, Name = x.Name, Description = x.Description }).ToList();
+                List<ListItemScenarioDeviceResponseDTO> listItemScenarioDeviceResponseDTOs = iCTDbContext.ScenarioDevices
+                        .Select(x => new ListItemScenarioDeviceResponseDTO { Id_Device = x.Id_Device, ManufacturedDate = x.ManufacturedDate,
+                                LastMaintenanceDate = x.LastMaintenanceDate, MaintenanceDueDate = x.MaintenanceDueDate, 
+                                OriginalState = x.OriginalState, CurrentState = x.CurrentState 
+                        }).ToList();
 
-                return new ListScenarioResponseDTO { Items = listItemScenarioResponseDTOs, Total = listItemScenarioResponseDTOs.Count() };
+                return new ListScenarioDeviceResponseDTO { Items = listItemScenarioDeviceResponseDTOs, Total = listItemScenarioDeviceResponseDTOs.Count() };
             }
         }
 

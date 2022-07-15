@@ -28,12 +28,12 @@ namespace ICT.MM.DAL.DB
         /// <summary>
         /// 
         /// </summary>
-        public DateTime LastManteinanceDate { get; set; }
+        public DateTime LastMaintenanceDate { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime ManteinanceDueDate { get; set; }
+        public DateTime MaintenanceDueDate { get; set; }
 
         /// <summary>
         /// 

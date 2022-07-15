@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ICT.MM.Core.DTO
 {
-    public class InsertScenarioDevicesRequestDTO
+    public class InsertScenarioDeviceRequestDTO
     {
         public int Id_Scenario { get; set; }
         public int Id_Device { get; set; }
