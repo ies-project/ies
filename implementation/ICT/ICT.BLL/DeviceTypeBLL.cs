@@ -6,7 +6,7 @@ namespace ICT.BLL
     public class DeviceTypeBLL
     {
 
-        public static void InsertDeviceType(InsertDeviceRequestDTO dto)
+        public static void InsertDeviceType(InsertDeviceTypeRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
@@ -24,7 +24,7 @@ namespace ICT.BLL
             }
         }
 
-        public static void DeleteDeviceType(DeleteDeviceRequestDTO dto)
+        public static void DeleteDeviceType(DeleteDeviceTypeRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
@@ -39,7 +39,7 @@ namespace ICT.BLL
             }
         }
 
-        public static void UpdateDeviceType(UpdateDeviceRequestDTO dto)
+        public static void UpdateDeviceType(UpdateDeviceTypeRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {

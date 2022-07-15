@@ -13,7 +13,7 @@ namespace ICT.PL.WebAPI.Controllers {
         }
 
         [HttpDelete(Name = "DeleteExtinguisher")]
-        public void DeleteDevice(DeleteExtinguisherRequestDTO dto)
+        public void DeleteExtinguisher(DeleteExtinguisherRequestDTO dto)
         {
             ExtinguisherBLL.DeleteExtinguisher(dto);
         }
@@ -24,7 +24,7 @@ namespace ICT.PL.WebAPI.Controllers {
             ExtinguisherBLL.InsertExtinguisher(dto);
         }
 
-        [HttpPatch(Name = "UpdateDevice")]
+        [HttpPatch(Name = "UpdateExtinguisher")]
         public void UpdateExtinguisher(UpdateExtinguisherRequestDTO dto)
         {
             ExtinguisherBLL.UpdateExtinguisher(dto);
