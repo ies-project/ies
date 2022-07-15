@@ -24,7 +24,7 @@ namespace ICT.PL.WebAPI.Controllers {
             AreaTypeBLL.InsertAreaType(dto);
         }
 
-        [HttpPut(Name = "UpdateAreaType")]
+        [HttpPatch(Name = "UpdateAreaType")]
         public void UpdateAreaType(UpdateAreaTypeRequestDTO dto)
         {
             AreaTypeBLL.UpdateAreaType(dto);

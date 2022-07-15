@@ -24,7 +24,7 @@ namespace ICT.PL.WebAPI.Controllers {
             BuildingBLL.InsertBuilding(dto);
         }
 
-        [HttpPut(Name = "UpdateBuilding")]
+        [HttpPatch(Name = "UpdateBuilding")]
         public void UpdateBuilding(UpdateBuildingRequestDTO dto)
         {
             BuildingBLL.UpdateBuilding(dto);

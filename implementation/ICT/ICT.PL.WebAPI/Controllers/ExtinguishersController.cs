@@ -24,7 +24,7 @@ namespace ICT.PL.WebAPI.Controllers {
             ExtinguishersBLL.InsertExtinguisher(dto);
         }
 
-        [HttpPut(Name = "UpdateDevice")]
+        [HttpPatch(Name = "UpdateDevice")]
         public void UpdateExtinguisher(UpdateExtinguisherRequestDTO dto)
         {
             ExtinguishersBLL.UpdateExtinguisher(dto);
