@@ -15,7 +15,7 @@ namespace ICT.MM.BLL
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                if (iCTDbContext.ScenarioDevices.Find(dto.Id_Device) == null)
+                if (iCTDbContext.ScenarioDevices.Find(dto.Id_Device, dto.Id_Device) == null)
                 {
                     ScenarioDevice sd = new ScenarioDevice();
                 
@@ -37,11 +37,9 @@ namespace ICT.MM.BLL
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Device == dto.Id));
-
-                if (iCTDbContext.ScenarioDevices.Find(dto.Id) != null)
+                if (iCTDbContext.ScenarioDevices.Find(dto.Id_Device, dto.Id_Scenario) != null)
                 {
-                    iCTDbContext.ScenarioDevices.Remove(iCTDbContext.ScenarioDevices.Find(dto.Id));
+                    iCTDbContext.ScenarioDevices.Remove(iCTDbContext.ScenarioDevices.Find(dto.Id_Device, dto.Id_Scenario)));
 
                     iCTDbContext.SaveChanges();
                 }
@@ -52,31 +50,32 @@ namespace ICT.MM.BLL
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                ScenarioDevice sd = iCTDbContext.ScenarioDevices.Find(dto.Id_Device);
+                if (iCTDbContext.ScenarioDevices.Find(dto.Id_Device, dto.Id_Scenario) != null)
+                {
+                    ScenarioDevice sd = iCTDbContext.ScenarioDevices.Find(dto.Id_Device);
 
-                sd.ManufacturedDate = dto.ManufacturedDate;
-                sd.LastMaintenanceDate = dto.LastMaintenanceDate;
-                sd.MaintenanceDueDate = dto.MaintenanceDueDate;
-                sd.OriginalState = dto.OriginalState;
-                sd.CurrentState = dto.CurrentState;
+                    sd.ManufacturedDate = dto.ManufacturedDate;
+                    sd.LastMaintenanceDate = dto.LastMaintenanceDate;
+                    sd.MaintenanceDueDate = dto.MaintenanceDueDate;
+                    sd.OriginalState = dto.OriginalState;
+                    sd.CurrentState = dto.CurrentState;
 
-                iCTDbContext.SaveChanges();
+                    iCTDbContext.SaveChanges();
+                }
             }
         }
 
         public static ListScenarioDeviceResponseDTO ListScenarioDevices()
         {
-
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-
                 List<ListItemScenarioDeviceResponseDTO> listItemScenarioDeviceResponseDTOs = iCTDbContext.ScenarioDevices
                         .Select(x => new ListItemScenarioDeviceResponseDTO { Id_Device = x.Id_Device, ManufacturedDate = x.ManufacturedDate,
                                 LastMaintenanceDate = x.LastMaintenanceDate, MaintenanceDueDate = x.MaintenanceDueDate, 
                                 OriginalState = x.OriginalState, CurrentState = x.CurrentState 
                         }).ToList();
 
-                return new ListScenarioDeviceResponseDTO { Items = listItemScenarioDeviceResponseDTOs, Total = listItemScenarioDeviceResponseDTOs.Count() };
+                return new ListScenarioDeviceResponseDTO {Items = listItemScenarioDeviceResponseDTOs, Total = listItemScenarioDeviceResponseDTOs.Count()};
             }
         }
 

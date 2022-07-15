@@ -31,11 +31,11 @@ namespace ICT.MM.BLL {
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
             {
-                iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Scenario == dto.Id));
-
                 if(iCTDbContext.Scenarios.Find(dto.Id) != null)
                 {
                     iCTDbContext.Scenarios.Remove(iCTDbContext.Scenarios.Find(dto.Id));
+
+                    iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Scenario == dto.Id));
 
                     iCTDbContext.SaveChanges();
                 }                

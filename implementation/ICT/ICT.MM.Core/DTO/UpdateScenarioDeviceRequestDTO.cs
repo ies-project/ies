@@ -8,6 +8,7 @@ namespace ICT.MM.Core.DTO {
     public class UpdateScenarioDeviceRequestDTO {
 
         public int Id_Device { get; set; }
+        public int Id_Scenario { get; set; }
 
         public DateTime ManufacturedDate { get; set; }
 

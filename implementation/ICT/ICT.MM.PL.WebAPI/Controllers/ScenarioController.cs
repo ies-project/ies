@@ -1,4 +1,5 @@
-﻿using ICT.MM.Core.DTO;
+﻿using ICT.MM.BLL;
+using ICT.MM.Core.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ICT.MM.PL.WebAPI.Controllers {
@@ -8,25 +9,25 @@ namespace ICT.MM.PL.WebAPI.Controllers {
         [HttpGet(Name = "GetScenarios")]
         public ListScenarioResponseDTO GetList()
         {
-            return BLL.ScenariosBLL.ListScenarios();
+            return ScenariosBLL.ListScenarios();
         }
 
         [HttpDelete(Name = "DeleteScenario")]
         public void DeleteScenario(DeleteScenarioRequestDTO dto)
         {
-            BLL.ScenariosBLL.DeleteScenario(dto);
+            ScenariosBLL.DeleteScenario(dto);
         }
 
         [HttpPut(Name = "InsertScenarios")]
         public void InsertScenario(InsertScenarioRequestDTO dto)
         {
-            BLL.ScenariosBLL.InsertScenario(dto);
+            ScenariosBLL.InsertScenario(dto);
         }
 
         [HttpPatch(Name = "UpdateScenarios")]
         public void UpdateScenario(UpdateScenarioRequestDTO dto)
         {
-            BLL.ScenariosBLL.UpdateScenario(dto);
+            ScenariosBLL.UpdateScenario(dto);
         }
     }
 }
