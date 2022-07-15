@@ -72,7 +72,19 @@ public class DeviceBLL {
         using (ICTDbContext db = new ICTDbContext())
         {
             List<ListItemDeviceResponseDTO> listItemDeviceResponseDTOs = db.Devices
-                    .Select(x => new ListItemDeviceResponseDTO { Id = x.Id, Name = x.Name, Description = x.Description }).ToList();
+                    .Select(x => new ListItemDeviceResponseDTO { Id = x.Id, 
+                                                                 Id_DeviceType = x.Id_DeviceType, 
+                                                                 Name = x.Name, 
+                                                                 Description = x.Description,
+                                                                 ManufacturedDate = x.ManufacturedDate,
+                                                                 LastMaintenanceDate = x.LastMaintenanceDate,
+                                                                 MaintenanceDueDate = x.MaintenanceDueDate,
+                                                                 ManufacturedBy= x.ManufacturedBy,
+                                                                 CreatedBy = x.CreatedBy,
+                                                                 CreatedDate = x.CreatedDate,
+                                                                 ModifiedBy = x.ModifiedBy,
+                                                                 ModifiedDate = x.ModifiedDate
+                    }).ToList();
 
             return new ListDeviceResponseDTO { Items = listItemDeviceResponseDTOs, Total = listItemDeviceResponseDTOs.Count()};
         }

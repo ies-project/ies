@@ -14,19 +14,19 @@ namespace ICT.MM.PL.WebAPI.Controllers {
         }
 
         [HttpDelete(Name = "DeleteDeviceType")]
-        public void DeleteDeviceType(DeleteDeviceRequestDTO dto)
+        public void DeleteDeviceType(DeleteDeviceTypeRequestDTO dto)
         {
             DeviceTypesBLL.DeleteDeviceType(dto);
         }
 
         [HttpPut(Name = "InsertDeviceType")]
-        public void InsertDeviceType(InsertDeviceRequestDTO dto)
+        public void InsertDeviceType(InsertDeviceTypeRequestDTO dto)
         {
             DeviceTypesBLL.InsertDeviceType(dto);
         }
 
         [HttpPatch(Name = "UpdateDeviceType")]
-        public void UpdateDevice(UpdateDeviceRequestDTO dto)
+        public void UpdateDevice(UpdateDeviceTypeRequestDTO dto)
         {
             DeviceTypesBLL.UpdateDeviceType(dto);
         }
