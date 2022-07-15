@@ -1,8 +1,10 @@
 ﻿using ICT.MM.BLL;
 using ICT.MM.Core.DTO;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Cors;
 
 namespace ICT.MM.PL.WebAPI.Controllers {
+    [EnableCors("*", "*", "*")]
     [ApiController]
     [Route("[controller]")]
     public class DeviceTypeController : ControllerBase{
