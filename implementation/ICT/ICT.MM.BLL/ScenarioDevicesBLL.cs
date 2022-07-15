@@ -39,7 +39,7 @@ namespace ICT.MM.BLL
             {
                 if (iCTDbContext.ScenarioDevices.Find(dto.Id_Device, dto.Id_Scenario) != null)
                 {
-                    iCTDbContext.ScenarioDevices.Remove(iCTDbContext.ScenarioDevices.Find(dto.Id_Device, dto.Id_Scenario)));
+                    iCTDbContext.ScenarioDevices.Remove(iCTDbContext.ScenarioDevices.Find(dto.Id_Device, dto.Id_Scenario));
 
                     iCTDbContext.SaveChanges();
                 }

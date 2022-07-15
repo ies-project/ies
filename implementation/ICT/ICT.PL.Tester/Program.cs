@@ -5,7 +5,7 @@ using ICT.MM.DAL.DB;
 Console.WriteLine("Hello, World!");
 
 //ICT.DAL.DB.ICTDbContext iCTDbContext = new ICT.DAL.DB.ICTDbContext();
-ICT.MM.DAL.DB.ICTDbContext iCTDbContext = new ICT.MM.DAL.DB.ICTDbContext();
+ICTDbContext iCTDbContext = new ICTDbContext();
 
 
 DeviceType dt = new DeviceType();

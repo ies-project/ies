@@ -39,7 +39,8 @@ public class DeviceBLL {
             {
                 db.Devices.Remove(db.Devices.Find(dto.Id));
 
-                db.ScenarioDevices.RemoveRange(db.ScenarioDevices.Where(x => x.Id_Device == dto.Id));
+                if(db.ScenarioDevices.Where(x => x.Id_Device == dto.Id).Any())
+                    db.ScenarioDevices.RemoveRange(db.ScenarioDevices.Where(x => x.Id_Device == dto.Id));
 
                 db.SaveChanges();
             }

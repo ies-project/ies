@@ -35,7 +35,8 @@ namespace ICT.MM.BLL {
                 {
                     iCTDbContext.Scenarios.Remove(iCTDbContext.Scenarios.Find(dto.Id));
 
-                    iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Scenario == dto.Id));
+                    if(iCTDbContext.ScenarioDevices.Where(x => x.Id_Scenario == dto.Id).Any())
+                        iCTDbContext.ScenarioDevices.RemoveRange(iCTDbContext.ScenarioDevices.Where(x => x.Id_Scenario == dto.Id));
 
                     iCTDbContext.SaveChanges();
                 }                
