@@ -28,10 +28,12 @@ function DeviceTypes() {
             GetDevices()
         })
     }
+    
 
-    /**useEffect(() => {
+
+    useEffect(() => {
         GetDevices();
-    }, []);*/
+    }, []);
 
 
     if (firstRun) {
@@ -68,7 +70,11 @@ function DeviceTypes() {
                             <td>{device.id}</td>
                             <td>{device.name}</td>
                             <td>{device.description}</td>
-                            <td><button onClick={() => eliminarDeviceType(device.id)}>Eliminar</button></td>
+                            <td><Link to={{
+                                pathname: "/editarDeviceType", 
+                                state: {device}
+                            }} class="btn btn-info" role="button">Editar</Link></td>
+                            <td><button class="btn btn-info" onClick={() => eliminarDeviceType(device.id)}>Eliminar</button></td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from 'react-router-dom';
 
 const Create = () => {
 
@@ -18,12 +18,14 @@ const Create = () => {
             console.log('Novo Tipo de Dispositivo Criado!')
         })
 
-        console.log(device)
     }
 
     return (
 
         <div className="form-group">
+            <Link to="/gerir">
+                    <button>Voltar</button>
+            </Link>
             <h2>Criar um Novo Tipo de Dispositivo</h2>
             <form onSubmit={handleSubmit}>
                 <label>Nome do Tipo de Dispositivo</label>
