@@ -47,7 +47,6 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-*.json
 
 obj/
 bin/
