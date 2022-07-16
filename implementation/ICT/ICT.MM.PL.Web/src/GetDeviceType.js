@@ -1,7 +1,6 @@
-import {useEffect, useState } from 'react'; 
-import axios from 'axios';
+import {useState, useEffect } from 'react'; 
 
-function Devices() {
+function DeviceTypes() {
 
     const [devices, setDevices] = useState([]);
     const [firstRun, setFirstRun] = useState(true);
@@ -17,9 +16,9 @@ function Devices() {
             });
     }
 
-    /**useEffect(() => {
+    useEffect(() => {
         GetDevices();
-    }, []);*/
+    }, []);
 
 
     if (firstRun) {
@@ -57,4 +56,4 @@ function Devices() {
         </div>)
 }
 
-export default Devices;
+export default DeviceTypes;
