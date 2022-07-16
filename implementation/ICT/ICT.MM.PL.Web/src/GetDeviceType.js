@@ -1,4 +1,5 @@
 import {useState, useEffect } from 'react'; 
+import { Link } from 'react-router-dom';
 
 function DeviceTypes() {
 
@@ -16,9 +17,9 @@ function DeviceTypes() {
             });
     }
 
-    useEffect(() => {
+    /**useEffect(() => {
         GetDevices();
-    }, []);
+    }, []);*/
 
 
     if (firstRun) {
@@ -27,7 +28,10 @@ function DeviceTypes() {
                 <a href="https://localhost:7207/swagger/index.html" target="_blank">
                     <button type="button">Swagger</button>
                 </a>
-                <button onClick={GetDevices}>Listar Dispositivos</button>
+                <button onClick={GetDevices}>Listar Tipos de Dispositivos</button>
+                <Link to="/criarDeviceType">
+                    <button>Criar Novo Tipo de Dispositivo</button>
+                </Link>
             </div>)
     }
 

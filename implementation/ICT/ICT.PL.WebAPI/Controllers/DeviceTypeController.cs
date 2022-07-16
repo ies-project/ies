@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ICT.PL.WebAPI.Controllers {
+
     [EnableCors("*")]
     [ApiController]
     [Route("[controller]")]
