@@ -58,9 +58,9 @@ implementation/ICT/.vs/ICT/xs/project-cache/ICT.MM.Core-Debug.json
 implementation/ICT/.vs/ICT/xs/project-cache/ICT.MM.DAL.DB-Debug.json
 implementation/ICT/.vs/ICT/xs/project-cache/ICT.MM.PL.WebAPI-Debug.json
 implementation/ICT/.vs/ICT/xs/project-cache/ICT.PL.WebAPI-Debug.json
-implementation\ICT\ICT.MM.PL.WebAPI.appsettings.json
-implementation\ICT\ICT.PL.Tester.appsettings.json
-implementation\ICT\ICT.PL.WebAPI.appsettings.json
+implementation/ICT/ICT.MM.PL.WebAPI/appsettings.json
+implementation/ICT/ICT.PL.Tester/appsettings.json
+implementation/ICT/ICT.PL.WebAPI/appsettings.json
 implementation/ICT/.vs/ICT/xs/UserPrefs.xml
 implementation/ICT/.vs/ICT/v17/.suo
 implementation/ICT/.vs/slnx.sqlite
@@ -84,3 +84,4 @@ implementation/ICT/.vs/ProjectEvaluation/ict.metadata.v2
 implementation/ICT/.vs/ProjectEvaluation/ict.projects.v2
 /.vs/ies/v17/.suo
 /.vs/IES-DW/v17/.suo
+*/appsettings.json
