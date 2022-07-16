@@ -38,7 +38,7 @@ function Devices() {
                 <button type="button">Swagger</button>
             </a>
             <button onClick={GetDevices}>Listar Dispositivos</button>
-            <table>
+            <table className="table table-striped">
                 <tbody>
                     <tr>
                         <th>ID</th>
