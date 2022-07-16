@@ -1,10 +1,10 @@
 import './App.css';
-import GetDevices from './GetDeviceType';
+import Devices from './GetDeviceType';
 
 function App() {
   return (
     <div className='App'>
-      <GetDevices />
+      <Devices />
     </div>
   )
 }

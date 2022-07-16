@@ -1,30 +1,60 @@
 import {useEffect, useState } from 'react'; 
 import axios from 'axios';
 
-function GetDevices() {
+function Devices() {
 
     const [devices, setDevices] = useState([]);
-    useEffect(() => {
-        axios.get('https://localhost:7207/DeviceType')
-        .then(res => {
-            console.log(res);
-            setDevices(res.data);
-        })
-        .catch( err => {
-            console.log(err)
-        });
+    const [firstRun, setFirstRun] = useState(true);
+
+    function GetDevices() {
+
+        fetch("https://localhost:7207/DeviceType")
+            .then((res) => res.json())
+            .then((data) => {
+                setDevices(data)
+                setFirstRun(false)
+                console.log(data)
+            });
+    }
+
+    /**useEffect(() => {
+        GetDevices();
+    }, []);*/
 
 
-    }, []);
+    if (firstRun) {
+        return (
+            <div>
+                <a href="https://localhost:7207/swagger/index.html" target="_blank">
+                    <button type="button">Swagger</button>
+                </a>
+                <button onClick={GetDevices}>Listar Dispositivos</button>
+            </div>)
+    }
 
-    return (
-    <div>
-        <ul>
-            {(devices.items)?.map(device => (
-                     <li key={device.id}>{device.name}, {device.description}</li>
-            ))}
-        </ul>
-    </div>)
+        return (
+        <div>
+            <a href="https://localhost:7207/swagger/index.html" target="_blank">
+                <button type="button">Swagger</button>
+            </a>
+            <button onClick={GetDevices}>Listar Dispositivos</button>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                    </tr>
+                    {(devices.items)?.map(device => (
+                        <tr key={device.id}>
+                            <td>{device.id}</td>
+                            <td>{device.name}</td>
+                            <td>{device.description}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>)
 }
 
-export default GetDevices;
+export default Devices;
