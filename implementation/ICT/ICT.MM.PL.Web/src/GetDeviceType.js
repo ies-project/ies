@@ -17,6 +17,18 @@ function DeviceTypes() {
             });
     }
 
+    function eliminarDeviceType(id) {
+        const device = {id}
+        fetch("https://localhost:7207/DeviceType", {
+            method: 'DELETE',
+            headers: { "Content-Type" : "application/json" },
+            body: JSON.stringify(device)
+        }).then(() => {
+            console.log('Dispositivo Eliminado!')
+            GetDevices()
+        })
+    }
+
     /**useEffect(() => {
         GetDevices();
     }, []);*/
@@ -41,6 +53,9 @@ function DeviceTypes() {
                 <button type="button">Swagger</button>
             </a>
             <button onClick={GetDevices}>Listar Dispositivos</button>
+            <Link to="/criarDeviceType">
+                    <button>Criar Novo Tipo de Dispositivo</button>
+            </Link>
             <table className="table table-striped">
                 <tbody>
                     <tr>
@@ -53,6 +68,7 @@ function DeviceTypes() {
                             <td>{device.id}</td>
                             <td>{device.name}</td>
                             <td>{device.description}</td>
+                            <td><button onClick={() => eliminarDeviceType(device.id)}>Eliminar</button></td>
                         </tr>
                     ))}
                 </tbody>
