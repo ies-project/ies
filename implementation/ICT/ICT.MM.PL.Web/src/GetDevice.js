@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import {useState, useEffect } from 'react'; 
+import { Link } from 'react-router-dom';
 
 function Devices() {
 
-    const [Devices, setDevices] = useState([]);
+    const [devices, setDevices] = useState([]);
+    const [firstRun, setFirstRun] = useState(true);
 
     function GetDevices() {
 
@@ -10,29 +12,68 @@ function Devices() {
             .then((res) => res.json())
             .then((data) => {
                 setDevices(data)
+                setFirstRun(false)
                 console.log(data)
             });
     }
 
-    return (
+    function eliminarDevice(id) {
+        const device = {id}
+        fetch("https://localhost:7207/Device", {
+            method: 'DELETE',
+            headers: { "Content-Type" : "application/json" },
+            body: JSON.stringify(device)
+        }).then(() => {
+            console.log('Dispositivo Eliminado!')
+            GetDevices()
+        })
+    }
+    
+
+
+    useEffect(() => {
+        GetDevices();
+    }, []);
+
+
+    if (firstRun) {
+        return (
+            <div>
+                <a href="https://localhost:7207/swagger/index.html" target="_blank">
+                    <button type="button">Swagger</button>
+                </a>
+                <button onClick={GetDevices}>Listar Dispositivos</button>
+                <Link to="/criarDevice">
+                    <button>Criar Novo Dispositivo</button>
+                </Link>
+            </div>)
+    }
+
+        return (
         <div>
+            <a href="https://localhost:7207/swagger/index.html" target="_blank">
+                <button type="button">Swagger</button>
+            </a>
+            <button onClick={GetDevices}>Listar Dispositivos</button>
+            <Link to="/criarDevice">
+                    <button>Criar Novo Dispositivo</button>
+            </Link>
             <table className="table table-striped">
                 <tbody>
                     <tr>
-                        <th>Id</th>
+                        <th>ID</th>
                         <th>DeviceType</th>
-                        <th>Name</th>
-                        <th>Descrição</th>
-                        <th>ManufacturedDate</th>
-                        <th>LastMaintenanceDate</th>
-                        <th>MaintenanceDueDate</th>
-                        <th>ManufacturedBy</th>
-                        <th>CreatedBy</th>
-                        <th>CreatedDate</th>
-                        <th>ModifiedBy</th>
-                        <th>ModifiedDate</th>
+                        <th>Nome</th>
+                        <th>DescriÃ§Ã£o</th>
+                        <th>Manufacture Date</th>
+                        <th>Last Maintenance Date</th>
+                        <th>Manufactured By</th>
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                        <th>Modified By</th>
+                        <th>Modified Date</th>
                     </tr>
-                    {(Devices.items)?.map(device => (
+                    {(devices.items)?.map(device => (
                         <tr key={device.id}>
                             <td>{device.id}</td>
                             <td>{device.id_DeviceType}</td>
@@ -40,12 +81,16 @@ function Devices() {
                             <td>{device.description}</td>
                             <td>{device.manufacturedDate}</td>
                             <td>{device.lastMaintenanceDate}</td>
-                            <td>{device.maintenanceDueDate}</td>
                             <td>{device.manufacturedBy}</td>
                             <td>{device.createdBy}</td>
                             <td>{device.createdDate}</td>
                             <td>{device.modifiedBy}</td>
                             <td>{device.modifiedDate}</td>
+                            <td><Link to={{
+                                pathname: "/editarDevices",
+                                state: {device}
+                            }} class="btn btn-info" role="button">Editar</Link></td>
+                            <td><button class="btn btn-info" onClick={() => eliminarDevice(device.id)}>Eliminar</button></td>
                         </tr>
                     ))}
                 </tbody>

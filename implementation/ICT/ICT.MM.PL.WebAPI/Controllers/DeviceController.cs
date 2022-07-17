@@ -7,6 +7,7 @@ namespace ICT.MM.PL.WebAPI.Controllers {
     [ApiController]
     [Route("[controller]")]
     public class DeviceController : ControllerBase {
+
         [HttpGet(Name = "GetDevices")]
         public ListDeviceResponseDTO GetList()
         {
