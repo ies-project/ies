@@ -1,7 +1,9 @@
 import './App.css';
 import DeviceTypes from './GetDeviceType';
-import Create from './PostDeviceType';
-import Edit from './PatchDeviceType';
+import Devices from './GetDevice';
+import CreateDeviceType from './PostDeviceType';
+import CreateDevice from './PostDevice';
+import EditDeviceType from './PatchDeviceType';
 import Home from './Home';
 import Barra from './Barra';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -16,14 +18,20 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/gerir">
+            <Route exact path="/gerirDevices">
+              <Devices />
+            </Route>
+            <Route exact path="/gerirDeviceTypes">
               <DeviceTypes />
             </Route>
             <Route exact path="/criarDeviceType">
-              <Create />
+              <CreateDeviceType />
+            </Route>
+            <Route exact path="/criarDevice">
+              <CreateDevice />
             </Route>
             <Route exact path="/editarDeviceType">
-              <Edit />
+              <EditDeviceType />
             </Route>
           </Switch>
         </div>

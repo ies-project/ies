@@ -6,7 +6,7 @@ function DeviceTypes() {
     const [devices, setDevices] = useState([]);
     const [firstRun, setFirstRun] = useState(true);
 
-    function GetDevices() {
+    function GetDeviceTypes() {
 
         fetch("https://localhost:7207/DeviceType")
             .then((res) => res.json())
@@ -25,14 +25,14 @@ function DeviceTypes() {
             body: JSON.stringify(device)
         }).then(() => {
             console.log('Dispositivo Eliminado!')
-            GetDevices()
+            GetDeviceTypes()
         })
     }
     
 
 
     useEffect(() => {
-        GetDevices();
+        GetDeviceTypes();
     }, []);
 
 
@@ -42,7 +42,7 @@ function DeviceTypes() {
                 <a href="https://localhost:7207/swagger/index.html" target="_blank">
                     <button type="button">Swagger</button>
                 </a>
-                <button onClick={GetDevices}>Listar Tipos de Dispositivos</button>
+                <button onClick={GetDeviceTypes}>Listar Tipos de Dispositivos</button>
                 <Link to="/criarDeviceType">
                     <button>Criar Novo Tipo de Dispositivo</button>
                 </Link>
@@ -54,7 +54,7 @@ function DeviceTypes() {
             <a href="https://localhost:7207/swagger/index.html" target="_blank">
                 <button type="button">Swagger</button>
             </a>
-            <button onClick={GetDevices}>Listar Dispositivos</button>
+            <button onClick={GetDeviceTypes}>Listar Dispositivos</button>
             <Link to="/criarDeviceType">
                     <button>Criar Novo Tipo de Dispositivo</button>
             </Link>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
-const Edit = () => {
+const EditDeviceType = () => {
 
     const location = useLocation()
     const data = location.state
@@ -63,10 +63,10 @@ const Edit = () => {
                         </input>
                     </td>
                     <td>
-                        <Link to="/gerir" class="btn btn-info" role="button">Cancelar</Link>
+                        <Link to="/gerirDeviceTypes" class="btn btn-info" role="button">Cancelar</Link>
                     </td>
                     <td>
-                        <Link to="/gerir" class="btn btn-info" role="button" onClick={ () => {atualizarDeviceType(data.device.id)} }>Guardar</Link>
+                        <Link to="/gerirDeviceTypes" class="btn btn-info" role="button" onClick={ () => {atualizarDeviceType(data.device.id)} }>Guardar</Link>
                     </td>
                 </tr>
             </tbody>
@@ -77,7 +77,7 @@ const Edit = () => {
 }
 
 
-export default Edit;
+export default EditDeviceType;
 
 /**<tr key={device.id}>
 <td>{device.id}</td>
