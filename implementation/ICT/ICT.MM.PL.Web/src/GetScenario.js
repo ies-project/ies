@@ -8,7 +8,7 @@ function Scenarios() {
 
     function GetScenarios() {
 
-        fetch("https://localhost:7207/DeviceType")
+        fetch("https://localhost:7207/Scenario")
             .then((res) => res.json())
             .then((data) => {
                 setScenarios(data)
@@ -38,7 +38,7 @@ function Scenarios() {
             <a href="https://localhost:7207/swagger/index.html" target="_blank">
                 <button type="button">Swagger</button>
             </a>
-            <Link to="/criarDeviceType">
+            <Link to="/criarScenario">
                 <button>Criar Novo Scenario</button>
             </Link>
             <table className="table table-striped">
@@ -46,7 +46,7 @@ function Scenarios() {
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Descri��o</th>
+                        <th>Descrição</th>
                     </tr>
                     {(scenarios.items)?.map(scenario => (
                         <tr key={scenario.id}>
@@ -57,7 +57,9 @@ function Scenarios() {
                                 pathname: "/editarScenario",
                                 state: { scenario }
                             }} class="btn btn-info" role="button">Editar</Link></td>
-                            <td><button class="btn btn-info" onClick={() => eliminarScenario(scenario.id)}>Eliminar</button></td>
+                            <td>
+                                <button class="btn btn-info" onClick={() => eliminarScenario(scenario.id)}>Eliminar</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
