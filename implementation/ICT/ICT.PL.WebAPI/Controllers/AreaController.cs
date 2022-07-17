@@ -1,8 +1,10 @@
 ﻿using ICT.Core.DTO;
 using ICT.BLL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace ICT.PL.WebAPI.Controllers {
+    [EnableCors("*")]
     [ApiController]
     [Route("[controller]")]
     public class AreaController : ControllerBase {
