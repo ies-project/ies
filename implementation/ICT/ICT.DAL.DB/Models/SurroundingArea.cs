@@ -19,7 +19,7 @@ namespace ICT.DAL.DB
         /// </summary>
         public int Id_Area { get; set; }
 
-        public ICollection<Area> Areas { get; set; }
+        public ICollection<Area> SurroundingAreas { get; set; }
 
         public Area Area { get; set; }
 
