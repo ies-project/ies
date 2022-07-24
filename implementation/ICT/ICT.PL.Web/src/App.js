@@ -1,17 +1,26 @@
-import './App.css';
 import Navbar from './Navbar';
 import Home from './Home';
+import PostReport from './PostReport';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
-  const Relatorio = 'Relatório';
 
   return (
+    <Router>
     <div className="App">
       <Navbar />
       <div className="content">
-       <Home />
+       <Routes>
+          <Route path="/PostReport">
+            <PostReport />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+       </Routes>
       </div>
     </div>
+    </Router>
   );
 }
 

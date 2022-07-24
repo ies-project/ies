@@ -4,7 +4,11 @@ const Navbar = () => {
             <h1>Relatórios</h1>
             <div className="links">
                 <a href="/">Home</a>
-                <a href="/criar">Criar Relatório</a>
+                <a href="/PostReport" style={{
+                    color: "white",
+                    backgroundColor: '#f1356d',
+                    borderRadius: '8px'
+                }}>Criar Relatório</a>
             </div>
         </nav>
      );
