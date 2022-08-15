@@ -3,7 +3,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace ICT.DAL.DB
 {
-    public class ICTDbContext : DbContext{
+    public class ICTDbContext : DbContext
+    {
 
         public DbSet<DeviceType> DeviceTypes { get; set; }
         public DbSet<Building> Buildings { get; set; }
@@ -25,7 +26,12 @@ namespace ICT.DAL.DB
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
                 .Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ICTDatabase"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ICTDatabase"),
+                sqlServerOptionsAction: sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(5), errorNumbersToAdd: null);
+                }
+                );
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
