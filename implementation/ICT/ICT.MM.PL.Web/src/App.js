@@ -7,6 +7,7 @@ import EditDeviceType from './PatchDeviceType';
 import Home from './Home';
 import Barra from './Barra';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Scenarios from './GetScenario';
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
             </Route>
             <Route exact path="/editarDeviceType">
               <EditDeviceType />
+            </Route>
+            <Route exact path="/gerirScenarios">
+              <Scenarios />
             </Route>
           </Switch>
         </div>
