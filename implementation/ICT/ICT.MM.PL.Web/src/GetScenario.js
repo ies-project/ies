@@ -8,7 +8,8 @@ function Scenarios() {
 
     function GetScenarios() {
 
-        fetch("https://localhost:7207/DeviceType")
+        fetch("https://
+            : 7207 / DeviceType")
             .then((res) => res.json())
             .then((data) => {
                 setScenarios(data)
@@ -46,7 +47,7 @@ function Scenarios() {
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Descri��o</th>
+                        <th>Descricao</th>
                     </tr>
                     {(scenarios.items)?.map(scenario => (
                         <tr key={scenario.id}>

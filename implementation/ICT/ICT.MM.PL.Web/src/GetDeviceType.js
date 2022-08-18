@@ -64,6 +64,8 @@ function DeviceTypes() {
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Descrição</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     {(devices.items)?.map(device => (
                         <tr key={device.id}>
