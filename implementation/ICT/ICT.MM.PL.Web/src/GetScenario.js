@@ -7,9 +7,7 @@ function Scenarios() {
     const [firstRun, setFirstRun] = useState(true);
 
     function GetScenarios() {
-
-        fetch("https://
-            : 7207 / DeviceType")
+        fetch("https://localhost:7207/DeviceType")
             .then((res) => res.json())
             .then((data) => {
                 setScenarios(data)
