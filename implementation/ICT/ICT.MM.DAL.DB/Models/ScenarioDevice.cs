@@ -23,17 +23,17 @@ namespace ICT.MM.DAL.DB
         /// 
         /// </summary>
         [Required]
-        public DateTime ManufacturedDate { get; set; }
+        public DateTime? ManufacturedDate { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime LastMaintenanceDate { get; set; }
+        public DateTime? LastMaintenanceDate { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime MaintenanceDueDate { get; set; }
+        public DateTime? MaintenanceDueDate { get; set; }
 
         /// <summary>
         /// 

@@ -33,15 +33,15 @@ namespace ICT.MM.DAL.DB
 		/// <summary>
 		/// Date of Device Manufacture
 		/// </summary>
-		public DateTime ManufacturedDate { get; set; }
+		public DateTime? ManufacturedDate { get; set; }
 		/// <summary>
 		/// Date of Last Maintenance
 		/// </summary>
-		public DateTime LastMaintenanceDate { get; set; }
+		public DateTime? LastMaintenanceDate { get; set; }
 		/// <summary>
 		/// Date of next Maintenance
 		/// </summary>
-		public DateTime MaintenanceDueDate { get; set; }
+		public DateTime? MaintenanceDueDate { get; set; }
 		/// <summary>
 		/// Name of the Device Manufacturer
 		/// </summary>
@@ -53,7 +53,7 @@ namespace ICT.MM.DAL.DB
 		/// <summary>
 		/// Date and time the Device was added to the system
 		/// </summary>
-		public DateTime CreatedDate { get; set; }
+		public DateTime? CreatedDate { get; set; }
 		/// <summary>
 		/// User that last modified the Device settings
 		/// </summary>
@@ -61,7 +61,7 @@ namespace ICT.MM.DAL.DB
 		/// <summary>
 		/// Date and time the device was last modified
 		/// </summary>
-		public DateTime ModifiedDate { get; set; }
+		public DateTime? ModifiedDate { get; set; }
 
 		public ICollection<ScenarioDevice> ScenarioDevices { get; set; }
 		public DeviceType DeviceType { get; set; }

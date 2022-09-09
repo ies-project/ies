@@ -22,6 +22,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         public async Task<IActionResult> Index()
         {
             var iCTDbContext = _context.Devices.Include(d => d.DeviceType);
+
             return View(await iCTDbContext.ToListAsync());
         }
 
@@ -60,6 +61,10 @@ namespace ICT.MM.PL.WebAPI.Controllers
         {
             if (ModelState.IsValid)
             {
+                device.LastMaintenanceDate = null;
+                device.ModifiedDate = null;
+                device.ModifiedBy = null;
+                device.CreatedDate = DateTime.Now;
                 _context.Add(device);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -101,6 +106,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 try
                 {
+                    device.ModifiedDate = DateTime.Now;
                     _context.Update(device);
                     await _context.SaveChangesAsync();
                 }
