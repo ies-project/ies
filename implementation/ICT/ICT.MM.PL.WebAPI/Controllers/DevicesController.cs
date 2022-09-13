@@ -5,10 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Security;
 using ICT.MM.DAL.DB;
+using System.Web.Http;
+using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using ActionNameAttribute = Microsoft.AspNetCore.Mvc.ActionNameAttribute;
+using Microsoft.AspNetCore.Authorization.Policy;
+using Microsoft.AspNetCore.Authorization;
+using AuthorizeAttribute = Microsoft.AspNetCore.Authorization.AuthorizeAttribute;
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
+    [Authorize(Policy = "Admins")]
     public class DevicesController : Controller
     {
         private readonly ICTDbContext _context;
@@ -19,6 +27,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         }
 
         // GET: Devices
+
         public async Task<IActionResult> Index()
         {
             var iCTDbContext = _context.Devices.Include(d => d.DeviceType);

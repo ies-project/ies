@@ -2,6 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using ICT.MM.DAL.DB.Models;
 using ICT.MM.DAL.DB;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ICT.MM.PL.WebAPI.Controllers {
     public class AccountController : Controller {
@@ -21,9 +27,10 @@ namespace ICT.MM.PL.WebAPI.Controllers {
         [HttpPost]
         public ActionResult Registration(Account acc)
         {
+            acc.Password = HashPassword(acc.Password);
             db.Accounts.Add(acc);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         public ActionResult Login()
@@ -31,19 +38,69 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login(Account acc)
+        public ActionResult Forbidden()
         {
-            var lg = db.Accounts.Where(x => x.Username == acc.Username && x.Password == acc.Password).FirstOrDefault();
-            if (lg != null)
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(Account acc)
+        {
+            var lg = db.Accounts.Where(x => x.Username == acc.Username && x.Password == HashPassword(acc.Password)).FirstOrDefault();
+            if (lg == null)
             {
-                return RedirectToAction("Index","Devices");
-            }
-            else
-            {
+                Debug.WriteLine("Login Falhado");
                 return RedirectToAction("Login", "Account");
             }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, lg.Name),
+                new Claim(ClaimTypes.Role, "Admin"),
+            };
+            Debug.WriteLine(claims);
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                AllowRefresh = false,
+                // Refreshing the authentication session should be allowed.
+
+                //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                // The time at which the authentication ticket expires. A 
+                // value set here overrides the ExpireTimeSpan option of 
+                // CookieAuthenticationOptions set with AddCookie.
+
+                //IsPersistent = true,
+                // Whether the authentication session is persisted across 
+                // multiple requests. When used with cookies, controls
+                // whether the cookie's lifetime is absolute (matching the
+                // lifetime of the authentication ticket) or session-based.
+
+                //IssuedUtc = <DateTimeOffset>,
+                // The time at which the authentication ticket was issued.
+
+                //RedirectUri = <string>
+                // The full path or absolute URI to be used as an http 
+                // redirect response value.
+            };
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+            return RedirectToAction("Index", "Devices");
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            Debug.WriteLine("Cheguei aqui");
+            // Clear the existing external cookie
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+            Debug.WriteLine("A Redirecionar");
+            return RedirectToAction("Login", "Account");
+        }
+
 
         // GET: AccountController/Details/5
         public ActionResult Details(int id)
@@ -112,6 +169,16 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             {
                 return View();
             }
+        }
+
+        public string HashPassword(string password)
+        {
+            var sha = SHA256.Create();
+
+            var asByteArray = Encoding.Default.GetBytes(password);
+            var hashedPassword = sha.ComputeHash(asByteArray);
+
+            return Convert.ToBase64String(hashedPassword);
         }
     }
 }

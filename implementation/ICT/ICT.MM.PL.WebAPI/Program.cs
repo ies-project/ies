@@ -1,5 +1,9 @@
 using ICT.MM.DAL.DB;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,28 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => {
+        options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/Forbidden";
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admins", policy =>
+                policy.RequireClaim(ClaimTypes.Role));
+    options.AddPolicy("Admin1", policy =>
+                policy.RequireClaim(ClaimTypes.Role,"Admin1"));
+    options.AddPolicy("Admin2", policy =>
+                policy.RequireClaim(ClaimTypes.Role,"Admin2"));
+    options.AddPolicy("Admin3", policy =>
+                policy.RequireClaim(ClaimTypes.Role,"Admin3"));
+}
+
+
+);
 builder.Services.AddControllersWithViews();
 builder.Services.AddCors();
 builder.Services.AddCors(options =>
@@ -36,10 +62,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 
 app.MapControllers();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
