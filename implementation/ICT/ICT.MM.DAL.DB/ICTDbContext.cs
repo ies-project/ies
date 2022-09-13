@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ICT.MM.DAL.DB.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace ICT.MM.DAL.DB 
@@ -9,6 +10,7 @@ namespace ICT.MM.DAL.DB
         public DbSet<Device> Devices { get; set; }
         public DbSet<Scenario> Scenarios { get; set; }
         public DbSet<ScenarioDevice> ScenarioDevices { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
