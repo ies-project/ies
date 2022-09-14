@@ -6,111 +6,113 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ICT.MM.DAL.DB;
+using ICT.MM.DAL.DB.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
-    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-    [Authorize(Policy = "LoggedIn")]
-    public class ScenariosController : Controller
+    [Authorize(Policy = "Root")]
+    public class AccountManagementController : Controller
     {
         private readonly ICTDbContext _context;
 
-        public ScenariosController(ICTDbContext context)
+        public AccountManagementController(ICTDbContext context)
         {
             _context = context;
         }
 
-        // GET: Scenarios
+        // GET: AccountManagement
         public async Task<IActionResult> Index()
         {
-              return _context.Scenarios != null ? 
-                          View(await _context.Scenarios.ToListAsync()) :
-                          Problem("Entity set 'ICTDbContext.Scenarios'  is null.");
+              return _context.Accounts != null ? 
+                          View(await _context.Accounts.ToListAsync()) :
+                          Problem("Entity set 'ICTDbContext.Accounts'  is null.");
         }
 
-        // GET: Scenarios/Details/5
+        // GET: AccountManagement/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Scenarios == null)
+            if (id == null || _context.Accounts == null)
             {
                 return NotFound();
             }
 
-            var scenario = await _context.Scenarios
+            var account = await _context.Accounts
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (scenario == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(scenario);
+            return View(account);
         }
 
-        // GET: Scenarios/Create
-        [Authorize(Policy = "Admin")]
+        // GET: AccountManagement/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Scenarios/Create
+        // POST: AccountManagement/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Scenario scenario)
+        public async Task<IActionResult> Create([Bind("Id,Name,Username,Password,Role")] Account account)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(scenario);
+                account.Password = HashPassword(account.Password);
+                _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(scenario);
+            return View(account);
         }
 
-        // GET: Scenarios/Edit/5
-        [Authorize(Policy = "Admin")]
+        // GET: AccountManagement/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Scenarios == null)
+            if (id == null || _context.Accounts == null)
             {
                 return NotFound();
             }
 
-            var scenario = await _context.Scenarios.FindAsync(id);
-            if (scenario == null)
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
             {
                 return NotFound();
             }
-            return View(scenario);
+            return View(account);
         }
 
-        // POST: Scenarios/Edit/5
+        // POST: AccountManagement/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Scenario scenario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Username,Password,Role")] Account account)
         {
-            if (id != scenario.Id)
+            var oldaccount =  await _context.Accounts.Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            account.Password = oldaccount.Password;
+            if (id != account.Id)
             {
                 return NotFound();
             }
+
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(scenario);
+                    _context.Update(account);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ScenarioExists(scenario.Id))
+                    if (!AccountExists(account.Id))
                     {
                         return NotFound();
                     }
@@ -121,51 +123,59 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(scenario);
+            return View(account);
         }
 
-        // GET: Scenarios/Delete/5
-        [Authorize(Policy = "Admin")]
+        // GET: AccountManagement/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Scenarios == null)
+            if (id == null || _context.Accounts == null)
             {
                 return NotFound();
             }
 
-            var scenario = await _context.Scenarios
+            var account = await _context.Accounts
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (scenario == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(scenario);
+            return View(account);
         }
 
-        // POST: Scenarios/Delete/5
+        // POST: AccountManagement/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Scenarios == null)
+            if (_context.Accounts == null)
             {
-                return Problem("Entity set 'ICTDbContext.Scenarios'  is null.");
+                return Problem("Entity set 'ICTDbContext.Accounts'  is null.");
             }
-            var scenario = await _context.Scenarios.FindAsync(id);
-            if (scenario != null)
+            var account = await _context.Accounts.FindAsync(id);
+            if (account != null)
             {
-                _context.Scenarios.Remove(scenario);
+                _context.Accounts.Remove(account);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ScenarioExists(int id)
+        private bool AccountExists(int id)
         {
-          return (_context.Scenarios?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Accounts?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public string HashPassword(string password)
+        {
+            var sha = SHA256.Create();
+
+            var asByteArray = Encoding.Default.GetBytes(password);
+            var hashedPassword = sha.ComputeHash(asByteArray);
+
+            return Convert.ToBase64String(hashedPassword);
         }
     }
 }

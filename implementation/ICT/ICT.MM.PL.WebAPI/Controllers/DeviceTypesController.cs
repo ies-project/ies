@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ICT.MM.DAL.DB;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+    [Authorize(Policy = "LoggedIn")]
     public class DeviceTypesController : Controller
     {
         private readonly ICTDbContext _context;
@@ -45,6 +48,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         }
 
         // GET: DeviceTypes/Create
+        [Authorize(Policy = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -55,6 +59,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,Name,Description")] DeviceType deviceType)
         {
             if (ModelState.IsValid)
@@ -67,6 +72,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         }
 
         // GET: DeviceTypes/Edit/5
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.DeviceTypes == null)
@@ -87,6 +93,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] DeviceType deviceType)
         {
             if (id != deviceType.Id)
@@ -118,6 +125,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         }
 
         // GET: DeviceTypes/Delete/5
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.DeviceTypes == null)
@@ -138,6 +146,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         // POST: DeviceTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.DeviceTypes == null)

@@ -50,7 +50,6 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             var lg = db.Accounts.Where(x => x.Username == acc.Username && x.Password == HashPassword(acc.Password)).FirstOrDefault();
             if (lg == null)
             {
-                Debug.WriteLine("Login Falhado");
                 return RedirectToAction("Login", "Account");
             }
 
@@ -60,7 +59,6 @@ namespace ICT.MM.PL.WebAPI.Controllers {
                 new Claim("Role", lg.Role),
             };
 
-            Debug.WriteLine(claims);
             var claimsIdentity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -90,16 +88,14 @@ namespace ICT.MM.PL.WebAPI.Controllers {
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-            return RedirectToAction("Index", "Devices");
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Logout()
         {
-            Debug.WriteLine("Cheguei aqui");
             // Clear the existing external cookie
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
-            Debug.WriteLine("A Redirecionar");
             return RedirectToAction("Login", "Account");
         }
 

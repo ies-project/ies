@@ -28,7 +28,10 @@
                                 <a class="btn" asp-action="Index" asp-controller="DeviceTypes">DeviceTypes</a>
                                 <a class="btn" asp-action="Index" asp-controller="Scenarios">Scenarios</a>
                                 <a class="btn" asp-action="Index" asp-controller="ScenarioDevices">ScenarioDevices</a>
-
+                                @if (User.FindFirst("Role").Value == "Root")
+                                {
+                                    <a class="btn" asp-action="Index" asp-controller="AccountManagement">Gerir</a>
+                                }
                         } else {
                             //Se não existir utilizador autenticado
                             <a class="btn" asp-action="Registration" asp-controller="Account">Register</a>

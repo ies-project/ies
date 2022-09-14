@@ -25,14 +25,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Admins", policy =>
-                policy.RequireClaim(ClaimTypes.Role));
-    options.AddPolicy("Admin1", policy =>
-                policy.RequireClaim(ClaimTypes.Role,"Admin1"));
-    options.AddPolicy("Admin2", policy =>
-                policy.RequireClaim(ClaimTypes.Role,"Admin2"));
-    options.AddPolicy("Admin3", policy =>
-                policy.RequireClaim(ClaimTypes.Role,"Admin3"));
+    options.AddPolicy("LoggedIn", policy =>
+                policy.RequireClaim("Role"));
+    options.AddPolicy("Root", policy =>
+                policy.RequireClaim("Role","Root"));
+    options.AddPolicy("Admin", policy =>
+                policy.RequireClaim("Role","Admin", "Root"));
 }
 
 
