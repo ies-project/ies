@@ -27,6 +27,7 @@ namespace ICT.MM.PL.WebAPI.Controllers {
         [HttpPost]
         public ActionResult Registration(Account acc)
         {
+            acc.Role = "User";
             acc.Password = HashPassword(acc.Password);
             db.Accounts.Add(acc);
             db.SaveChanges();
@@ -55,9 +56,10 @@ namespace ICT.MM.PL.WebAPI.Controllers {
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, lg.Name),
-                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.Name, lg.Username),
+                new Claim("Role", lg.Role),
             };
+
             Debug.WriteLine(claims);
             var claimsIdentity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);

@@ -21,10 +21,22 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        @if (User.Identity.IsAuthenticated) {
+                            //Se existir utilizador autenticado
+                            <a class="btn" asp-action="Logout" asp-controller="Account">Logout</a>
+                                <a class="btn"  asp-controller="Devices">Devices</a>
+                                <a class="btn" asp-action="Index" asp-controller="DeviceTypes">DeviceTypes</a>
+                                <a class="btn" asp-action="Index" asp-controller="Scenarios">Scenarios</a>
+                                <a class="btn" asp-action="Index" asp-controller="ScenarioDevices">ScenarioDevices</a>
+
+                        } else {
+                            //Se não existir utilizador autenticado
+                            <a class="btn" asp-action="Registration" asp-controller="Account">Register</a>
+                            <a class="btn" asp-action="Login" asp-controller="Account">Login</a>
+
+
+                        }
                         </li>
-                        <!--<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Privacy">Privacy</a>
-                        </li>-->
                     </ul>
                     @*
                         permite os links de autenticação
@@ -44,8 +56,9 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - SOA for Safety - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            <a class="btn" asp-action="Registration" asp-controller="Account">Register</a>
-            <a class="btn" asp-action="Logout" asp-controller="Account">Logout</a>
+
+            
+       
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

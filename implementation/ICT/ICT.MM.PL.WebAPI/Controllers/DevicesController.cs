@@ -16,7 +16,7 @@ using AuthorizeAttribute = Microsoft.AspNetCore.Authorization.AuthorizeAttribute
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
-    [Authorize(Policy = "Admins")]
+    //[Authorize(Policy = "Admins")]
     public class DevicesController : Controller
     {
         private readonly ICTDbContext _context;
