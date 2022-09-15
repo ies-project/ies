@@ -8,7 +8,7 @@
 <h1>Index</h1>
 
 <p>
-    @if (User.FindFirst("Role").Value == "Admin")
+    @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root"))
     {
 
         <a asp-action="Create">Create New</a>
