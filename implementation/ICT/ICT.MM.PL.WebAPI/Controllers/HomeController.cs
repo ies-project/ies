@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
@@ -7,6 +8,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View("~/Views/Shared/Error.cshtml");
         }
     }
 }

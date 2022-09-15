@@ -23,6 +23,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Account/Forbidden";
     });
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("LoggedIn", policy =>
@@ -36,17 +41,6 @@ builder.Services.AddAuthorization(options =>
 
 );
 builder.Services.AddControllersWithViews();
-builder.Services.AddCors();
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(
-        builder =>
-        {
-            builder.AllowAnyHeader()
-                   .AllowAnyMethod()
-                   .AllowAnyOrigin();
-        });
-});
 
 
 var app = builder.Build();
@@ -58,8 +52,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
+
+app.UseExceptionHandler("/Home/Error");
+app.UseStatusCodePagesWithReExecute("/Home/Error");
 app.UseStaticFiles();
 app.MapControllers();
 app.UseRouting();
@@ -72,13 +70,6 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
-app.UseCors();
-app.UseCors(builder =>
-{
-    builder
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader();
-});
+app.UseCors("corsapp");
 
 app.Run();
