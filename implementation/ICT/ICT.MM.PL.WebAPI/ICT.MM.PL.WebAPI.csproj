@@ -21,4 +21,8 @@
     <ProjectReference Include="..\ICT.MM.Core\ICT.MM.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
 </Project>
