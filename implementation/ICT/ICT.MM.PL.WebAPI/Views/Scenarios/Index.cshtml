@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<ICT.MM.DAL.DB.Scenario>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Scenarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Scenarios</h1>
+@if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -32,9 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><br />
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a><br />
+                }
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }

@@ -3,11 +3,13 @@ using ICT.MM.Core.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Cors;
 
-namespace ICT.MM.PL.WebAPI.Controllers {
+namespace ICT.MM.PL.WebAPI.API
+{
     [EnableCors("*", "*", "*")]
     [ApiController]
     [Route("[controller]")]
-    public class DeviceTypeController : ControllerBase{
+    public class DeviceTypeController : ControllerBase
+    {
 
         [HttpGet(Name = "GetDeviceTypes")]
         public ListDeviceTypesResponseDTO GetList()

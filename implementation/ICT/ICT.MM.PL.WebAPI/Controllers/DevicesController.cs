@@ -59,7 +59,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         [Authorize(Policy = "Admin")]
         public IActionResult Create()
         {
-            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Description");
+            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name");
             return View();
         }
 
@@ -77,11 +77,12 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 device.ModifiedDate = null;
                 device.ModifiedBy = null;
                 device.CreatedDate = DateTime.Now;
+                device.CreatedBy = User.Identity.Name;
                 _context.Add(device);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Description", device.Id_DeviceType);
+            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name", device.Id_DeviceType);
             return View(device);
         }
 
@@ -99,7 +100,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return NotFound();
             }
-            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Description", device.Id_DeviceType);
+            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name", device.Id_DeviceType);
             return View(device);
         }
 
@@ -113,14 +114,18 @@ namespace ICT.MM.PL.WebAPI.Controllers
         {
             if (id != device.Id)
             {
+                Console.WriteLine("NotFound");
                 return NotFound();
             }
-
+            Console.WriteLine("Found");
             if (ModelState.IsValid)
             {
+                
                 try
                 {
                     device.ModifiedDate = DateTime.Now;
+                    device.ModifiedBy = User.Identity.Name;
+
                     _context.Update(device);
                     await _context.SaveChangesAsync();
                 }
@@ -137,7 +142,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Description", device.Id_DeviceType);
+            ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name", device.Id_DeviceType);
             return View(device);
         }
 

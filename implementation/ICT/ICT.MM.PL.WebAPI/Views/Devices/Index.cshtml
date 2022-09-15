@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<ICT.MM.DAL.DB.Device>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Devices";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Devices</h1>
 
 <p>
-    @if (User.FindFirst("Role").Value == "Admin")
+    @if (User.FindFirst("Role").Value == "Admin"|| User.FindFirst("Role").Value == "Root")
     {
 
         <a asp-action="Create">Create New</a>
@@ -88,17 +88,17 @@
                 @Html.DisplayFor(modelItem => item.ModifiedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeviceType.Description)
+                <a asp-action="Details" asp-controller="DeviceTypes" asp-route-id="@item.Id_DeviceType">
+                    @Html.DisplayFor(modelItem => item.DeviceType.Name)
+                </a>
             </td>
             <td>
                     @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root")) 
                     {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                     }
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                 } else {
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                 }
             </td>
         </tr>
 }

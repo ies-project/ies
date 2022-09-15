@@ -1,7 +1,7 @@
 ﻿@model ICT.MM.DAL.DB.Device
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Device";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -76,7 +76,7 @@
             @Html.DisplayNameFor(model => model.DeviceType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeviceType.Description)
+            @Html.DisplayFor(model => model.DeviceType.Name)
         </dd>
     </dl>
     

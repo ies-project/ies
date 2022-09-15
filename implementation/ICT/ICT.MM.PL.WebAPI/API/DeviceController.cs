@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Cors;
 
-namespace ICT.MM.PL.WebAPI.Controllers {
-    [EnableCors("*","*","*")]
+namespace ICT.MM.PL.WebAPI.API
+{
+    [EnableCors("*", "*", "*")]
     [ApiController]
     [Route("[controller]")]
-    public class DeviceController : ControllerBase {
+    public class DeviceController : ControllerBase
+    {
 
         [HttpGet(Name = "GetDevices")]
         public ListDeviceResponseDTO GetList()

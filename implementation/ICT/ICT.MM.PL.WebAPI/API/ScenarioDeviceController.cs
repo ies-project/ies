@@ -2,10 +2,12 @@
 using ICT.MM.Core.DTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ICT.MM.PL.WebAPI.Controllers {
+namespace ICT.MM.PL.WebAPI.API
+{
     [ApiController]
     [Route("[controller]")]
-    public class ScenarioDeviceController : ControllerBase {
+    public class ScenarioDeviceController : ControllerBase
+    {
         [HttpGet(Name = "GetScenarioDevices")]
         public ListScenarioDeviceResponseDTO GetList()
         {

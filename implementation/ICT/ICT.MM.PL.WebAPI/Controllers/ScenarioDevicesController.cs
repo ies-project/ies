@@ -28,9 +28,9 @@ namespace ICT.MM.PL.WebAPI.Controllers
         }
 
         // GET: ScenarioDevices/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? idScen, int? idDevi)
         {
-            if (id == null || _context.ScenarioDevices == null)
+            if (idScen == null || idDevi == null || _context.ScenarioDevices == null)
             {
                 return NotFound();
             }
@@ -38,7 +38,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             var scenarioDevice = await _context.ScenarioDevices
                 .Include(s => s.Device)
                 .Include(s => s.Scenario)
-                .FirstOrDefaultAsync(m => m.Id_Scenario == id);
+                .FirstOrDefaultAsync(m => m.Id_Scenario == idScen && m.Id_Device == idDevi);
             if (scenarioDevice == null)
             {
                 return NotFound();
@@ -51,8 +51,8 @@ namespace ICT.MM.PL.WebAPI.Controllers
         [Authorize(Policy = "Admin")]
         public IActionResult Create()
         {
-            ViewData["Id_Device"] = new SelectList(_context.Devices, "Id", "Description");
-            ViewData["Id_Scenario"] = new SelectList(_context.Scenarios, "Id", "Description");
+            ViewData["Id_Device"] = new SelectList(_context.Devices, "Id", "Name");
+            ViewData["Id_Scenario"] = new SelectList(_context.Scenarios, "Id", "Name");
             return View();
         }
 
@@ -70,39 +70,37 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id_Device"] = new SelectList(_context.Devices, "Id", "Description", scenarioDevice.Id_Device);
-            ViewData["Id_Scenario"] = new SelectList(_context.Scenarios, "Id", "Description", scenarioDevice.Id_Scenario);
+            ViewData["Id_Device"] = new SelectList(_context.Devices, "Id", "Name", scenarioDevice.Id_Device);
+            ViewData["Id_Scenario"] = new SelectList(_context.Scenarios, "Id", "Name", scenarioDevice.Id_Scenario);
             return View(scenarioDevice);
         }
 
-        // GET: ScenarioDevices/Edit/5
+        // GET: ScenarioDevices/Edit?idScen=2&idDevi=6
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? idScen, int? idDevi)
         {
-            if (id == null || _context.ScenarioDevices == null)
+            if (idScen == null || idDevi == null || _context.ScenarioDevices == null)
             {
                 return NotFound();
             }
 
-            var scenarioDevice = await _context.ScenarioDevices.FindAsync(id);
+            var scenarioDevice = await _context.ScenarioDevices.FindAsync(idScen,idDevi);
             if (scenarioDevice == null)
             {
                 return NotFound();
             }
-            ViewData["Id_Device"] = new SelectList(_context.Devices, "Id", "Description", scenarioDevice.Id_Device);
-            ViewData["Id_Scenario"] = new SelectList(_context.Scenarios, "Id", "Description", scenarioDevice.Id_Scenario);
             return View(scenarioDevice);
         }
 
-        // POST: ScenarioDevices/Edit/5
+        // POST: ScenarioDevices/Edit?idScen=2&idDevi=6
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Scenario,Id_Device,ManufacturedDate,LastMaintenanceDate,MaintenanceDueDate,OriginalState,CurrentState")] ScenarioDevice scenarioDevice)
+        public async Task<IActionResult> Edit(int idScen, int idDevi, [Bind("Id_Scenario,Id_Device,ManufacturedDate,LastMaintenanceDate,MaintenanceDueDate,OriginalState,CurrentState")] ScenarioDevice scenarioDevice)
         {
-            if (id != scenarioDevice.Id_Scenario)
+            if (idScen != scenarioDevice.Id_Scenario || idDevi != scenarioDevice.Id_Device)
             {
                 return NotFound();
             }
@@ -116,7 +114,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ScenarioDeviceExists(scenarioDevice.Id_Scenario))
+                    if (!ScenarioDeviceExists(scenarioDevice.Id_Scenario, scenarioDevice.Id_Device))
                     {
                         return NotFound();
                     }
@@ -127,16 +125,14 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id_Device"] = new SelectList(_context.Devices, "Id", "Description", scenarioDevice.Id_Device);
-            ViewData["Id_Scenario"] = new SelectList(_context.Scenarios, "Id", "Description", scenarioDevice.Id_Scenario);
             return View(scenarioDevice);
         }
 
         // GET: ScenarioDevices/Delete/5
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? idScen, int? idDevi)
         {
-            if (id == null || _context.ScenarioDevices == null)
+            if (idScen == null || idDevi == null || _context.ScenarioDevices == null)
             {
                 return NotFound();
             }
@@ -144,7 +140,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             var scenarioDevice = await _context.ScenarioDevices
                 .Include(s => s.Device)
                 .Include(s => s.Scenario)
-                .FirstOrDefaultAsync(m => m.Id_Scenario == id);
+                .FirstOrDefaultAsync(m => m.Id_Scenario == idScen && m.Id_Device == idDevi);
             if (scenarioDevice == null)
             {
                 return NotFound();
@@ -157,13 +153,13 @@ namespace ICT.MM.PL.WebAPI.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int? idScen, int? idDevi)
         {
             if (_context.ScenarioDevices == null)
             {
                 return Problem("Entity set 'ICTDbContext.ScenarioDevices'  is null.");
             }
-            var scenarioDevice = await _context.ScenarioDevices.FindAsync(id);
+            var scenarioDevice = await _context.ScenarioDevices.FindAsync(idScen, idDevi);
             if (scenarioDevice != null)
             {
                 _context.ScenarioDevices.Remove(scenarioDevice);
@@ -173,9 +169,9 @@ namespace ICT.MM.PL.WebAPI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ScenarioDeviceExists(int id)
+        private bool ScenarioDeviceExists(int idScen, int idDevi)
         {
-          return (_context.ScenarioDevices?.Any(e => e.Id_Scenario == id)).GetValueOrDefault();
+          return (_context.ScenarioDevices?.Any(e => e.Id_Scenario == idScen && e.Id_Device == idDevi)).GetValueOrDefault();
         }
     }
 }

@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
-        options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
+        //options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
         options.LoginPath = "/Account/Login";
         options.LogoutPath = "/Account/Login";
         options.AccessDeniedPath = "/Account/Forbidden";

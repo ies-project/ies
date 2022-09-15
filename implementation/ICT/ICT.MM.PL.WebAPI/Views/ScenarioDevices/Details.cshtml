@@ -56,6 +56,9 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root")) {
+        @Html.ActionLink("Edit", "Edit", new { idScen = Html.DisplayFor(model => model.Id_Scenario), idDevi = Html.DisplayFor(model => model.Id_Scenario)})
+        <span> | </span>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

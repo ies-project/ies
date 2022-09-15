@@ -1,7 +1,7 @@
 ﻿@model ICT.MM.DAL.DB.Device
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Device Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -75,7 +75,9 @@
             @Html.DisplayNameFor(model => model.DeviceType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeviceType.Description)
+            <a asp-action="Details" asp-controller="DeviceTypes" asp-route-id="@Model.Id_DeviceType">
+                @Html.DisplayFor(model => model.DeviceType.Name)
+            </a>
         </dd>
     </dl>
 </div>
