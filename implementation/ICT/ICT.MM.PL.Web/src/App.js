@@ -4,6 +4,7 @@ import Devices from './GetDevice';
 import CreateDeviceType from './PostDeviceType';
 import CreateDevice from './PostDevice';
 import EditDeviceType from './PatchDeviceType';
+import EditDevice from './PatchDevice';
 import Home from './Home';
 import Barra from './Barra';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -34,6 +35,9 @@ function App() {
             <Route exact path="/editarDeviceType">
               <EditDeviceType />
             </Route>
+            <Route exact path="/editarDevices">
+              <EditDevice />
+             </Route>
             <Route exact path="/gerirScenarios">
               <Scenarios />
             </Route>
