@@ -114,10 +114,8 @@ namespace ICT.MM.PL.WebAPI.Controllers
         {
             if (id != device.Id)
             {
-                Console.WriteLine("NotFound");
                 return NotFound();
             }
-            Console.WriteLine("Found");
             if (ModelState.IsValid)
             {
                 

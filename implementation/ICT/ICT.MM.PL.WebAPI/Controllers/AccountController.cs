@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Authentication;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Http.Controllers;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ICT.MM.PL.WebAPI.Controllers {
     public class AccountController : Controller {
@@ -28,10 +32,25 @@ namespace ICT.MM.PL.WebAPI.Controllers {
         public ActionResult Registration(Account acc)
         {
             acc.Role = "User";
-            acc.Password = HashPassword(acc.Password);
-            db.Accounts.Add(acc);
-            db.SaveChanges();
-            return RedirectToAction("Login", "Account");
+
+            var VerifyUsername = db.Accounts.Where(a=> a.Username==acc.Username);
+            if(VerifyUsername != null)
+            {
+                ViewData["ErrorUser"] = "O nome de utilizador introduzido já existe";
+            }
+
+            if (StrongPassword(acc.Password)){
+                acc.Password = HashPassword(acc.Password);
+                db.Accounts.Add(acc);
+                db.SaveChanges();
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                ViewData["ErrorPass"] = "A palavra passe tem de ter pelo menos uma letra maiuscula, uma letra minuscula, um número e um caracter especial";
+            }
+            return View();
+
         }
 
         public ActionResult Login()
@@ -99,77 +118,60 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             return RedirectToAction("Login", "Account");
         }
 
-
-        // GET: AccountController/Details/5
-        public ActionResult Details(int id)
+        //GET
+        [Authorize(Policy = "LoggedIn")]
+        public async Task<IActionResult> ChangePassword(string username)
         {
-            return View();
-        }
+            if (username == null || db.Accounts == null)
+            {
+                return NotFound();
+            }
 
-        // GET: AccountController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+            var acc = await db.Accounts.Where(a => a.Username==username).FirstOrDefaultAsync();
+            if (acc == null)
+            {
+                return NotFound();
+            }
+            ViewData["NewPass1"] = "";
+            ViewData["NewPass2"] = "";
+            ViewData["CurrentPass"] = "";
 
-        // POST: AccountController/Create
+            return View(acc);
+        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Edit([Bind("Id,Username,Password,Name,Role")] Account acc)
         {
-            try
+            var verifyAcc = db.Accounts.Where(a=> a.Id == acc.Id);
+            if (!(verifyAcc.Any(a => a.Username == acc.Username && a.Password == acc.Password) && HashPassword(ViewData["CurrentPass"].ToString()) == acc.Password))
             {
-                return RedirectToAction(nameof(Index));
+                //logout
+                await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("Account", "Login");
             }
-            catch
+            if(ViewData["NewPass1"] != ViewData["NewPass2"])
             {
-                return View();
+                ViewData["ErrorPassDiff"] = "As palavras passe não são iguais.";
+                return RedirectToAction("Account", "ChangePassword");
             }
+
+            if (StrongPassword(ViewData["NewPass1"].ToString()))
+            {
+                acc.Password = HashPassword(ViewData["NewPass1"].ToString());
+                db.Accounts.Add(acc);
+                db.SaveChanges();
+                return RedirectToAction("Home", "Index");
+            }
+            else
+            {
+                ViewData["ErrorPassNotStrong"] = "A palavra passe tem de conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caracter especial";
+                return View(acc);
+            }
+
+           
         }
 
-        // GET: AccountController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AccountController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AccountController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AccountController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public string HashPassword(string password)
+         public string HashPassword(string password)
         {
             var sha = SHA256.Create();
 
@@ -177,6 +179,24 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             var hashedPassword = sha.ComputeHash(asByteArray);
 
             return Convert.ToBase64String(hashedPassword);
+        }
+
+        public Boolean StrongPassword(string password)
+        {
+            if(password == null)
+                return false;
+            if (password.Length < 8)
+                return false;
+            if (!password.Any(c => char.IsDigit(c)))
+                return false;
+            if (!password.Any(c => char.IsUpper(c)))
+                return false;
+            if(!password.Any(c => char.IsLower(c)))
+                return false;
+            if (!password.Any(c => char.IsSymbol(c)))
+                return false;
+
+            return true;
         }
     }
 }

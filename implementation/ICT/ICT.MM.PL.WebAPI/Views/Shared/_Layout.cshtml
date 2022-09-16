@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,7 +34,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <div style="float:left">
-                                <span class="nav-link text-dark">Olá, @User.Identity.Name</span>
+                                <p class="nav-link text-dark" style="padding-right:10px; padding-top:7px">Olá, @User.Identity.Name</p>
                             </div>
                         }
                         <div class="dropdown" style="float:left">
@@ -51,6 +52,8 @@
                                     {
                                         <a class="dropdown-item" asp-action="Index" asp-controller="AccountManagement">Gerir</a>
                                     }
+
+                                    <a class="dropdown-item" asp-action="ChangePassword" asp-controller="Account" asp-route-username="@User.Identity.Name">Mudar Palavra Passe</a>
                                     <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a>
                                 }
                                 else

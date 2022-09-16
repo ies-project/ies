@@ -27,11 +27,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+                    @if (@ViewBag.ErrorUser != null)
+                    {
+                        <br />
+                        <span style="color:red">@ViewBag.ErrorUser</span>
+                    }
+                    <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
+                    @if (@ViewBag.ErrorPass != null)
+                    {
+                        <br />
+                        <span style="color:red">@ViewBag.ErrorPass</span>
+                    }
                 <input type="password" asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
