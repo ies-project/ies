@@ -95,8 +95,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Username,Password,Role")] Account account)
         {
-            var oldaccount =  await _context.Accounts.Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
-            account.Password = oldaccount.Password;
+            account.Password = HashPassword(account.Password);
             if (id != account.Id)
             {
                 return NotFound();

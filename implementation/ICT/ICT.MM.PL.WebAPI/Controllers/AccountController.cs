@@ -138,33 +138,31 @@ namespace ICT.MM.PL.WebAPI.Controllers {
 
             return View(acc);
         }
+
         [HttpPost]
         [Authorize(Policy = "LoggedIn")]
-        public async Task<IActionResult> ChangePassword(string NewPass2,string NewPass1,string CurPass, [Bind("Id,Username,Password,Name,Role")] Account acc)
+        public async Task<IActionResult> Edit([Bind("Id,Username,Password,Name,Role")] Account acc)
         {
-            var verifyAcc = await db.Accounts.AsNoTracking().Where(a => a.Id == acc.Id).FirstOrDefaultAsync();
-            if (verifyAcc == null)
-            { return NotFound(); }
-            Boolean bol = HashPassword(CurPass) == verifyAcc.Password;
-            if (!bol)
+            var verifyAcc = db.Accounts.Where(a=> a.Id == acc.Id);
+            if (!(verifyAcc.Any(a => a.Username == acc.Username && a.Password == acc.Password) && HashPassword(ViewData["CurrentPass"].ToString()) == acc.Password))
             {
                 //logout
                 await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
                 return RedirectToAction("Account", "Login");
             }
-            if(NewPass2 != NewPass1)
+            if(ViewData["NewPass1"] != ViewData["NewPass2"])
             {
                 ViewData["ErrorPassDiff"] = "As palavras passe não são iguais.";
                 return RedirectToAction("Account", "ChangePassword");
             }
 
-            if (StrongPassword(NewPass1))
+            if (StrongPassword(ViewData["NewPass1"].ToString()))
             {
-                acc.Password = HashPassword(NewPass1);
-                db.Accounts.Update(acc);
+                acc.Password = HashPassword(ViewData["NewPass1"].ToString());
+                db.Accounts.Add(acc);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Index");
             }
             else
             {
@@ -197,8 +195,8 @@ namespace ICT.MM.PL.WebAPI.Controllers {
                 return false;
             if(!password.Any(c => char.IsLower(c)))
                 return false;
-            //if (!password.Any(c => char.IsSymbol(c)))
-            //    return false;
+            if (!password.Any(c => char.IsSymbol(c)))
+                return false;
 
             return true;
         }
