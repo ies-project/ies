@@ -195,8 +195,8 @@ namespace ICT.MM.PL.WebAPI.Controllers {
                 return false;
             if(!password.Any(c => char.IsLower(c)))
                 return false;
-            if (!password.Any(c => char.IsSymbol(c)))
-                return false;
+            //if (!password.Any(c => char.IsSymbol(c)))
+                //return false;
 
             return true;
         }
