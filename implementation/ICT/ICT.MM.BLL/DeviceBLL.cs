@@ -53,6 +53,7 @@ public class DeviceBLL {
         {
             Device newDevice = db.Devices.Find(dto.Id);
 
+            newDevice.Id_DeviceType = dto.Id_DeviceType;
             newDevice.Name = dto.Name;
             newDevice.Description = dto.Description;
             newDevice.ManufacturedDate = dto.ManufacturedDate;

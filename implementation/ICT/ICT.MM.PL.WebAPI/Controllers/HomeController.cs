@@ -14,5 +14,15 @@ namespace ICT.MM.PL.WebAPI.Controllers
         {
             return View("~/Views/Shared/Error.cshtml");
         }
+
+        public IActionResult About()
+        {
+            return View("~/Views/Shared/About.cshtml");
+        }
+
+        public IActionResult Credits()
+        {
+            return View("~/Views/Shared/Credits.cshtml");
+        }
     }
 }
