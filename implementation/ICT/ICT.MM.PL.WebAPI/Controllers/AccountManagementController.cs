@@ -93,9 +93,8 @@ namespace ICT.MM.PL.WebAPI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Username,Password,Role")] Account account)
+        public async Task<IActionResult> Edit(string PassTemp, int id, [Bind("Id,Name,Username,Password,Role")] Account account)
         {
-            account.Password = HashPassword(account.Password);
             if (id != account.Id)
             {
                 return NotFound();
@@ -106,8 +105,17 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 try
                 {
-                    _context.Update(account);
-                    await _context.SaveChangesAsync();
+                    if (PassTemp != "********")
+                    {
+                        account.Password = HashPassword(PassTemp);
+                        _context.Update(account);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        _context.Update(account);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
