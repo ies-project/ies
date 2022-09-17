@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Devices</h1>
+<h1>Dispositivos</h1>
 
 <p>
 
     @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root"))
     {
 
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create">Criar Dispositivo</a>
     }
     
 </p>
@@ -96,10 +96,10 @@
             <td>
                     @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root")) 
                     {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                      }
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
             </td>
         </tr>
 }

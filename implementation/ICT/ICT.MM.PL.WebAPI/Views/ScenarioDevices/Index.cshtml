@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Scenario Devices</h1>
+<h1>Cenário Dispositivo</h1>
 
 @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root")){
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create">Criar novo</a>
     </p>
 }
 
@@ -72,11 +72,11 @@
             <td>
                     @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { idScen = item.Id_Scenario, idDevi = item.Id_Device})<br />
+                        @Html.ActionLink("Editar", "Edit", new { idScen = item.Id_Scenario, idDevi = item.Id_Device})<br />
 
-                        @Html.ActionLink("Delete", "Delete", new { idScen = item.Id_Scenario, idDevi = item.Id_Device }) <br />
+                        @Html.ActionLink("Eliminar", "Delete", new { idScen = item.Id_Scenario, idDevi = item.Id_Device }) <br />
                     }
-                    @Html.ActionLink("Details", "Details", new { idScen = item.Id_Scenario, idDevi = item.Id_Device })
+                    @Html.ActionLink("Detalhes", "Details", new { idScen = item.Id_Scenario, idDevi = item.Id_Device })
             </td>
         </tr>
 }

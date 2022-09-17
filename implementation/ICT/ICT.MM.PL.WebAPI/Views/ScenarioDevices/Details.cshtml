@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
-    <h4>ScenarioDevice</h4>
+    <h4>Cenário Dispositivos</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -57,8 +57,8 @@
 </div>
 <div>
     @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root")) {
-        @Html.ActionLink("Edit", "Edit", new { idScen = Html.DisplayFor(model => model.Id_Scenario), idDevi = Html.DisplayFor(model => model.Id_Scenario)})
-        <span> | </span>
+        @Html.ActionLink("Editar", "Edit", new { idScen = Html.DisplayFor(model => model.Id_Scenario), idDevi = Html.DisplayFor(model => model.Id_Scenario)})
+        <br />
     }
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar á Lista</a>
 </div>

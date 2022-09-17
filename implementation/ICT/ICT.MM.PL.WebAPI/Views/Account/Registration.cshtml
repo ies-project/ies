@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<h4>Account</h4>
+<h4>Conta</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,33 +27,30 @@
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
                     @if (@ViewBag.ErrorUser != null)
                     {
-                        <br />
                         <span style="color:red">@ViewBag.ErrorUser</span>
                     }
-                    <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
+                    
+                <input type="password" asp-for="Password" class="form-control" />
                     @if (@ViewBag.ErrorPass != null)
                     {
-                        <br />
                         <span style="color:red">@ViewBag.ErrorPass</span>
                     }
-                <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="Home">Voltar á página inicial</a>
 </div>
 
 @section Scripts {
