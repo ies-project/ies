@@ -8,64 +8,83 @@ namespace ICT.MM.DAL.DB
 	/// </summary>
 	public class Device {
 		/// <summary>
-		/// Primary Key for Devices
+		/// Chave primaria para os devices
 		/// </summary>
 		[Key]
 		public int Id { get; set; }
 		/// <summary>
-		/// Foreign Key from Device Type
+		/// Chave forasteira para o DeviceType
 		/// </summary>
+		[Display(Name="Tipo de Device")]
 		public int Id_DeviceType { get; set; }
 		/// <summary>
-		/// Name of the Device
+		/// Nome do device
 		/// 32 Character Limit
 		/// </summary>
 		[Required]
 		[StringLength(32)]
+		[Display(Name="Nome do Dispositivo")]
 		public string Name { get; set; }
 		/// <summary>
-		/// Description for the Device
+		/// Descrição do device
 		/// 64 Character Limit
 		/// </summary>
 		[Required]
 		[StringLength(32)]
+		[Display(Name="Descrição do Dispositivo")]
 		public string Description { get; set; }
 		/// <summary>
-		/// Date of Device Manufacture
+		/// Data de fabricação do dispositivo
 		/// </summary>
+		[Display(Name="Data de Fabricação")]
 		public DateTime? ManufacturedDate { get; set; }
 		/// <summary>
-		/// Date of Last Maintenance
+		/// Data da última manutenção dos dispositivo
 		/// </summary>
+		[Display(Name="Data da última manutenção")]
 		public DateTime? LastMaintenanceDate { get; set; }
 		/// <summary>
-		/// Date of next Maintenance
+		/// Data da próxima manutenção
 		/// </summary>
+		[Display(Name="Data da próxima manutenção")]
 		public DateTime? MaintenanceDueDate { get; set; }
 		/// <summary>
-		/// Name of the Device Manufacturer
+		/// Nome do frabicante do dispositivo
 		/// </summary>
+		[Display(Name="Fabricado por")]
 		public string ManufacturedBy { get; set; }
 		/// <summary>
-		/// User that added the Device to the system
+		/// Utilizador que adicionou o dispositivo ao sistema
 		/// </summary>
+		[Display(Name="Criado por")]
 		public string CreatedBy { get; set; }
 		/// <summary>
-		/// Date and time the Device was added to the system
+		/// Data a que o dispositivo foi adicionado ao sistema
 		/// </summary>
+		[Display(Name="Data de criação")]
 		public DateTime? CreatedDate { get; set; }
 		/// <summary>
-		/// User that last modified the Device settings
+		/// Utilizador que modifico o dispositivo pela última vez
 		/// </summary>
+		[Display(Name="Modificado por")]
 		public string ModifiedBy { get; set; }
 		/// <summary>
-		/// Date and time the device was last modified
+		/// Data da última modificação
 		/// </summary>
+		[Display(Name="Data da última modificação")]
 		public DateTime? ModifiedDate { get; set; }
 
 		public ICollection<ScenarioDevice> ScenarioDevices { get; set; }
+		/// <summary>
+		/// Tipo de dispositivo
+		/// </summary>
+		[Display(Name="Tipo de dispositivo")]
 		public DeviceType DeviceType { get; set; }
 
+		/// <summary>
+		/// Configura as relações
+		/// </summary>
+		/// <param name="modelBuilder"></param>
 		public static void ConfigureRelations(ModelBuilder modelBuilder)
 		{
 			//Relationship from Device to ScenarioDevices

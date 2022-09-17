@@ -3,32 +3,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ICT.MM.DAL.DB
 {
-    /// <summary>
-    /// DeviceType class
-    /// </summary>
     public class DeviceType {
         /// <summary>
-        /// Primary key of DeviceType
+        /// Chave Primaria para o DeviceType
         /// </summary>
         [Key]
         public int Id { get; set; }
 
         /// <summary>
-        /// Name of the DeviceType
+        /// Nome do DeviceType
         /// </summary>
         [Required]
         [StringLength(32)]
+        [Display(Name="Nome")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Description of the DeviceType
+        /// Descrição do DeviceType
         /// </summary>
         [Required]
         [StringLength(64)]
+        [Display(Name="Descrição")]
         public string Description { get; set; }
 
         public ICollection<Device> Devices { get; set; }
-
+        /// <summary>
+        /// Configurar as relações
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         public static void ConfigureRelations(ModelBuilder modelBuilder)
         {
             //Relationship from DeviceType to Devices

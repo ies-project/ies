@@ -4,32 +4,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ICT.MM.DAL.DB
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class Scenario {
         /// <summary>
-        /// 
+        /// Chave primaria para os cenarios
         /// </summary>
         [Key]
         public int Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Nome do Scenario
         /// </summary>
         [Required]
         [StringLength(64)]
+        [Display(Name="Nome")]
         public String Name { get; set; }
 
         /// <summary>
-        /// 
+        /// Descrição do Scenario
         /// </summary>
         [Required]
         [StringLength(64)]
+        [Display(Name="Descrição")]
         public String Description { get; set; }
 
         public ICollection<ScenarioDevice> ScenarioDevices { get; set; }
-
+        /// <summary>
+        /// Configuração dos Scenarios
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         public static void ConfigureRelations(ModelBuilder modelBuilder)
         {
             //Relationship from Scenario to ScenarioDevices
