@@ -28,7 +28,7 @@
 <div>
     @if ((User.FindFirst("Role").Value == "Admin") || (User.FindFirst("Role").Value == "Root")){
     <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> 
-    <<br />
+    <br />
     }
     <a asp-action="Index">Voltar á Lista</a>
 </div>

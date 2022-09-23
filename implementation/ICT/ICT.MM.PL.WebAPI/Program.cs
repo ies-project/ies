@@ -25,6 +25,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Account/Login";
         options.LogoutPath = "/Account/Login";
         options.AccessDeniedPath = "/Account/Forbidden";
+        options.Cookie.Name = "IES-Cookie";
+        options.Cookie.IsEssential = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.SameSite = SameSiteMode.None;
     });
 
 

@@ -154,9 +154,17 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 return Problem("Entity set 'ICTDbContext.DeviceTypes'  is null.");
             }
             var deviceType = await _context.DeviceTypes.FindAsync(id);
+
             if (deviceType != null)
             {
                 _context.DeviceTypes.Remove(deviceType);
+            }
+
+
+            var devices = _context.Devices.Where(m => m.Id_DeviceType == id);
+            if (devices != null)
+            {
+                _context.Devices.RemoveRange(devices);
             }
             
             await _context.SaveChangesAsync();
