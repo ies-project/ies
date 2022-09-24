@@ -12,6 +12,7 @@ using System.Web.Http.Controllers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Principal;
 
 namespace ICT.MM.PL.WebAPI.Controllers {
     public class AccountController : Controller {
@@ -38,16 +39,21 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             {
                 ViewData["ErrorUser"] = "O nome de utilizador introduzido já existe";
             }
+            else
+            {
+                ViewData["ErrorUser"] = "";
+            }
 
             if (StrongPassword(acc.Password)){
                 acc.Password = HashPassword(acc.Password);
                 db.Accounts.Add(acc);
                 db.SaveChanges();
+                ViewData["ErrorPass"] = "";
                 return RedirectToAction("Login", "Account");
             }
             else
             {
-                ViewData["ErrorPass"] = "A palavra passe tem de ter pelo menos uma letra maiuscula, uma letra minuscula, um número e um caracter especial";
+                ViewData["ErrorPass"] = "A palavra passe tem de ter pelo menos uma letra maiuscula, uma letra minuscula e um número";
             }
             return View();
 
@@ -132,37 +138,36 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             {
                 return NotFound();
             }
-            ViewData["NewPass1"] = "";
-            ViewData["NewPass2"] = "";
-            ViewData["CurrentPass"] = "";
 
             return View(acc);
         }
 
         [HttpPost]
         [Authorize(Policy = "LoggedIn")]
-        public async Task<IActionResult> Edit([Bind("Id,Username,Password,Name,Role")] Account acc)
+        public async Task<IActionResult> ChangePassword(string CurPass,string NewPass1,string NewPass2,[Bind("Id,Username,Password,Name,Role")] Account acc)
         {
             var verifyAcc = db.Accounts.Where(a=> a.Id == acc.Id);
-            if (!(verifyAcc.Any(a => a.Username == acc.Username && a.Password == acc.Password) && HashPassword(ViewData["CurrentPass"].ToString()) == acc.Password))
+            if (!(verifyAcc.Any(a => a.Username == acc.Username && a.Password == acc.Password) && HashPassword(CurPass) == acc.Password))
             {
                 //logout
                 await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
                 return RedirectToAction("Account", "Login");
             }
-            if(ViewData["NewPass1"] != ViewData["NewPass2"])
+            if(NewPass1 != NewPass2)
             {
                 ViewData["ErrorPassDiff"] = "As palavras passe não são iguais.";
                 return RedirectToAction("Account", "ChangePassword");
             }
 
-            if (StrongPassword(ViewData["NewPass1"].ToString()))
+            if (StrongPassword(NewPass1))
             {
-                acc.Password = HashPassword(ViewData["NewPass1"].ToString());
-                db.Accounts.Add(acc);
-                db.SaveChanges();
-                return RedirectToAction("Home", "Index");
+
+                acc.Password = HashPassword(NewPass1);
+                db.Update(acc);
+                await db.SaveChangesAsync();
+
+                return RedirectToAction("Index","Home");
             }
             else
             {
