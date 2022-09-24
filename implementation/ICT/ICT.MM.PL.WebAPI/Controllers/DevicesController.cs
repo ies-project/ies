@@ -16,10 +16,14 @@ using AuthorizeAttribute = Microsoft.AspNetCore.Authorization.AuthorizeAttribute
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
+    /// <summary>
+    /// Controller para os devices
+    /// </summary>
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     [Authorize(Policy = "LoggedIn")]
     public class DevicesController : Controller
     {
+        //variavel de acesso a base de dados
         private readonly ICTDbContext _context;
 
         public DevicesController(ICTDbContext context)
@@ -28,14 +32,21 @@ namespace ICT.MM.PL.WebAPI.Controllers
         }
 
         // GET: Devices
-
+        /// <summary>
+        /// Lista os dispositivos presentes na base de dados
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             var iCTDbContext = _context.Devices.Include(d => d.DeviceType);
 
             return View(await iCTDbContext.ToListAsync());
         }
-
+        /// <summary>
+        /// Retorna a view com os detalhes de um dispositivo, dando o id do device 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Devices/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,7 +54,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return NotFound();
             }
-
+            //procura na base de dados pelo dispositivo
             var device = await _context.Devices
                 .Include(d => d.DeviceType)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -55,14 +66,23 @@ namespace ICT.MM.PL.WebAPI.Controllers
             return View(device);
         }
 
+        /// <summary>
+        /// Retorna a view para criar um novo dispositivo
+        /// </summary>
+        /// <returns></returns>
         // GET: Devices/Create
         [Authorize(Policy = "Admin")]
         public IActionResult Create()
         {
+            //envia para a view a lista de todos os tipos de dispositivos para o utilizador poder selecionar o tipo de dispositivo correto de entre os que existem na base de dados
             ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name");
             return View();
         }
-
+        /// <summary>
+        /// Cria na base de dados um novo dispositivo dispositivo 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
         // POST: Devices/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -73,11 +93,13 @@ namespace ICT.MM.PL.WebAPI.Controllers
         {
             if (ModelState.IsValid)
             {
+                //alguma atribuições basicas
                 device.LastMaintenanceDate = null;
                 device.ModifiedDate = null;
                 device.ModifiedBy = null;
                 device.CreatedDate = DateTime.Now;
                 device.CreatedBy = User.Identity.Name;
+                //guardar na base de dados
                 _context.Add(device);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,7 +107,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
             ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name", device.Id_DeviceType);
             return View(device);
         }
-
+        /// <summary>
+        /// retorna a view para editar um dispositivo dando o seu id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Devices/Edit/5
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Edit(int? id)
@@ -94,7 +120,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return NotFound();
             }
-
+            //procura na base de dados o dispositivo
             var device = await _context.Devices.FindAsync(id);
             if (device == null)
             {
@@ -103,7 +129,12 @@ namespace ICT.MM.PL.WebAPI.Controllers
             ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name", device.Id_DeviceType);
             return View(device);
         }
-
+        /// <summary>
+        /// Guarda na base de dados as alterações realizadas ao dispositivo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="device"></param>
+        /// <returns></returns>
         // POST: Devices/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -112,6 +143,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Id_DeviceType,Name,Description,ManufacturedDate,LastMaintenanceDate,MaintenanceDueDate,ManufacturedBy,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] Device device)
         {
+            //faz se algumas verificações para editar o dispositivo
             if (id != device.Id)
             {
                 return NotFound();
@@ -121,9 +153,10 @@ namespace ICT.MM.PL.WebAPI.Controllers
                 
                 try
                 {
+                    //Algumas atribuições simples
                     device.ModifiedDate = DateTime.Now;
                     device.ModifiedBy = User.Identity.Name;
-
+                    //guardas as alterações na base de dados
                     _context.Update(device);
                     await _context.SaveChangesAsync();
                 }
@@ -143,7 +176,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
             ViewData["Id_DeviceType"] = new SelectList(_context.DeviceTypes, "Id", "Name", device.Id_DeviceType);
             return View(device);
         }
-
+        /// <summary>
+        /// Retorna a view para se confirmar a eliminiação de um dispositivo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Devices/Delete/5
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(int? id)
@@ -152,7 +189,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return NotFound();
             }
-
+            //procura na base de dados o dispositivo
             var device = await _context.Devices
                 .Include(d => d.DeviceType)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -163,7 +200,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
 
             return View(device);
         }
-
+        /// <summary>
+        /// Elimina um dispositivo da base de dados
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: Devices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -174,6 +215,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return Problem("Entity set 'ICTDbContext.Devices'  is null.");
             }
+            //procura na base de dados o dipositivo e se exitir elimina o da base de dados
             var device = await _context.Devices.FindAsync(id);
             if (device != null)
             {
