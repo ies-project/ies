@@ -34,11 +34,9 @@ function Scenarios() {
 
     return (
         <div>
-            <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                <button type="button">Swagger</button>
-            </a>
+            
             <Link to="/criarScenario">
-                <button>Criar Novo Scenario</button>
+                <button>Criar Novo Cenario</button>
             </Link>
             <table className="table table-striped">
                 <tbody>

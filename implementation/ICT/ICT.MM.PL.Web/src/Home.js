@@ -8,13 +8,13 @@ return (
                     <tbody>
                             <tr>
                                 <td align='center' className="table-primary">
-                                    <Link to="/gerirDevices" class="btn btn-primary" role="button">Devices</Link>
+                                    <Link to="/gerirDevices" class="btn btn-primary" role="button">Dispositivos</Link>
                                 </td>
                                 <td align='center' className="table-success">
-                                    <Link to="/gerirDeviceTypes" class="btn btn-success" role="button">DeviceTypes</Link>
+                                    <Link to="/gerirDeviceTypes" class="btn btn-success" role="button">Tipos de Dispositivos</Link>
                                 </td>
                                 <td align='center' className="table-danger">
-                                    <Link to="/gerirScenarios" class="btn btn-danger" role="button">Scenarios</Link>
+                                    <Link to="/gerirScenarios" class="btn btn-danger" role="button">Cenarios</Link>
                                 </td>
                                 <td align='center' className="table-warning">
                                     <Link to="/gerirScenarioDevices" class="btn btn-warning" role="button">ScenarioDevices</Link>

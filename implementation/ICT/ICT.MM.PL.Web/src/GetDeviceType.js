@@ -36,25 +36,8 @@ function DeviceTypes() {
     }, []);
 
 
-    if (firstRun) {
-        return (
-            <div>
-                <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                    <button type="button">Swagger</button>
-                </a>
-                <button onClick={GetDeviceTypes}>Listar Tipos de Dispositivos</button>
-                <Link to="/criarDeviceType">
-                    <button>Criar Novo Tipo de Dispositivo</button>
-                </Link>
-            </div>)
-    }
-
         return (
         <div>
-            <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                <button type="button">Swagger</button>
-            </a>
-            <button onClick={GetDeviceTypes}>Listar Dispositivos</button>
             <Link to="/criarDeviceType">
                     <button>Criar Novo Tipo de Dispositivo</button>
             </Link>

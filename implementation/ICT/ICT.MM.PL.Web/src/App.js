@@ -43,15 +43,15 @@ function App() {
             </Route>
             <Route exact path="/editarDevices">
               <EditDevice />
-             </Route>
-            <Route exact path="/gerirScenarios">
-              <Scenarios />
             </Route>
             <Route exact path="/editarScenario">
               <EditScenario />
             </Route>
             <Route exact path="/criarScenario">
               <CreateScenario />
+                </Route>
+            <Route exact path="/gerirScenarios">
+                <Scenarios />
             </Route>
             <Route exact path="/gerirScenarioDevices">
                <ScenarioDevices />

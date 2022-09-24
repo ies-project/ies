@@ -9,6 +9,10 @@ using ICT.MM.DAL.DB;
 namespace ICT.MM.BLL {
     public class ScenariosBLL {
 
+        /// <summary>
+        /// Adiciona um scenario na base de dados utilizando o dto passado como parametro
+        /// </summary>
+        /// <param name="dto"></param>
         public static void InsertScenario(InsertScenarioRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -27,6 +31,10 @@ namespace ICT.MM.BLL {
             }
         }
         
+        /// <summary>
+        /// Elimina um scenario da base de dados utilizando o dto passado como parametro
+        /// </summary>
+        /// <param name="dto"></param>
         public static void DeleteScenario(DeleteScenarioRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -43,6 +51,10 @@ namespace ICT.MM.BLL {
             }
         }
 
+        /// <summary>
+        /// Atualiza um scenario da base de dados utilizando o dto passado como parametro
+        /// </summary>
+        /// <param name="dto"></param>
         public static void UpdateScenario(UpdateScenarioRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -57,6 +69,10 @@ namespace ICT.MM.BLL {
             }
         }
 
+        /// <summary>
+        /// Retorna uma lista com todos os scenarios presentes na base de dados
+        /// </summary>
+        /// <returns></returns>
         public static ListScenarioResponseDTO ListScenarios() {
 
             using (ICTDbContext iCTDbContext = new ICTDbContext()){ 

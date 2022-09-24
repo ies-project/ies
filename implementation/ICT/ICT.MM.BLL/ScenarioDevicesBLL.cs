@@ -10,7 +10,10 @@ namespace ICT.MM.BLL
 {
     public class ScenarioDevicesBLL
     {
-
+        /// <summary>
+        /// Adiciona um scenariodevice na base de dados utilizando o dto passado como parametro
+        /// </summary>
+        /// <param name="dto"></param>
         public static void InsertScenarioDevices(InsertScenarioDeviceRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -34,6 +37,10 @@ namespace ICT.MM.BLL
             }
         }
 
+        /// <summary>
+        /// Elimina um scenariodevice da base de dados utilizando o dto passado como parametro
+        /// </summary>
+        /// <param name="dto"></param>
         public static void DeleteScenarioDevices(DeleteScenarioDeviceRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -47,6 +54,10 @@ namespace ICT.MM.BLL
             }
         }
 
+        /// <summary>
+        /// Atualiza um scenariodevice da base de dados utilizando o dto passado como parametro
+        /// </summary>
+        /// <param name="dto"></param>
         public static void UpdateScenarioDevices(UpdateScenarioDeviceRequestDTO dto)
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())
@@ -66,6 +77,10 @@ namespace ICT.MM.BLL
             }
         }
 
+        /// <summary>
+        /// Retorna uma lista com todos os scenariodevices presentes na base de dados
+        /// </summary>
+        /// <returns></returns>
         public static ListScenarioDeviceResponseDTO ListScenarioDevices()
         {
             using (ICTDbContext iCTDbContext = new ICTDbContext())

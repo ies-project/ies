@@ -36,10 +36,6 @@ function Devices() {
 
         return (
         <div>
-            <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                <button type="button">Swagger</button>
-            </a>
-            <button onClick={GetDevices}>Listar Dispositivos</button>
             <Link to="/criarDevice">
                     <button>Criar Novo Dispositivo</button>
             </Link>

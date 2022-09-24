@@ -49,9 +49,6 @@ const EditDevice = () => {
 
     return (
         <div>
-            <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                <button type="button">Swagger</button>
-            </a>
 
             <table className="table table-striped">
                 <tbody>

@@ -37,7 +37,7 @@ function ScenarioDevices() {
     return (
         <div>
             <Link to="/criarScenarioDevices">
-                <button>Criar Novo</button>
+                <button>Criar Novo ScenarioDevice</button>
             </Link>
             <table className="table table-striped">
                 <tbody>
