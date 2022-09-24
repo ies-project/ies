@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
+    /// <summary>
+    /// Controller para o Home, contem todos os metodos para retornar as view basicas do programa
+    /// </summary>
     public class HomeController : Controller
     {
         public IActionResult Index()

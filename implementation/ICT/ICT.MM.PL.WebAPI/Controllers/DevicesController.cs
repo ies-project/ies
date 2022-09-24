@@ -215,24 +215,28 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return Problem("Entity set 'ICTDbContext.Devices'  is null.");
             }
-            //procura na base de dados o dipositivo e se exitir elimina o da base de dados
+            //procura na base de dados o dipositivo e se exitir elimina-o da base de dados
             var device = await _context.Devices.FindAsync(id);
             if (device != null)
             {
                 _context.Devices.Remove(device);
             }
-
+            //procura na base de dados por ScenarioDevice que possuam como id_Device o id desse device e elimina os a todos 
             var scenarioDevices = _context.ScenarioDevices.Where(m => m.Id_Device == id);
 
             if (scenarioDevices != null)
             {
                 _context.ScenarioDevices.RemoveRange(scenarioDevices);
             }
-            
+            //guarda as alterações da base de dados
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        /// <summary>
+        /// Verifica se um dispositivo existe dado o seu id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool DeviceExists(int id)
         {
           return (_context.Devices?.Any(e => e.Id == id)).GetValueOrDefault();

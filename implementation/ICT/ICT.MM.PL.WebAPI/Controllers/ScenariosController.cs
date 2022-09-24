@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ICT.MM.PL.WebAPI.Controllers
 {
+    /// <summary>
+    /// Controller para os Cenarios
+    /// </summary>
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     [Authorize(Policy = "LoggedIn")]
     public class ScenariosController : Controller
@@ -20,7 +23,10 @@ namespace ICT.MM.PL.WebAPI.Controllers
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Lista todos os cenarios presentes na base de dados
+        /// </summary>
+        /// <returns></returns>
         // GET: Scenarios
         public async Task<IActionResult> Index()
         {
@@ -28,7 +34,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
                           View(await _context.Scenarios.ToListAsync()) :
                           Problem("Entity set 'ICTDbContext.Scenarios'  is null.");
         }
-
+        /// <summary>
+        /// Retorna a View com os detalhes de um cenario dado o id do cenario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Scenarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -36,7 +46,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return NotFound();
             }
-
+            //procura na base de dados pelo cenario e retorna a view com os detalhe de um cenario
             var scenario = await _context.Scenarios
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (scenario == null)
@@ -46,14 +56,21 @@ namespace ICT.MM.PL.WebAPI.Controllers
 
             return View(scenario);
         }
-
+        /// <summary>
+        /// Retorna a view para criar um novo Scenario
+        /// </summary>
+        /// <returns></returns>
         // GET: Scenarios/Create
         [Authorize(Policy = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
-
+        /// <summary>
+        /// Adiciona a base de dados um novo cenario
+        /// </summary>
+        /// <param name="scenario"></param>
+        /// <returns></returns>
         // POST: Scenarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,13 +81,18 @@ namespace ICT.MM.PL.WebAPI.Controllers
         {
             if (ModelState.IsValid)
             {
+                //adiciona e guarda um cenario na base de dados
                 _context.Add(scenario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(scenario);
         }
-
+        /// <summary>
+        /// Retorna a view para editar um cenario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Scenarios/Edit/5
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Edit(int? id)
@@ -79,7 +101,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return NotFound();
             }
-
+            //procura na base de dados pelo scenario e retorna a view com esses dados
             var scenario = await _context.Scenarios.FindAsync(id);
             if (scenario == null)
             {
@@ -87,7 +109,12 @@ namespace ICT.MM.PL.WebAPI.Controllers
             }
             return View(scenario);
         }
-
+        /// <summary>
+        /// Atualiza um Cenario na base de dados
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="scenario"></param>
+        /// <returns></returns>
         // POST: Scenarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -105,6 +132,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 try
                 {
+                    //atualiza o scenario na base de dados 
                     _context.Update(scenario);
                     await _context.SaveChangesAsync();
                 }
@@ -123,7 +151,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
             }
             return View(scenario);
         }
-
+        /// <summary>
+        /// Retorna a view para o utilizador confirmar a eliminação de um cenario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Scenarios/Delete/5
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(int? id)
@@ -132,7 +164,7 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return NotFound();
             }
-
+            //procura na base de dados e retorna a view com os dados do cenario a eliminar
             var scenario = await _context.Scenarios
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (scenario == null)
@@ -142,7 +174,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
 
             return View(scenario);
         }
-
+        /// <summary>
+        /// Elimina da base de dados um scenario dado o seu id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: Scenarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -153,12 +189,13 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 return Problem("Entity set 'ICTDbContext.Scenarios'  is null.");
             }
+            //procura na base de dados e elimina o scenario
             var scenario = await _context.Scenarios.FindAsync(id);
             if (scenario != null)
             {
                 _context.Scenarios.Remove(scenario);
             }
-
+            //procura e eliminar da base de dados todos os scenarioDevice que tenham como id de cenario o id do cenario a eliminar
             var scenarioDevices = _context.ScenarioDevices.Where(m => m.Id_Scenario == id);
 
             if (scenarioDevices != null)
@@ -169,7 +206,11 @@ namespace ICT.MM.PL.WebAPI.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        /// <summary>
+        /// Verifica se um scenario existe dado o seu id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ScenarioExists(int id)
         {
           return (_context.Scenarios?.Any(e => e.Id == id)).GetValueOrDefault();
