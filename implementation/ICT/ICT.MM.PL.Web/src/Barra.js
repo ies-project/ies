@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+//Barra de navegacao que contem o Home e o trademark do projeto
 const Barra = () => {
     return (
         <nav className="navbar navbar-dark bg-dark">

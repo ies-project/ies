@@ -4,13 +4,15 @@ import { useLocation } from "react-router-dom";
 
 const EditDeviceType = () => {
 
+    //Utilização do state passado pelo link anterior com informacao sobre o devicetype a editar
     const location = useLocation()
     const data = location.state
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [name, setName] = useState(data.device.name)
     const [description, setDescription] = useState(data.device.description)
 
-
+    //Funcao que atualiza um devicetype dado o seu id
     function atualizarDeviceType(id) {
         const deviceData = {id, name, description}
         fetch("https://localhost:7207/DeviceType", {
@@ -25,9 +27,6 @@ const EditDeviceType = () => {
 
     return (
         <div>
-        <a href="https://localhost:7207/swagger/index.html" target="_blank">
-            <button type="button">Swagger</button>
-        </a>
 
         <table className="table table-striped">
             <tbody>

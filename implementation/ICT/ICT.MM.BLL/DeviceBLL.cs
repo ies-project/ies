@@ -2,13 +2,19 @@
 using ICT.MM.DAL.DB;
 
 public class DeviceBLL {
-
+    /// <summary>
+    /// Adiciona um device na base de dados utilizando o dto passado como parametro
+    /// </summary>
+    /// <param name="dto"></param>
     public static void InsertDevice(InsertDeviceRequestDTO dto)
     {
+        //inicializa uma conexao com a base de dados
         using (ICTDbContext db = new ICTDbContext())
         {
+            //tenta encontrar um device cujo id seja igual ao id passado pelo dto
             if (db.Devices.Find(dto.Id) == null && db.DeviceTypes.Find(dto.Id_DeviceType) != null)
             {
+                //inicializa um novo device
                 Device newDevice = new Device();
 
                 newDevice.Id = dto.Id;
@@ -24,17 +30,24 @@ public class DeviceBLL {
                 newDevice.ModifiedBy = dto.ModifiedBy;
                 newDevice.ModifiedDate = dto.ModifiedDate;
 
+                //adiciona o device á base de dados
                 db.Devices.Add(newDevice);
 
+                //atualiza a base de dados com as mudanças feitas
                 db.SaveChanges();
             }
         }
     }
 
+    /// <summary>
+    /// Elimina um device da base de dados utilizando o dto passado como parametro
+    /// </summary>
+    /// <param name="dto"></param>
     public static void DeleteDevice(DeleteDeviceRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
         {
+
             if (db.Devices.Find(dto.Id) != null)
             {
                 db.Devices.Remove(db.Devices.Find(dto.Id));
@@ -46,7 +59,10 @@ public class DeviceBLL {
             }
         }
     }
-
+    /// <summary>
+    /// Atualiza um device da base de dados utilizando o dto passado como parametro
+    /// </summary>
+    /// <param name="dto"></param>
     public static void UpdateDevice(UpdateDeviceRequestDTO dto)
     {
         using (ICTDbContext db = new ICTDbContext())
@@ -69,6 +85,10 @@ public class DeviceBLL {
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista com todos os devices existentes na base de dados
+    /// </summary>
+    /// <returns></returns>
     public static ListDeviceResponseDTO ListDevices()
     {
         using (ICTDbContext db = new ICTDbContext())

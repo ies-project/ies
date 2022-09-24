@@ -14,6 +14,7 @@ namespace ICT.MM.DAL.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //Configurar a db para utilizar a connection string definida em appsettings.json
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
@@ -22,11 +23,10 @@ namespace ICT.MM.DAL.DB
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Defined database relations
+            // Associar as relacoes feitas nos models ao modelBuilder
             DeviceType.ConfigureRelations(modelBuilder);
             Device.ConfigureRelations(modelBuilder);
             Scenario.ConfigureRelations(modelBuilder);
-            // Defined primary key
             ScenarioDevice.ConfigureRelations(modelBuilder);
 
         }

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 
 function DeviceTypes() {
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [devices, setDevices] = useState([]);
     const [firstRun, setFirstRun] = useState(true);
 
+    //Funcao que retorna e atribui uma lista com todos os devicetypes na base de dados a constante devicetypes
     function GetDeviceTypes() {
 
         fetch("https://localhost:7207/DeviceType")
@@ -17,6 +19,7 @@ function DeviceTypes() {
             });
     }
 
+    //Funcao utilizada para eliminar um devicetype dado o seu id
     function eliminarDeviceType(id) {
         const device = {id}
         fetch("https://localhost:7207/DeviceType", {
@@ -30,31 +33,14 @@ function DeviceTypes() {
     }
     
 
-
+    //useEffect utilizado para carregar todos os devicetypes sempre que a pagina seja aberta
     useEffect(() => {
         GetDeviceTypes();
     }, []);
 
 
-    if (firstRun) {
-        return (
-            <div>
-                <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                    <button type="button">Swagger</button>
-                </a>
-                <button onClick={GetDeviceTypes}>Listar Tipos de Dispositivos</button>
-                <Link to="/criarDeviceType">
-                    <button>Criar Novo Tipo de Dispositivo</button>
-                </Link>
-            </div>)
-    }
-
         return (
         <div>
-            <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                <button type="button">Swagger</button>
-            </a>
-            <button onClick={GetDeviceTypes}>Listar Dispositivos</button>
             <Link to="/criarDeviceType">
                     <button>Criar Novo Tipo de Dispositivo</button>
             </Link>

@@ -2,83 +2,47 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
-const EditDevice = () => {
+const EditScenario = () => {
 
+    //Utilização do state passado pelo link anterior com informacao sobre o scenario a editar
     const location = useLocation()
     const data = location.state
 
-    const [deviceTypes, setDeviceTypes] = useState([])
-    const [id_DeviceType, setIdDeviceType] = useState(data.device.id_DeviceType)
-    const [name, setName] = useState(data.device.name)
-    const [description, setDescription] = useState(data.device.description)
-    const [manufacturedDate, setManufacturedDate] = useState(data.device.manufacturedDate)
-    const [lastMaintenanceDate, setLastMaintenanceDate] = useState(data.device.lastMaintenanceDate)
-    const [maintenanceDueDate, setMaintenanceDueDate] = useState(data.device.maintenanceDueDate)
-    const [manufacturedBy, setManufacturedBy] = useState(data.device.manufacturedBy)
-    const [createdBy, setCreatedBy] = useState(data.device.createdBy)
-    const [createdDate, setCreatedDate] = useState(data.device.createdDate)
-    const [modifiedBy, setModifiedBy] = useState(data.device.modifiedBy)
-    const [modifiedDate, setModifiedDate] = useState(data.device.modifiedDate)
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
+    const [name, setName] = useState(data.scenario.name)
+    const [description, setDescription] = useState(data.scenario.description)
 
-
-    function atualizarDevice(id) {
-        const deviceData = { id, id_DeviceType, name, description, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, manufacturedBy, createdBy, createdDate, modifiedBy, modifiedDate }
-        fetch("https://localhost:7207/Device", {
+    //Funcao que atualiza um cenario dado o seu id
+    function atualizarScenario(id) {
+        const scenarioData = { id, name, description }
+        fetch("https://localhost:7207/Scenario", {
             method: 'PATCH',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(deviceData)
+            body: JSON.stringify(scenarioData)
         }).then(() => {
-            console.log('Dispositivo Atualizado!')
-            console.log(deviceData)
+            console.log('Cenario Atualizado!')
+            console.log(scenarioData)
         })
     }
 
-    function GetDeviceTypes() {
-
-        fetch("https://localhost:7207/DeviceType")
-            .then((res) => res.json())
-            .then((data) => {
-                setDeviceTypes(data)
-                console.log(data)
-            });
-    }
-
-    useEffect(() => {
-        GetDeviceTypes();
-    }, []);
 
     return (
         <div>
-            <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                <button type="button">Swagger</button>
-            </a>
 
             <table className="table table-striped">
                 <tbody>
                     <tr>
                         <th>ID</th>
-                        <th>Tipo de Dispositivo</th>
                         <th>Nome</th>
                         <th>Descricao</th>
-                        <th>Data da Ultima Manutencao</th>
-                        <th>Data da Proxima Manutencao</th>
-                        <th>Modificado Por</th>
-                        <th>Data da Ultima Modificacao</th>
                     </tr>
-                    <tr key={data.device.id}>
+                    <tr key={data.scenario.id}>
                         <td>
-                            {data.device.id}
-                        </td>
-                        <td>
-                            <select required onChange={(e) => setIdDeviceType(e.target.value)}>
-                                {(deviceTypes.items)?.map(deviceType => (
-                                    <option key={deviceType.id} value={deviceType.id}>{deviceType.name}</option>
-                                ))}
-                            </select>
+                            {data.scenario.id}
                         </td>
                         <td>
                             <input
-                                placeholder={data.device.name}
+                                placeholder={data.scenario.name}
                                 class="form-control"
                                 type="text"
                                 required
@@ -89,7 +53,7 @@ const EditDevice = () => {
                         </td>
                         <td>
                             <input
-                                placeholder={data.device.description}
+                                placeholder={data.scenario.description}
                                 class="form-control"
                                 type="text"
                                 required
@@ -99,54 +63,10 @@ const EditDevice = () => {
                             </input>
                         </td>
                         <td>
-                            <input
-                                placeholder={data.device.lastMaintenanceDate}
-                                class="form-control"
-                                type="datetime-local"
-                                required
-                                value={lastMaintenanceDate}
-                                onChange={(e) => setLastMaintenanceDate(e.target.value)}
-                            >
-                            </input>
+                            <Link to="/gerirScenarios" class="btn btn-info" role="button">Cancelar</Link>
                         </td>
                         <td>
-                            <input
-                                placeholder={data.device.maintenanceDueDate}
-                                class="form-control"
-                                type="datetime-local"
-                                required
-                                value={maintenanceDueDate}
-                                onChange={(e) => setMaintenanceDueDate(e.target.value)}
-                            >
-                            </input>
-                        </td>
-                        <td>
-                            <input
-                                placeholder={data.device.modifiedBy}
-                                class="form-control"
-                                type="text"
-                                required
-                                value={modifiedBy}
-                                onChange={(e) => setModifiedBy(e.target.value)}
-                            >
-                            </input>
-                        </td>
-                        <td>
-                            <input
-                                placeholder={data.device.modifiedDate}
-                                class="form-control"
-                                type="datetime-local"
-                                required
-                                value={modifiedDate}
-                                onChange={(e) => setModifiedDate(e.target.value)}
-                            >
-                            </input>
-                        </td>
-                        <td>
-                            <Link to="/gerirDevices" class="btn btn-info" role="button">Cancelar</Link>
-                        </td>
-                        <td>
-                            <Link to="/gerirDevices" class="btn btn-info" role="button" onClick={() => { atualizarDevice(data.device.id) }}>Guardar</Link>
+                            <Link to="/gerirScenarios" class="btn btn-info" role="button" onClick={() => { atualizarScenario(data.scenario.id) }}>Guardar</Link>
                         </td>
                     </tr>
                 </tbody>
@@ -157,12 +77,4 @@ const EditDevice = () => {
 }
 
 
-export default EditDevice;
-
-/**<tr key={device.id}>
-<td>{device.id}</td>
-<td>{device.name}</td>
-<td>{device.description}</td>
-<td><Link to="/gerir" class="btn btn-info" role="button">Cancelar</Link></td>
-<td><button class="btn btn-info">Guardar</button></td>
-</tr>**/
+export default EditScenario;

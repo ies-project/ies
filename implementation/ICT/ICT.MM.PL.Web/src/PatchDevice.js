@@ -4,9 +4,11 @@ import { useLocation } from "react-router-dom";
 
 const EditDevice = () => {
 
+    //Utilização do state passado pelo link anterior com informacao sobre o device a editar
     const location = useLocation()
     const data = location.state
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [deviceTypes, setDeviceTypes] = useState([])
     const [id_DeviceType, setIdDeviceType] = useState(data.device.id_DeviceType)
     const [name, setName] = useState(data.device.name)
@@ -20,7 +22,7 @@ const EditDevice = () => {
     const [modifiedBy, setModifiedBy] = useState(data.device.modifiedBy)
     const [modifiedDate, setModifiedDate] = useState(data.device.modifiedDate)
 
-
+    //Funcao que atualiza um device dado o seu id
     function atualizarDevice(id) {
         const deviceData = { id, id_DeviceType, name, description, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, manufacturedBy, createdBy, createdDate, modifiedBy, modifiedDate }
         fetch("https://localhost:7207/Device", {
@@ -32,6 +34,7 @@ const EditDevice = () => {
             console.log(deviceData)
         })
     }
+
 
     function GetDeviceTypes() {
 
@@ -49,9 +52,6 @@ const EditDevice = () => {
 
     return (
         <div>
-            <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                <button type="button">Swagger</button>
-            </a>
 
             <table className="table table-striped">
                 <tbody>

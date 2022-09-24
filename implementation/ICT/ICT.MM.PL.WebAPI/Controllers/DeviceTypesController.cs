@@ -161,12 +161,18 @@ namespace ICT.MM.PL.WebAPI.Controllers
             }
 
 
-            var devices = _context.Devices.Where(m => m.Id_DeviceType == id);
+            var devices = _context.Devices.Where(m => m.Id_DeviceType == id).ToList();
             if (devices != null)
             {
                 _context.Devices.RemoveRange(devices);
             }
-            
+            foreach(Device device in devices)
+            {
+                if (_context.ScenarioDevices.Where(x => x.Id_Device == device.Id) != null)
+                {
+                    _context.ScenarioDevices.RemoveRange(_context.ScenarioDevices.Where(x => x.Id_Device == device.Id));
+                }
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

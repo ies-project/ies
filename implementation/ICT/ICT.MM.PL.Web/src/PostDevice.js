@@ -5,6 +5,7 @@ const CreateDevice = () => {
 
     let history = useHistory()
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [deviceTypes, setDeviceTypes] = useState([])
     const [id_DeviceType, setIdDeviceType] = useState({})
     const [name, setName] = useState('Device')
@@ -18,7 +19,7 @@ const CreateDevice = () => {
     const [modifiedBy, setModifiedBy] = useState('')
     const [modifiedDate, setModifiedDate] = useState('')
 
-
+    //Cria um novo device com base nas constantes definidas anteriormente e submete o pedido para o API
     const handleSubmit = (e) => {
         e.preventDefault()
         const device = { id_DeviceType, name, description, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, manufacturedBy, createdBy, createdDate, modifiedBy, modifiedDate }
@@ -29,6 +30,7 @@ const CreateDevice = () => {
             body: JSON.stringify(device)
         }).then(() => {
             console.log('Novo Tipo de Dispositivo Criado!')
+            //Utilização do history para redirecionamento
             history.push("/gerirDevices")
         })
 

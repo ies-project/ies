@@ -4,9 +4,11 @@ import { useLocation } from "react-router-dom";
 
 const EditScenarioDevices = () => {
 
+    //Utilização do state passado pelo link anterior com informacao sobre o scenariodevice a editar
     const location = useLocation()
     const data = location.state
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [id_Device, setIdDevice] = useState(data.sc.id_Device)
     const [id_Scenario, setIdScenario] = useState(data.sc.id_Scenario)
     const [manufacturedDate, setManufacturedDate] = useState(data.sc.manufacturedDate)
@@ -15,7 +17,7 @@ const EditScenarioDevices = () => {
     const [originalState, setOriginalState] = useState(data.sc.originalState)
     const [currentState, setCurrentState] = useState(data.sc.currentState)
 
-
+    //Funcao que atualiza um scenariodevice dados o id do device e do scenario associados
     function atualizarDevice(id_Scenario, id_Device) {
         const scData = { id_Device,id_Scenario, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, originalState, currentState }
         fetch("https://localhost:7207/ScenarioDevice", {
