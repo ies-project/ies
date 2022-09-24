@@ -11,6 +11,10 @@ import Home from './Home';
 import Barra from './Barra';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Scenarios from './GetScenario';
+import ScenarioDevices from './GetScenarioDevice';
+import EditScenarioDevices from './PatchScenarioDevices';
+import CreateScenarioDevice from './PostScenarioDevice';
+
 
 function App() {
   return (
@@ -48,6 +52,15 @@ function App() {
             </Route>
             <Route exact path="/criarScenario">
               <CreateScenario />
+            </Route>
+            <Route exact path="/gerirScenarioDevices">
+               <ScenarioDevices />
+            </Route>
+            <Route exact path="/editarScenarioDevices">
+               <EditScenarioDevices />
+            </Route>
+            <Route exact path="/criarScenarioDevices">
+               <CreateScenarioDevice />
             </Route>
           </Switch>
         </div>

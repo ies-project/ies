@@ -60,7 +60,8 @@ const CreateDevice = () => {
                 <label>Tipo de Dispositivo </label>
                 <br></br>
 
-                <select required onChange={(e) => setIdDeviceType(e.target.value)}>
+                <select selected="123" required onSelect={(e) => setIdDeviceType(e.target.value)}>
+                    <option value="123">Tipo de Dispositivo</option>
                     {(deviceTypes.items)?.map(deviceType => (
                         <option key={deviceType.id} value={deviceType.id}>{deviceType.name}</option>
                     ))}

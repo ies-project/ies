@@ -16,7 +16,6 @@ namespace ICT.MM.Core.DTO
     {
         public int Id_Scenario { get; set; }
         public int Id_Device { get; set; }
-        public string Name { get; set; }
         public DateTime? ManufacturedDate { get; set; }
         public DateTime? LastMaintenanceDate { get; set; }
         public DateTime? MaintenanceDueDate { get; set; }
