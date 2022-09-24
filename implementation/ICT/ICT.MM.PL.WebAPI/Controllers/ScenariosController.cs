@@ -158,7 +158,14 @@ namespace ICT.MM.PL.WebAPI.Controllers
             {
                 _context.Scenarios.Remove(scenario);
             }
-            
+
+            var scenarioDevices = _context.ScenarioDevices.Where(m => m.Id_Scenario == id);
+
+            if (scenarioDevices != null)
+            {
+                _context.ScenarioDevices.RemoveRange(scenarioDevices);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

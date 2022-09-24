@@ -98,13 +98,8 @@ namespace ICT.MM.PL.WebAPI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> Edit(int idScen, int idDevi, [Bind("Id_Scenario,Id_Device,ManufacturedDate,LastMaintenanceDate,MaintenanceDueDate,OriginalState,CurrentState")] ScenarioDevice scenarioDevice)
+        public async Task<IActionResult> Edit([Bind("Id_Scenario,Id_Device,ManufacturedDate,LastMaintenanceDate,MaintenanceDueDate,OriginalState,CurrentState")] ScenarioDevice scenarioDevice)
         {
-            if (idScen != scenarioDevice.Id_Scenario || idDevi != scenarioDevice.Id_Device)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -153,13 +148,13 @@ namespace ICT.MM.PL.WebAPI.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> DeleteConfirmed(int? idScen, int? idDevi)
+        public async Task<IActionResult> DeleteConfirmed(ScenarioDevice sc)
         {
             if (_context.ScenarioDevices == null)
             {
                 return Problem("Entity set 'ICTDbContext.ScenarioDevices'  is null.");
             }
-            var scenarioDevice = await _context.ScenarioDevices.FindAsync(idScen, idDevi);
+            var scenarioDevice = await _context.ScenarioDevices.FindAsync(sc.Id_Scenario, sc.Id_Device);
             if (scenarioDevice != null)
             {
                 _context.ScenarioDevices.Remove(scenarioDevice);
