@@ -7,7 +7,7 @@ function Scenarios() {
     const [firstRun, setFirstRun] = useState(true);
 
     function GetScenarios() {
-        fetch("https://localhost:7207/DeviceType")
+        fetch("https://localhost:7207/Scenario")
             .then((res) => res.json())
             .then((data) => {
                 setScenarios(data)
@@ -37,7 +37,7 @@ function Scenarios() {
             <a href="https://localhost:7207/swagger/index.html" target="_blank">
                 <button type="button">Swagger</button>
             </a>
-            <Link to="/criarDeviceType">
+            <Link to="/criarScenario">
                 <button>Criar Novo Scenario</button>
             </Link>
             <table className="table table-striped">

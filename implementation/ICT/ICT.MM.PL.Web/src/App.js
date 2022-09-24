@@ -5,6 +5,8 @@ import CreateDeviceType from './PostDeviceType';
 import CreateDevice from './PostDevice';
 import EditDeviceType from './PatchDeviceType';
 import EditDevice from './PatchDevice';
+import EditScenario from './PatchScenario';
+import CreateScenario from './PostScenario';
 import Home from './Home';
 import Barra from './Barra';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -40,6 +42,12 @@ function App() {
              </Route>
             <Route exact path="/gerirScenarios">
               <Scenarios />
+            </Route>
+            <Route exact path="/editarScenario">
+              <EditScenario />
+            </Route>
+            <Route exact path="/criarScenario">
+              <CreateScenario />
             </Route>
           </Switch>
         </div>

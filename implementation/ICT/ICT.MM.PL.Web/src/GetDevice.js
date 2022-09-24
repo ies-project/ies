@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 function Devices() {
 
     const [devices, setDevices] = useState([]);
-    const [firstRun, setFirstRun] = useState(true);
 
     function GetDevices() {
 
@@ -12,7 +11,6 @@ function Devices() {
             .then((res) => res.json())
             .then((data) => {
                 setDevices(data)
-                setFirstRun(false)
                 console.log(data)
             });
     }
@@ -35,19 +33,6 @@ function Devices() {
         GetDevices();
     }, []);
 
-
-    if (firstRun) {
-        return (
-            <div>
-                <a href="https://localhost:7207/swagger/index.html" target="_blank">
-                    <button type="button">Swagger</button>
-                </a>
-                <button onClick={GetDevices}>Listar Dispositivos</button>
-                <Link to="/criarDevice">
-                    <button>Criar Novo Dispositivo</button>
-                </Link>
-            </div>)
-    }
 
         return (
         <div>

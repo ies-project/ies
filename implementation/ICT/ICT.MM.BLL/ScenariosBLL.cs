@@ -51,7 +51,7 @@ namespace ICT.MM.BLL {
 
                 sc.Name = dto.Name;
 
-                sc.Description = dto.Descripton;
+                sc.Description = dto.Description;
 
                 iCTDbContext.SaveChanges();
             }

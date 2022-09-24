@@ -11,6 +11,6 @@ namespace ICT.MM.Core.DTO {
 
         public string Name { get; set; }
 
-        public string Descripton { get; set; }
+        public string Description { get; set; }
     }
 }
