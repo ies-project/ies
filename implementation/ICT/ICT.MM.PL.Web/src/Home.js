@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+//pagina inicial com os 4 butoes
 const Home = () => {
 return (
     <div className="navbar navbar-inverse">

@@ -4,9 +4,11 @@ import { Link, useHistory } from 'react-router-dom';
 const CreateDeviceType = () => {
 
     let history = useHistory()
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [name, setName] = useState('Device')
     const [description, setDescription] = useState('Description')
 
+    //Cria um novo devicetype com base nas constantes definidas anteriormente e submete o pedido para o API
     const handleSubmit = (e) => {
         e.preventDefault()
         const device = {name, description}
@@ -17,6 +19,7 @@ const CreateDeviceType = () => {
             body: JSON.stringify(device)
         }).then(() => {
             console.log('Novo Tipo de Dispositivo Criado!')
+            //Utilização do history para redirecionamento
             history.push("/gerirDeviceTypes")
         })
 

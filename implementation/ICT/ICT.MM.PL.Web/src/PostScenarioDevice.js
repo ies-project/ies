@@ -5,9 +5,9 @@ const CreateScenarioDevice = () => {
 
     let history = useHistory()
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [scenarios, setScenarios] = useState([])
     const [devices, setDevices] = useState([])
-
     const [id_Device, setIdDevice] = useState({})
     const [id_Scenario, setIdScenario] = useState({})
     const [manufacturedDate, setManufacturedDate] = useState('')
@@ -16,7 +16,7 @@ const CreateScenarioDevice = () => {
     const [originalState, setOriginalState] = useState('')
     const [currentState, setCurrentState] = useState('')
 
-
+    //Cria um novo scenariodevice com base nas constantes definidas anteriormente e submete o pedido para o API
     const handleSubmit = (e) => {
         e.preventDefault()
         const sc = { id_Scenario, id_Device, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, originalState, currentState }
@@ -27,6 +27,7 @@ const CreateScenarioDevice = () => {
             body: JSON.stringify(sc)
         }).then(() => {
             console.log('Novo cenario Dispositivo Criado!')
+            //Utilização do history para redirecionamento
             history.push("/gerirScenarioDevices")
         })
 

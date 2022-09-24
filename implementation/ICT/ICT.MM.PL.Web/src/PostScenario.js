@@ -4,9 +4,12 @@ import { Link, useHistory } from 'react-router-dom';
 const CreateScenario = () => {
 
     let history = useHistory()
+
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [name, setName] = useState('Scenario')
     const [description, setDescription] = useState('Description')
 
+    //Cria um novo scenario com base nas constantes definidas anteriormente e submete o pedido para o API
     const handleSubmit = (e) => {
         e.preventDefault()
         const scenario = { name, description }
@@ -17,6 +20,7 @@ const CreateScenario = () => {
             body: JSON.stringify(scenario)
         }).then(() => {
             console.log('Novo Cenário Criado!')
+            //Utilização do history para redirecionamento
             history.push("/gerirScenarios")
         })
 

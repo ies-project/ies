@@ -2,9 +2,10 @@ import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Devices() {
-
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [devices, setDevices] = useState([]);
 
+    //Funcao que retorna e atribui uma lista com todos os devices na base de dados a constante devices
     function GetDevices() {
 
         fetch("https://localhost:7207/Device")
@@ -15,6 +16,7 @@ function Devices() {
             });
     }
 
+    //Funcao utilizada para eliminar um device dado o seu id
     function eliminarDevice(id) {
         const device = {id}
         fetch("https://localhost:7207/Device", {
@@ -28,7 +30,7 @@ function Devices() {
     }
     
 
-
+    //useEffect utilizado para carregar todos os devices sempre que a pagina seja aberta
     useEffect(() => {
         GetDevices();
     }, []);

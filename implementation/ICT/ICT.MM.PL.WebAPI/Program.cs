@@ -28,7 +28,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 
-
+//Criar policies para serem usadas através da autorização com claims
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("LoggedIn", policy =>
@@ -46,6 +46,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+//Permitir requests para o API vindos da app em React.
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
 
 
@@ -60,12 +61,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+//Redirecionar para a página Error em caso de erro.
 app.UseExceptionHandler("/Home/Error");
 app.UseStatusCodePagesWithReExecute("/Home/Error");
 app.UseStaticFiles();
 app.MapControllers();
 app.UseRouting();
+//Utilizar autenticação(cookies) e autorização(claims)
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>

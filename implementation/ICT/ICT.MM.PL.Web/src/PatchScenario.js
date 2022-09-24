@@ -4,12 +4,15 @@ import { useLocation } from "react-router-dom";
 
 const EditScenario = () => {
 
+    //Utilização do state passado pelo link anterior com informacao sobre o scenario a editar
     const location = useLocation()
     const data = location.state
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [name, setName] = useState(data.scenario.name)
     const [description, setDescription] = useState(data.scenario.description)
 
+    //Funcao que atualiza um cenario dado o seu id
     function atualizarScenario(id) {
         const scenarioData = { id, name, description }
         fetch("https://localhost:7207/Scenario", {

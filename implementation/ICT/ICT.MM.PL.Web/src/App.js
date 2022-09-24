@@ -15,7 +15,7 @@ import ScenarioDevices from './GetScenarioDevice';
 import EditScenarioDevices from './PatchScenarioDevices';
 import CreateScenarioDevice from './PostScenarioDevice';
 
-
+//Criação de Routes através de um Router e um Switch para existir ligação entre as várias páginas.
 function App() {
   return (
     <Router>

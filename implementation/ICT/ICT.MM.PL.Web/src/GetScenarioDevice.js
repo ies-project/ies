@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 function ScenarioDevices() {
 
+    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [scenarioDevices, setScenarioDevices] = useState([]);
 
+    //Funcao que retorna e atribui uma lista com todos os scenariodevices na base de dados a constante scenarios
     function GetScenarioDevices() {
 
         fetch("https://localhost:7207/ScenarioDevice")
@@ -15,6 +17,7 @@ function ScenarioDevices() {
             });
     }
 
+    //Funcao utilizada para eliminar um scenariodevice dado o id do cenario e o id do device associados
     function eliminarScenarioDevice(id_Scenario, id_Device) {
         const scenario = { id_Scenario, id_Device }
         fetch("https://localhost:7207/ScenarioDevice", {
@@ -28,7 +31,7 @@ function ScenarioDevices() {
     }
 
 
-
+    //useEffect utilizado para carregar todos os scenariodevices sempre que a pagina seja aberta
     useEffect(() => {
         GetScenarioDevices();
     }, []);
