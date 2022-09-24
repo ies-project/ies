@@ -57,8 +57,13 @@ const EditDevice = () => {
                 <tbody>
                     <tr>
                         <th>ID</th>
+                        <th>Tipo de Dispositivo</th>
                         <th>Nome</th>
-                        <th>Descrição</th>
+                        <th>Descricao</th>
+                        <th>Data da Ultima Manutencao</th>
+                        <th>Data da Proxima Manutencao</th>
+                        <th>Modificado Por</th>
+                        <th>Data da Ultima Modificacao</th>
                     </tr>
                     <tr key={data.device.id}>
                         <td>
@@ -90,6 +95,50 @@ const EditDevice = () => {
                                 required
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
+                            >
+                            </input>
+                        </td>
+                        <td>
+                            <input
+                                placeholder={data.device.lastMaintenanceDate}
+                                class="form-control"
+                                type="datetime-local"
+                                required
+                                value={lastMaintenanceDate}
+                                onChange={(e) => setLastMaintenanceDate(e.target.value)}
+                            >
+                            </input>
+                        </td>
+                        <td>
+                            <input
+                                placeholder={data.device.maintenanceDueDate}
+                                class="form-control"
+                                type="datetime-local"
+                                required
+                                value={maintenanceDueDate}
+                                onChange={(e) => setMaintenanceDueDate(e.target.value)}
+                            >
+                            </input>
+                        </td>
+                        <td>
+                            <input
+                                placeholder={data.device.modifiedBy}
+                                class="form-control"
+                                type="text"
+                                required
+                                value={modifiedBy}
+                                onChange={(e) => setModifiedBy(e.target.value)}
+                            >
+                            </input>
+                        </td>
+                        <td>
+                            <input
+                                placeholder={data.device.modifiedDate}
+                                class="form-control"
+                                type="datetime-local"
+                                required
+                                value={modifiedDate}
+                                onChange={(e) => setModifiedDate(e.target.value)}
                             >
                             </input>
                         </td>
