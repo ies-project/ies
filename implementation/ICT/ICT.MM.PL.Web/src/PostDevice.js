@@ -61,6 +61,7 @@ const CreateDevice = () => {
                 <br></br>
 
                 <select required onChange={(e) => setIdDeviceType(e.target.value)}>
+                    <option hidden disabled selected value> -- Selecione um Tipo de Dispositivo -- </option>
                     {(deviceTypes.items)?.map(deviceType => (
                         <option key={deviceType.id} value={deviceType.id}>{deviceType.name}</option>
                     ))}
