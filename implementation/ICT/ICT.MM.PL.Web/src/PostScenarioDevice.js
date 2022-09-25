@@ -5,7 +5,7 @@ const CreateScenarioDevice = () => {
 
     let history = useHistory()
 
-    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
+    //Inicializaï¿½ï¿½o de variï¿½veis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterï¿½-las
     const [scenarios, setScenarios] = useState([])
     const [devices, setDevices] = useState([])
     const [id_Device, setIdDevice] = useState({})
@@ -21,13 +21,13 @@ const CreateScenarioDevice = () => {
         e.preventDefault()
         const sc = { id_Scenario, id_Device, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, originalState, currentState }
 
-        fetch("https://localhost:7207/ScenarioDevice", {
+        fetch("http://soaforsafety.ddns.net:81/ScenarioDevice", {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(sc)
         }).then(() => {
             console.log('Novo cenario Dispositivo Criado!')
-            //Utilização do history para redirecionamento
+            //Utilizaï¿½ï¿½o do history para redirecionamento
             history.push("/gerirScenarioDevices")
         })
 
@@ -35,7 +35,7 @@ const CreateScenarioDevice = () => {
 
     function GetScenarios() {
 
-        fetch("https://localhost:7207/Scenario")
+        fetch("http://soaforsafety.ddns.net:81/Scenario")
             .then((res) => res.json())
             .then((data) => {
                 setScenarios(data)
@@ -45,7 +45,7 @@ const CreateScenarioDevice = () => {
 
     function GetDevices() {
 
-        fetch("https://localhost:7207/Device")
+        fetch("http://soaforsafety.ddns.net:81/Device")
             .then((res) => res.json())
             .then((data) => {
                 setDevices(data)

@@ -25,7 +25,7 @@ const EditDevice = () => {
     //Funcao que atualiza um device dado o seu id
     function atualizarDevice(id) {
         const deviceData = { id, id_DeviceType, name, description, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, manufacturedBy, createdBy, createdDate, modifiedBy, modifiedDate }
-        fetch("https://localhost:7207/Device", {
+        fetch("http://soaforsafety.ddns.net:81/Device", {
             method: 'PATCH',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(deviceData)
@@ -38,7 +38,7 @@ const EditDevice = () => {
 
     function GetDeviceTypes() {
 
-        fetch("https://localhost:7207/DeviceType")
+        fetch("http://soaforsafety.ddns.net:81/DeviceType")
             .then((res) => res.json())
             .then((data) => {
                 setDeviceTypes(data)

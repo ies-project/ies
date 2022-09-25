@@ -15,7 +15,7 @@ const EditScenario = () => {
     //Funcao que atualiza um cenario dado o seu id
     function atualizarScenario(id) {
         const scenarioData = { id, name, description }
-        fetch("https://localhost:7207/Scenario", {
+        fetch("http://soaforsafety.ddns.net:81/Scenario", {
             method: 'PATCH',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(scenarioData)

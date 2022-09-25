@@ -8,7 +8,7 @@ function Devices() {
     //Funcao que retorna e atribui uma lista com todos os devices na base de dados a constante devices
     function GetDevices() {
 
-        fetch("https://localhost:7207/Device")
+        fetch("http://soaforsafety.ddns.net:81/Device")
             .then((res) => res.json())
             .then((data) => {
                 setDevices(data)
@@ -19,7 +19,7 @@ function Devices() {
     //Funcao utilizada para eliminar um device dado o seu id
     function eliminarDevice(id) {
         const device = {id}
-        fetch("https://localhost:7207/Device", {
+        fetch("http://soaforsafety.ddns.net:81/Device", {
             method: 'DELETE',
             headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(device)

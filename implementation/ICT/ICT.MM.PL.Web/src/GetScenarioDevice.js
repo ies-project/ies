@@ -9,7 +9,7 @@ function ScenarioDevices() {
     //Funcao que retorna e atribui uma lista com todos os scenariodevices na base de dados a constante scenarios
     function GetScenarioDevices() {
 
-        fetch("https://localhost:7207/ScenarioDevice")
+        fetch("http://soaforsafety.ddns.net:81/ScenarioDevice")
             .then((res) => res.json())
             .then((data) => {
                 setScenarioDevices(data)
@@ -20,7 +20,7 @@ function ScenarioDevices() {
     //Funcao utilizada para eliminar um scenariodevice dado o id do cenario e o id do device associados
     function eliminarScenarioDevice(id_Scenario, id_Device) {
         const scenario = { id_Scenario, id_Device }
-        fetch("https://localhost:7207/ScenarioDevice", {
+        fetch("http://soaforsafety.ddns.net:81/ScenarioDevice", {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(scenario)

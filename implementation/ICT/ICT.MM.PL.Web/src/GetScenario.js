@@ -9,7 +9,7 @@ function Scenarios() {
 
     //Funcao que retorna e atribui uma lista com todos os scenarios na base de dados a constante scenarios
     function GetScenarios() {
-        fetch("https://localhost:7207/Scenario")
+        fetch("http://soaforsafety.ddns.net:81/Scenario")
             .then((res) => res.json())
             .then((data) => {
                 setScenarios(data)
@@ -20,7 +20,7 @@ function Scenarios() {
     //Funcao utilizada para eliminar um scenario dado o seu id
     function eliminarScenario(id) {
         const scenario = { id }
-        fetch("https://localhost:7207/Scenario", {
+        fetch("http://soaforsafety.ddns.net:81/Scenario", {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(scenario)

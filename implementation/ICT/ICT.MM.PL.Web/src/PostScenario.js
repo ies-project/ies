@@ -14,7 +14,7 @@ const CreateScenario = () => {
         e.preventDefault()
         const scenario = { name, description }
 
-        fetch("https://localhost:7207/Scenario", {
+        fetch("http://soaforsafety.ddns.net:81/Scenario", {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(scenario)

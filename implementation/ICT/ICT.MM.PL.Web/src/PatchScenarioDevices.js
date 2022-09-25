@@ -18,7 +18,7 @@ const EditScenarioDevices = () => {
     //Funcao que atualiza um scenariodevice dados o id do device e do scenario associados
     function atualizarDevice(id_Scenario, id_Device) {
         const scData = { id_Device,id_Scenario, manufacturedDate, lastMaintenanceDate, maintenanceDueDate, originalState, currentState }
-        fetch("https://localhost:7207/ScenarioDevice", {
+        fetch("http://soaforsafety.ddns.net:81/ScenarioDevice", {
             method: 'PATCH',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(scData)

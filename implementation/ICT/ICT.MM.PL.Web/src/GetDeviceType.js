@@ -20,7 +20,7 @@ function DeviceTypes() {
     //Funcao utilizada para eliminar um devicetype dado o seu id
     function eliminarDeviceType(id) {
         const device = {id}
-        fetch("https://localhost:7207/DeviceType", {
+        fetch("http://soaforsafety.ddns.net:81/DeviceType", {
             method: 'DELETE',
             headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(device)
