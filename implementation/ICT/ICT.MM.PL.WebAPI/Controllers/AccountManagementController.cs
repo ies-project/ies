@@ -236,7 +236,8 @@ namespace ICT.MM.PL.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Transforma uma string em hash
+        /// Transforma uma string em hash, código retirado do seguinte video:
+        /// https://www.youtube.com/watch?v=2yEiwjUEZ78
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
