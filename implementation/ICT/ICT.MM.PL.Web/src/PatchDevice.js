@@ -4,21 +4,21 @@ import { useLocation } from "react-router-dom";
 
 const EditDevice = () => {
 
-    //Utilização do state passado pelo link anterior com informacao sobre o device a editar
+    //Utilizaï¿½ï¿½o do state passado pelo link anterior com informacao sobre o device a editar
     const location = useLocation()
     const data = location.state
 
-    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
+    //Inicializaï¿½ï¿½o de variï¿½veis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterï¿½-las
     const [deviceTypes, setDeviceTypes] = useState([])
     const [id_DeviceType, setIdDeviceType] = useState(data.device.id_DeviceType)
     const [name, setName] = useState(data.device.name)
     const [description, setDescription] = useState(data.device.description)
-    const [manufacturedDate, setManufacturedDate] = useState(data.device.manufacturedDate)
+    const [manufacturedDate] = useState(data.device.manufacturedDate)
     const [lastMaintenanceDate, setLastMaintenanceDate] = useState(data.device.lastMaintenanceDate)
     const [maintenanceDueDate, setMaintenanceDueDate] = useState(data.device.maintenanceDueDate)
-    const [manufacturedBy, setManufacturedBy] = useState(data.device.manufacturedBy)
-    const [createdBy, setCreatedBy] = useState(data.device.createdBy)
-    const [createdDate, setCreatedDate] = useState(data.device.createdDate)
+    const [manufacturedBy] = useState(data.device.manufacturedBy)
+    const [createdBy] = useState(data.device.createdBy)
+    const [createdDate] = useState(data.device.createdDate)
     const [modifiedBy, setModifiedBy] = useState(data.device.modifiedBy)
     const [modifiedDate, setModifiedDate] = useState(data.device.modifiedDate)
 

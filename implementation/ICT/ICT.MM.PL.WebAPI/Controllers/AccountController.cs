@@ -117,7 +117,27 @@ namespace ICT.MM.PL.WebAPI.Controllers {
             var authProperties = new AuthenticationProperties
             {
                 AllowRefresh = false,
-                
+
+                // Refreshing the authentication session should be allowed.
+
+                //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                // The time at which the authentication ticket expires. A 
+                // value set here overrides the ExpireTimeSpan option of 
+                // CookieAuthenticationOptions set with AddCookie.
+
+                IsPersistent = false,
+                // Whether the authentication session is persisted across 
+                // multiple requests. When used with cookies, controls
+                // whether the cookie's lifetime is absolute (matching the
+                // lifetime of the authentication ticket) or session-based.
+
+                //IssuedUtc = <DateTimeOffset>,
+                // The time at which the authentication ticket was issued.
+
+                //RedirectUri = <string>
+                // The full path or absolute URI to be used as an http 
+                // redirect response value.
+
             };
             //faz o login para a aplicação e cria a cookie utilizada para verifica se um utilizador esta logado e para verificar se tem acesso a determinado conteudo
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);

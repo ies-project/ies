@@ -5,7 +5,6 @@ function DeviceTypes() {
 
     //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
     const [devices, setDevices] = useState([]);
-    const [firstRun, setFirstRun] = useState(true);
 
     //Funcao que retorna e atribui uma lista com todos os devicetypes na base de dados a constante devicetypes
     function GetDeviceTypes() {
@@ -14,7 +13,6 @@ function DeviceTypes() {
             .then((res) => res.json())
             .then((data) => {
                 setDevices(data)
-                setFirstRun(false)
                 console.log(data)
             });
     }

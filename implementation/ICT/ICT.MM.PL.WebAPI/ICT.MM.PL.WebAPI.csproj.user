@@ -11,7 +11,7 @@
     <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_DbContextTypeFullName>ICT.MM.DAL.DB.ICTDbContext</WebStackScaffolding_DbContextTypeFullName>
-    <ActiveDebugProfile>ICT.MM.PL.WebAPI</ActiveDebugProfile>
+    <ActiveDebugProfile>Docker</ActiveDebugProfile>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
     <_SelectedScaffolderID>IdentityScaffolder</_SelectedScaffolderID>
