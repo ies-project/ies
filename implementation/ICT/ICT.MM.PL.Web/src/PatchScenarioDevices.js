@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
@@ -9,8 +9,6 @@ const EditScenarioDevices = () => {
     const data = location.state
 
     //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
-    const [id_Device, setIdDevice] = useState(data.sc.id_Device)
-    const [id_Scenario, setIdScenario] = useState(data.sc.id_Scenario)
     const [manufacturedDate, setManufacturedDate] = useState(data.sc.manufacturedDate)
     const [lastMaintenanceDate, setLastMaintenanceDate] = useState(data.sc.lastMaintenanceDate)
     const [maintenanceDueDate, setMaintenanceDueDate] = useState(data.sc.maintenanceDueDate)

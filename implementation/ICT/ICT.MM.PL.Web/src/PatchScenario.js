@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
 const EditScenario = () => {
 
-    //Utilização do state passado pelo link anterior com informacao sobre o scenario a editar
+    //Utilizaï¿½ï¿½o do state passado pelo link anterior com informacao sobre o scenario a editar
     const location = useLocation()
     const data = location.state
 
-    //Inicialização de variáveis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterá-las
+    //Inicializaï¿½ï¿½o de variï¿½veis utilizando o hook useState para lhes atribuir valores por defeito e posteriormente alterï¿½-las
     const [name, setName] = useState(data.scenario.name)
     const [description, setDescription] = useState(data.scenario.description)
 
